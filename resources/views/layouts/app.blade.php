@@ -1,171 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>@yield('title') - DTS System</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
-    <!-- Pignose Calender -->
-    <link href="{{asset('assets/plugins/pg-calendar/css/pignose.calendar.min.css')}}" rel="stylesheet">
-    <!-- Chartist -->
-    <link rel="stylesheet" href="{{asset('assets/plugins/chartist/css/chartist.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css')}}">
-    <!-- Custom Stylesheet -->
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 </head>
-
 <body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    @extends('layouts.loader')
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
 
-        <!--**********************************
-            Nav header start
-        ***********************************-->
-        <div class="nav-header">
-            
-            
-        </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
+                    </ul>
 
-        <!--**********************************
-            Header start
-        ***********************************-->
-        <div class="header">    
-            <div class="header-content clearfix">
-                
-                <div class="nav-control">
-                    <div class="hamburger">
-                        <span class="toggle-icon"><i class="icon-menu"></i></span>
-                    </div>
-                </div>
-                <div class="header-left">
-                    
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                </div>
-                <div class="header-right">
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
 
-                    <ul class="clearfix">
-                        <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                                <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
-                            </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
-                                        </li>
-                                        <hr class="my-2">
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
-                                    </ul>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
-        </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
+        </nav>
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
-        <div class="nk-sidebar">           
-            <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/profile">Profile</a></li>
-                            
-                        </ul>
-                    </li>
-                    <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Menu</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">Menu 1</a></li>
-                            <li><a href="#">Menu 2</a></li>
-                        </ul>
-                    </li>
-            {{-- tambah menu disini --}}
-            
-                </ul>
-            </div>
-        </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-@yield('home')
-
-                
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
-        </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-
-    <script src="{{asset('assets/plugins/common/common.min.js')}}"></script>
-    <script src="{{asset('assets/js/custom.min.js')}}"></script>
-    <script src="{{asset('assets/js/settings.js')}}"></script>
-    <script src="{{asset('assets/js/gleek.js')}}"></script>
-    <script src="{{asset('assets/js/styleSwitcher.js')}}"></script>
-    <!-- Chartjs -->
-    <script src="{{asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
-    <!-- Circle progress -->
-    <script src="{{asset('assets/plugins/circle-progress/circle-progress.min.js')}}"></script>
-    <!-- Datamap -->
-    <script src="{{asset('assets/plugins/d3v3/index.js')}}"></script>
-    <script src="{{asset('assets/plugins/topojson/topojson.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/datamaps/datamaps.world.min.js')}}"></script>
-    <!-- Morrisjs -->
-    <script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
-    <!-- Pignose Calender -->
-    <script src="{{asset('assets/plugins/moment/moment.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/pg-calendar/js/pignose.calendar.min.js')}}"></script>
-    <!-- ChartistJS -->
-    <script src="{{asset('assets/plugins/chartist/js/chartist.min.js')}}"></script> --}}
-    <script src="{{asset('assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}"></script>
-
-
-
-    <script src="{{asset('assets/js/dashboard/dashboard-1.js')}}"></script>
-
 </body>
-
 </html>

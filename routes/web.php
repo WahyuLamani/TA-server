@@ -5,4 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [HomeController::class, 'index']);
+
+Auth::routes();
+
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+Route::get('/', [HomeController::class, 'index'])->name('home');

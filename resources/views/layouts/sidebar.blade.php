@@ -12,7 +12,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/menu2">menu 2</a></li>
                     
                 </ul>
             </li>

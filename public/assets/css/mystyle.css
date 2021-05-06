@@ -1,0 +1,19 @@
+.tombol-keluar {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #808080;
+    cursor: pointer;
+}
+
+.tombol-keluar:hover {
+    color: #4747d1;
+    outline: none;
+}
+
+.tombol-keluar:focus {
+    outline: none;
+}
