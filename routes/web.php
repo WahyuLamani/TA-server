@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
 Auth::routes();
 
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
