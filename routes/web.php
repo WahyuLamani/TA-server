@@ -8,4 +8,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/profile/edit', [HomeController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile/update/{user:id}', [HomeController::class, 'update'])->name('profile.update');

@@ -54,7 +54,7 @@
     <script src="{{asset('assets/js/settings.js')}}"></script>
     <script src="{{asset('assets/js/gleek.js')}}"></script>
     <script src="{{asset('assets/js/styleSwitcher.js')}}"></script>
-@if ( request()->path() != 'profile')   
+@if ( request()->path() != route('profile'))   
 <!-- Chartjs -->
 <script src="{{asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 <!-- Circle progress -->

@@ -15,6 +15,14 @@ class CreateAgentsTable extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->casecadeOnDelete();
+            $table->string('name');
+            $table->char('username')->unique();
+            $table->string('address');
+            $table->string('telp_num');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('thumnail')->nullable();
             $table->timestamps();
         });
     }
