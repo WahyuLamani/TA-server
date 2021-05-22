@@ -21,8 +21,9 @@
                     </div>
                 </div>
                 <div class="header-left">
-                    
-
+                    <div class="py-4 ml-2">
+                        <h3 class="text-gray">{{ucwords(Auth::user()->company_name)}}</h3>
+                    </div>
                 </div>
                 <div class="header-right">
                     
@@ -37,7 +38,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="{{asset("storage/" . Auth::user()->thumnail)}}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">

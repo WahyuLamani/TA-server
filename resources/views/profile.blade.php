@@ -15,14 +15,14 @@
     <!-- row -->
 
     <div class="container-fluid">
+        @include('layouts.alert')
         <div class="row">
             <div class="col-lg-4 col-xl-4">
-                @include('layouts.alert')
                 <div class="card">
                     <div class="card-body">
                         <div class="media align-items-center mb-4">
                             @if (Auth::user()->thumnail > 0)
-                            <img class="mr-3" src="images/avatar/11.png" width="80" height="80" alt="">
+                            <img class="mr-3" src="{{asset("storage/" . Auth::user()->thumnail)}}" width="80" height="80" alt="">
                             @endif
                             <div class="media-body">
                                 <h3 class="mb-0">{{ Auth::user()->name}}</h3>

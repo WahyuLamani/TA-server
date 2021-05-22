@@ -77,7 +77,6 @@
 
 <script src="{{asset('assets/js/dashboard/dashboard-1.js')}}"></script>
 @endif
-
 </body>
 
 </html>
