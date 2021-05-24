@@ -17,3 +17,7 @@
 .tombol-keluar:focus {
     outline: none;
 }
+
+.chnges-color {
+    background-color: #e0e0e0de !important;
+}

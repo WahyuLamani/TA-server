@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $count = Agent::where('user_id', '=', Auth::user()->id)->count();
+        // $date = Carbon::now()->toRfc850String();
+        return view('index', compact('count'));
     }
 
     public function profile()
@@ -114,7 +118,7 @@ class HomeController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
             }
-            session()->flash('success', ucwords('Your blog is successfully Updated'));
+            session()->flash('success', ucwords('your profile has successfull updated'));
         } else {
             session()->flash('error', ucwords('password uncorrect'));
         }

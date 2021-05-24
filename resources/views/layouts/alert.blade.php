@@ -14,3 +14,16 @@
     </button>
 </div>
 @endif
+{{-- <div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sweet Message</h4>
+            <div class="card-content">
+                <div class="sweetalert m-t-30">
+                    <button class="btn btn-info btn sweet-message">Sweet Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /# card -->
+</div> --}}

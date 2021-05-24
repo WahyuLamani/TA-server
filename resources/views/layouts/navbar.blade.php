@@ -1,8 +1,7 @@
 <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
-            
+        <div class="nav-header chnges-color">
             
         </div>
         <!--**********************************
@@ -26,7 +25,6 @@
                     </div>
                 </div>
                 <div class="header-right">
-                    
                     <ul class="clearfix">
                         @auth
                         <li class="icons dropdown d-none d-md-flex" data-toggle="dropdown">
