@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agent;
+use App\Models\Client\Agent;
+use App\Models\Client\Transactions\Distribution;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,8 +31,10 @@ class HomeController extends Controller
     public function index()
     {
         $count = Agent::where('user_id', '=', Auth::user()->id)->count();
+        $sumDisItem = Distribution::where('agent_id', Auth::user()->id)->sum('dis_item');
+        // $sum = Model::where('status', 'paid')->sum('sum_field');
         // $date = Carbon::now()->toRfc850String();
-        return view('index', compact('count'));
+        return view('index', compact(['count', 'sumDisItem']));
     }
 
     public function profile()
