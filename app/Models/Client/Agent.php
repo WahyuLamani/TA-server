@@ -4,6 +4,7 @@ namespace App\Models\Client;
 
 use App\Models\Distribution;
 use App\Models\User;
+use App\Models\Client\ProblemReporting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,10 @@ class Agent extends Model
     public function distribution()
     {
         $this->hasMany(Distribution::class);
+    }
+
+    public function problemreporting()
+    {
+        $this->hasMany(ProblemReporting::class);
     }
 }

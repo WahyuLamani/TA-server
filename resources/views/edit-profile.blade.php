@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="/profile/update/{{$user->id}}" method="post" enctype="multipart/form-data">
+                            <form class="form-valide" action="/profile/update/{{Auth::user()->id}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group row">

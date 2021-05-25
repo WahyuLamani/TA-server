@@ -88,21 +88,24 @@
                 </div> --}}
 
                 <div class="card" id="reporting">
-                    <div class="media media-reply">
-                        <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50">
-                        <div class="media-body">
-                            <div class="d-sm-flex justify-content-between mb-2">
-                                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                <div class="media-reply__link">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                    <h3 class="mt-3 ml-3 text-black-50 text-center">Agents Problem Reporting</h3>
+                    @foreach ($reports as $row)
+                        <div class="media media-reply">
+                            <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50">
+                            <div class="media-body">
+                                <div class="d-sm-flex justify-content-between mb-2">
+                                    <h5 class="mb-sm-0">{{$row->name}}<small class="text-muted ml-3">about 3 days ago</small></h5>
+                                    <div class="media-reply__link">
+                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                        <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                    </div>
                                 </div>
+                                
+                                <p>{{$row->post}}</p>
                             </div>
-                            
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
                 </div>
             </div>
