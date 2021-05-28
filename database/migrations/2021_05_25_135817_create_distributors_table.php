@@ -15,13 +15,11 @@ class CreateDistributorsTable extends Migration
     {
         Schema::create('distributors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->casecadeOnDelete();
             $table->string('name');
-            $table->char('username')->unique();
             $table->string('address');
             $table->char('location', 255)->nullable();
             $table->string('telp_num');
-            $table->string('email')->unique();
-            $table->string('password');
             $table->string('thumnail')->nullable();
             $table->timestamps();
         });

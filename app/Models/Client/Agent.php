@@ -7,12 +7,19 @@ use App\Models\User;
 use App\Models\Client\ProblemReporting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Passport\HasApiTokens;
 
 class Agent extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
-    protected $fillable = ['name', 'address', 'email', 'telp_num', 'password'];
+    protected $fillable = [
+        'name',
+        'address',
+        'telp_num',
+        'location',
+        'thumnail',
+    ];
 
     public function user()
     {

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Client\Agent;
+use App\Models\Client\Distributor;
+use App\Models\Server\Company;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,13 +20,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'company_name',
-        'name',
         'email',
-        'address',
-        'telp_num',
         'password',
-        'thumnail',
+        'roles',
     ];
 
     /**
@@ -48,6 +46,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function agents()
     {
-        return $this->hasMany(Agent::class);
+        return $this->hasOne(Agent::class);
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
+
+    public function distributor()
+    {
+        return $this->hasOne(Distributor::class);
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+
 
 class UpdateUserController extends Controller
 {
@@ -95,17 +95,5 @@ class UpdateUserController extends Controller
         //     'address' => $request->address,
         //     'telp_num' => $request->telp_num,
         // ]);
-    }
-
-    protected function Validation(array $data)
-    {
-        return Validator::make($data, [
-            'company_name' => ['required', 'string', 'max:255'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'address' => ['required', 'string', 'max:255'],
-            'telp_num' => ['required', 'numeric', 'digits_between:10,14'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ])->validate();
     }
 }
