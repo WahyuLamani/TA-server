@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client\Agent;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,21 +16,32 @@ class AuthAgentController extends Controller
             'name' => 'required|max:55',
             'address' => 'required',
             'telp_num' => 'required|numeric|digits_between:10,14',
-            'email' => 'email|required|unique:agents',
+            'email' => 'email|required|unique:users',
             'password' => 'required|confirmed'
         ]);
-        $hashing = Hash::make($request->password);
+
+
         $agent = Agent::create([
-            'user_id' => '1',
             'name' => $request->name,
             'address' => $request->address,
             'telp_num' => $request->telp_num,
-            'email' => $request->email,
-            'password' => $hashing,
         ]);
-        $accessToken = $agent->createToken('authToken')->accessToken;
+        // $user = new User();
+        // $user->userable_type = Agent::class;
+        // $user->userable_id = $agent->id;
+        // $user->email = $request->email;
+        // $user->password = Hash::make($request->password);
+        // $user->save();
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'userable_type' => Agent::class,
+            'userable_id' => $agent->id,
+        ]);
 
-        return response(['user' => $agent, 'access_token' => $accessToken], 201);
+        $accessToken = $user->createToken('authToken')->accessToken;
+
+        return response(['user' => $validatedData, 'access_token' => $accessToken], 201);
     }
 
     public function login(Request $request)

@@ -15,7 +15,6 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->casecadeOnDelete();
             $table->string('company_name');
             $table->string('ceo_name');
             $table->string('company_address');

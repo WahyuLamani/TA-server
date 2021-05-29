@@ -39,7 +39,7 @@
                                     <label class="col-lg-4 col-form-label" for="name">Name
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') ?? $user->name }}" placeholder="Enter Name">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') ?? $user->ceo_name }}" placeholder="Enter Name">
 
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
@@ -52,7 +52,7 @@
                                     <label class="col-lg-4 col-form-label" for="email">Email
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') ?? $user->email }}" placeholder="Enter Email..">
+                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') ?? $user->company_email }}" placeholder="Enter Email..">
                                         
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                                     <label class="col-lg-4 col-form-label" for="address">Company Address
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') ?? $user->address }}" placeholder="Company Address..">
+                                        <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') ?? $user->company_address }}" placeholder="Company Address..">
 
                                         @error('address')
                                             <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                                     <label class="col-lg-4 col-form-label" for="telp_num">Telp.Number
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control  @error('telp_num') is-invalid @enderror" id="telp_num" name="telp_num" value="{{ old('telp_num') ?? $user->telp_num }}" placeholder="Telp.Number">
+                                        <input type="text" class="form-control  @error('telp_num') is-invalid @enderror" id="telp_num" name="telp_num" value="{{ old('telp_num') ?? $user->company_telp_num }}" placeholder="Telp.Number">
 
                                         @error('telp_num')
                                             <span class="invalid-feedback" role="alert">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Server;
 
 use App\Http\Controllers\Controller;
 use App\Models\Server\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -12,8 +13,14 @@ class CompanyController extends Controller
 {
     public function create(Request $request)
     {
+        // validation
         $data = $this->Validation($request->all());
-        Auth::user()->company()->create($data);
+        // store data
+        $Company = Company::create($data);
+        $user = User::find(Auth::user()->id);
+        $user->userable_type = Company::class;
+        $user->userable_id = $Company->id;
+        $user->save();
         return redirect(route('home'));
     }
 

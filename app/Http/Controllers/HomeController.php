@@ -47,13 +47,13 @@ class HomeController extends Controller
 
     public function edit()
     {
-        return view('edit-profile');
+        $user = Auth::user()->userable;
+        return view('edit-profile', compact('user'));
     }
 
     public function form()
     {
-        $data = Company::where('user_id', Auth::user()->id)->first();
-        if ($data == null) {
+        if (!Auth::user()->userable) {
             return view('company.register');
         } else {
             return redirect(route('home'));

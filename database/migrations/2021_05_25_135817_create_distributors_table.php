@@ -15,7 +15,6 @@ class CreateDistributorsTable extends Migration
     {
         Schema::create('distributors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->casecadeOnDelete();
             $table->string('name');
             $table->string('address');
             $table->char('location', 255)->nullable();

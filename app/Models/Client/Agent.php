@@ -5,13 +5,14 @@ namespace App\Models\Client;
 use App\Models\Distribution;
 use App\Models\User;
 use App\Models\Client\ProblemReporting;
+use App\Models\Server\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Passport\HasApiTokens;
+
 
 class Agent extends Model
 {
-    use HasApiTokens, HasFactory;
+    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -34,5 +35,10 @@ class Agent extends Model
     public function problemreporting()
     {
         $this->hasMany(ProblemReporting::class);
+    }
+
+    public function company()
+    {
+        $this->hasMany(Company::class);
     }
 }

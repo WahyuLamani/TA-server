@@ -21,7 +21,7 @@
                 </div>
                 <div class="header-left">
                     <div class="py-4 ml-2">
-                        <h3 class="text-gray">{{ucwords(Auth::user()->company_name)}}</h3>
+                        <h3 class="text-gray">{{ucwords(Auth::user()->userable->company_name)}}</h3>
                     </div>
                 </div>
                 <div class="header-right">
@@ -29,7 +29,7 @@
                         @auth
                         <li class="icons dropdown d-none d-md-flex" data-toggle="dropdown">
                             <a href="" class="log-user">
-                                <span>{{ucwords(Auth::user()->name)}}</span>
+                                <span>{{ucwords(Auth::user()->userable->ceo_name)}}</span>
                             </a>
                         </li>
                         @endauth
