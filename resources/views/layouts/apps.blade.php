@@ -57,7 +57,7 @@
     <script src="{{asset('assets/js/script.js')}}"></script>
 
 
-@if ( request()->path() != route('profile'))   
+  
 <!-- Chartjs -->
 <script src="{{asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 <!-- Circle progress -->
@@ -79,7 +79,6 @@
 
 
 <script src="{{asset('assets/js/dashboard/dashboard-1.js')}}"></script>
-@endif
 <script>
  
 </script>

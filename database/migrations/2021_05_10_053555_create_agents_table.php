@@ -15,6 +15,7 @@ class CreateAgentsTable extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained();
             $table->string('name');
             $table->string('address');
             $table->char('location', 255)->nullable();

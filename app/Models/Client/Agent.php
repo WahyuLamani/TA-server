@@ -22,11 +22,6 @@ class Agent extends Model
         'thumnail',
     ];
 
-    public function user()
-    {
-        $this->belongsTo(User::class);
-    }
-
     public function distribution()
     {
         $this->hasMany(Distribution::class);
@@ -39,6 +34,6 @@ class Agent extends Model
 
     public function company()
     {
-        $this->hasMany(Company::class);
+        $this->belongsTo(Company::class);
     }
 }

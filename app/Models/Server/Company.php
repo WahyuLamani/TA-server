@@ -2,7 +2,7 @@
 
 namespace App\Models\Server;
 
-use App\Models\User;
+use App\Models\Client\Agent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,8 +21,8 @@ class Company extends Model
         'about',
     ];
 
-    // public function user()
-    // {
-    //     return $this->hasOne(User::class);
-    // }
+    public function agent()
+    {
+        return $this->hasMany(Agent::class);
+    }
 }

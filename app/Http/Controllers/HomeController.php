@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $count = Agent::where('user_id', Auth::user()->id)->count();
+        $count = Agent::where('company_id', Auth::user()->userable->id)->count();
         $sumDisItem = Distribution::where('agent_id', Auth::user()->id)->sum('dis_item');
         // $sum = Model::where('status', 'paid')->sum('sum_field');
         // $date = Carbon::now()->toRfc850String();
@@ -39,7 +39,7 @@ class HomeController extends Controller
     public function profile()
     {
         $reports = ProblemReporting::join('agents', 'agents.id', '=', 'problem_reportings.agent_id')
-            ->where('agents.user_id', Auth::user()->id)
+            ->where('agents.company_id', Auth::user()->userable->id)
             ->get();
         // dd($reports);
         return view('profile', compact('reports'));
