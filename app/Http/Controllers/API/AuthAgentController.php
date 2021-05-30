@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client\Agent;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthAgentController extends Controller
@@ -23,6 +24,7 @@ class AuthAgentController extends Controller
 
         $agent = Agent::create([
             'name' => $request->name,
+            'company_id' => '1',
             'address' => $request->address,
             'telp_num' => $request->telp_num,
         ]);
@@ -55,8 +57,12 @@ class AuthAgentController extends Controller
             return response(['message' => 'This User does not exist, check your details'], 400);
         }
 
-        $accessToken = auth()->user()->createToken('authToken')->accessToken;
+        $accessToken = Auth::user()->createToken('authToken')->accessToken;
 
-        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+        return response([
+            'user' => Auth::user(),
+            'user_detail' => Auth::user()->userable,
+            'access_token' => $accessToken
+        ]);
     }
 }

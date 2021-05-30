@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Client\Agent;
 use App\Models\Client\ProblemReporting;
 use App\Models\Client\Transactions\Distribution;
-use App\Models\Server\Company;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
