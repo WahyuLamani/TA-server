@@ -34,11 +34,11 @@
                                 <tbody>
                                     @foreach ($agents as $agent)
                                     <tr>
-                                        <td><img style="width: 40px" src="storage/{{$agent->thumnail}}" class=" rounded-circle mr-3">{{$agent->name}}</td>
+                                        <td><img style="width: 30px" src="/storage/{{$agent->thumbnail}}" class=" rounded-circle mr-3">{{$agent->name}}</td>
                                         <td>{{$agent->address}}</td>
                                         <td>{{$agent->telp_num}}</td>
                                         <td><a href="agent/details/{{$agent->id}}">details</a></td>
-                                        <td width="10px"><form action="agent/delete/{{$agent->id}}" method="post">@csrf @method('delete')<button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash color-danger"></i></button></form>
+                                        <td width="10px"><form action="agent/delete/{{$agent->id}}" method="post">@csrf @method('delete')<button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></form>
                                         </td>
                                     </tr>
                                     @endforeach

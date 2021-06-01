@@ -24,7 +24,7 @@ class AuthAgentController extends Controller
 
         $agent = Agent::create([
             'name' => $request->name,
-            'company_id' => '3',
+            'company_id' => '1',
             'address' => $request->address,
             'thumbnail' => 'images/avatar/default.png',
             'telp_num' => $request->telp_num,

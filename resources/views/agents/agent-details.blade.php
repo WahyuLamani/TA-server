@@ -14,7 +14,18 @@
         </div>
     </div>
     {{-- this your content --}}
-    
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <img style="width: 180px" src="/storage/{{$agent->thumbnail}}" class="rounded-circle" alt="">
+                    <h5 class="mt-3 mb-1">{{$agent->name}}</h5>
+                    <p class="m-0">{{$agent->email}}</p>
+                    {{-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> --}}
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- end your content --}}
 </div>
 

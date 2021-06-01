@@ -20,7 +20,7 @@ class Agent extends Model
         'address',
         'telp_num',
         'location',
-        'thumnail',
+        'thumbnail',
     ];
 
     public function distribution()
