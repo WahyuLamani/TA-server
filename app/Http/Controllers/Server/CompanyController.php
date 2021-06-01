@@ -15,6 +15,9 @@ class CompanyController extends Controller
     {
         // validation
         $data = $this->Validation($request->all());
+        if (!isset($data['thumbnail'])) {
+            $data['thumbnail'] = 'images/avatar/default.png';
+        }
         // store data
         $Company = Company::create($data);
         $user = User::find(Auth::user()->id);
@@ -33,7 +36,7 @@ class CompanyController extends Controller
             'company_email' => ['required', 'string', 'email'],
             'company_telp_num' => ['required', 'numeric', 'digits_between:10,14'],
             'about' => ['required', 'string'],
-            'thumnail' => ['image', 'mimes:jpeg,png,jpg', 'max:5100'],
+            'thumbnail' => ['image', 'mimes:jpeg,png,jpg', 'max:5100'],
         ])->validate();
     }
 }

@@ -19,7 +19,7 @@ class CreateDistributorsTable extends Migration
             $table->string('address');
             $table->char('location', 255)->nullable();
             $table->string('telp_num');
-            $table->string('thumnail')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }

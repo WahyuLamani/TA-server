@@ -11,8 +11,8 @@
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/menu2">menu 2</a></li>
+                    <li><a href="{{route('home')}}">Home</a></li>
+                    <li><a href="{{route('agents')}}">Your Agents</a></li>
                     
                 </ul>
             </li>

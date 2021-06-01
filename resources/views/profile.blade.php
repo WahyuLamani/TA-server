@@ -19,16 +19,19 @@
         <div class="row">
             <div class="col-lg-4 col-xl-4">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="media align-items-center mb-4">
-                            @if (Auth::user()->thumnail > 0)
-                            <img class="mr-3" src="{{asset("storage/" . Auth::user()->thumnail)}}" width="80" height="80" alt="">
-                            @endif
-                            <div class="media-body">
-                                <h3 class="mb-0">{{ Auth::user()->name}}</h3>
-                                <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
+                    <div class="card-header">
+                        <h4 class="text-black-50">Company Profile</h4>
+                        <div class="card-body">
+                            <div class="media align-items-center mb-4">
+                                @if (Auth::user()->userable->thumbnail > 0)
+                                <img class="mr-3" src="{{asset("storage/" . Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
+                                @endif
+                                <div class="media-body">
+                                    <h4 class="mb-0 text-black-50">{{ Auth::user()->userable->ceo_name}}</h4>
+                                    <p class="text-muted mb-0">{{ Auth::user()->userable->company_email }}</p>
+                                </div>
                             </div>
-                        </div>
+                    </div>
                         
                         <div class="row mb-5">
                             {{-- <div class="col">
@@ -53,8 +56,8 @@
                         <h4>About Me</h4>
                         <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
                         <ul class="card-profile__info">
-                            <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>{{ Auth::user()->telp_num }}</span></li>
-                            <li><strong class="text-dark mr-4">Email</strong> <span>{{ Auth::user()->email }}</span></li>
+                            <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>{{ Auth::user()->userable->company_telp_num }}</span></li>
+                            <li><strong class="text-dark mr-4">Login Email</strong> <span>{{ Auth::user()->email }}</span></li>
                         </ul>
                     </div>
                 </div>  

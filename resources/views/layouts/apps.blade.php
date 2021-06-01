@@ -13,6 +13,8 @@
     <!-- Chartist -->
     <link rel="stylesheet" href="{{asset('assets/plugins/chartist/css/chartist.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css')}}">
+    {{-- data tables --}}
+    <link href="{{asset('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/mystyle.css')}}" rel="stylesheet">
@@ -58,6 +60,11 @@
 
 
   
+{{-- data tables --}}
+<script src="{{asset('assets/plugins/tables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+
 <!-- Chartjs -->
 <script src="{{asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 <!-- Circle progress -->

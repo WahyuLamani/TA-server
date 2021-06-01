@@ -17,15 +17,16 @@ class AuthAgentController extends Controller
             'name' => 'required|max:55',
             'address' => 'required',
             'telp_num' => 'required|numeric|digits_between:10,14',
+            // 'thumnail' => 'image|mimes:jpeg,png,jpg|max:5100',
             'email' => 'email|required|unique:users',
             'password' => 'required|confirmed'
         ]);
-
 
         $agent = Agent::create([
             'name' => $request->name,
             'company_id' => '1',
             'address' => $request->address,
+            'thumnail' => 'images/avatar/default.png',
             'telp_num' => $request->telp_num,
         ]);
         // $user = new User();

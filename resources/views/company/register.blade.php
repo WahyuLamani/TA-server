@@ -65,10 +65,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">Thumnail</label>
+                                <label for="thumbnail" class="col-md-4 col-form-label text-md-right">Thumbnail</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="file" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
+                                    <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') }}" required autocomplete="thumbnail" autofocus>
+                                    @error('thumbnail')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -79,7 +79,7 @@
                                 <label for="about" class="col-md-4 col-form-label text-md-right">About</label>
                                 <div class="col-md-6">
                                     <textarea name="about" id="about" class="form-control @error('about') is-invalid @enderror" rows="4">{{old('about')}}</textarea>
-                                    @error('email')
+                                    @error('about')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

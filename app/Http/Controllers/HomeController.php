@@ -38,13 +38,14 @@ class HomeController extends Controller
         $reports = ProblemReporting::join('agents', 'agents.id', '=', 'problem_reportings.agent_id')
             ->where('agents.company_id', Auth::user()->userable->id)
             ->get();
-        // dd($reports);
         return view('profile', compact('reports'));
     }
 
     public function edit()
     {
         $user = Auth::user()->userable;
+        // $array = explode('/', $user->thumbnail);
+        // $user->thumbnail = end($array);
         return view('edit-profile', compact('user'));
     }
 

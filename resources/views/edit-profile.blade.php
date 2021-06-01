@@ -27,12 +27,11 @@
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name') ?? $user->company_name }}" placeholder="Company Name">
 
-                                     @error('company_name')
+                                    @error('company_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{$message}}</strong>
                                             </span>
-                                     @enderror
-                                       
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -91,7 +90,7 @@
                                     <label class="col-lg-4 col-form-label" for="thumnail">Thumnail
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="file" class="form-control  @error('thumnail') is-invalid @enderror" id="thumnail" name="thumnail" value="{{ old('thumnail') ?? $user->thumnail }}" placeholder="Telp.Number">
+                                        <input type="file" class="form-control  @error('thumnail') is-invalid @enderror" id="thumnail" name="thumnail" value="{{ old('thumnail') ?? $user->thumnail }}">
 
                                         @error('thumnail')
                                             <span class="invalid-feedback" role="alert">
