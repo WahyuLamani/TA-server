@@ -24,9 +24,9 @@ class AuthAgentController extends Controller
 
         $agent = Agent::create([
             'name' => $request->name,
-            'company_id' => '1',
+            'company_id' => '3',
             'address' => $request->address,
-            'thumnail' => 'images/avatar/default.png',
+            'thumbnail' => 'images/avatar/default.png',
             'telp_num' => $request->telp_num,
         ]);
         // $user = new User();
@@ -65,5 +65,13 @@ class AuthAgentController extends Controller
             'user_detail' => Auth::user()->userable,
             'access_token' => $accessToken
         ]);
+    }
+    public function logout()
+    {
+        Auth::user()->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+
+        return response()->json('Successfully logged out');
     }
 }

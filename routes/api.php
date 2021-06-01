@@ -25,3 +25,4 @@ Passport::routes();
 
 Route::post('register', [AuthAgentController::class, 'register']);
 Route::post('login', [AuthAgentController::class, 'login']);
+Route::post('logout', [AuthAgentController::class, 'logout']);

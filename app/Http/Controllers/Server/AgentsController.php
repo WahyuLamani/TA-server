@@ -7,7 +7,7 @@ use App\Models\Client\Agent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Events\AccessTokenCreated;
+use Laravel\Passport\TokenRepository;
 
 class AgentsController extends Controller
 {
@@ -27,17 +27,13 @@ class AgentsController extends Controller
 
     public function destroy(Agent $agent)
     {
-        $agent->delete();
+        $tokenRepository = app(TokenRepository::class);
         $user = User::where('userable_id', $agent->id);
-        dd($user->first());
+        dd($tokenRepository->revokeAccessToken($tokenId));
+        $agent->delete();
+        $user->delete();
         // User::find($agent->id, 'userable_id')->token()->revoke();
         session()->flash('success', ucwords('Agent Has Ben Deleted'));
         return redirect()->to('agents');
-    }
-    public function handle(AccessTokenCreated $event)
-    {
-        Token::where('user_id', $event->userId)
-            ->where('id', '<>', $event->tokenId)
-            ->update(['revoked' => true]);
     }
 }
