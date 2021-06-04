@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AllResource;
 use App\Models\Client\Agent;
 use App\Models\Server\Company;
 use App\Models\User;
@@ -16,7 +17,7 @@ class AuthAgentController extends Controller
     public function showCompanies()
     {
         $company = Company::select('id', 'company_name')->get();
-        return response(['companies' => $company], 200);
+        return response(['companies' => AllResource::collection($company), 'message' => 'Please Select One'], 200);
     }
 
     public function register(Request $request)

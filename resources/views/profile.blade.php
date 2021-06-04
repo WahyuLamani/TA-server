@@ -94,14 +94,14 @@
                     <h3 class="mt-3 ml-3 text-black-50 text-center">Agents Problem Reporting</h3>
                     @foreach ($reports as $row)
                         <div class="media media-reply">
-                            <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50">
+                            <img class="mr-2 ml-1 circle-rounded" src="{{asset("storage/" . $row->thumbnail)}}" width="50" height="50">
                             <div class="media-body">
                                 <div class="d-sm-flex justify-content-between mb-2">
-                                    <h5 class="mb-sm-0">{{$row->name}}<small class="text-muted ml-3">about 3 days ago</small></h5>
+                                    <h5 class="mb-sm-0">{{$row->name}}<small class="text-muted ml-3">{{$row->created_at->diffForHumans()}}</small></h5>
                                     <div class="media-reply__link">
-                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                        {{-- <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
                                         <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                        <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                        <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button> --}}
                                     </div>
                                 </div>
                                 

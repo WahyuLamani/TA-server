@@ -11,6 +11,14 @@ class Distribution extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'agent_id',
+        'distributor_id',
+        'dis_item',
+        'info'
+    ];
+
+
     public function agent()
     {
         $this->belongsTo(Agent::class);

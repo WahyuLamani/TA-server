@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\AuthAgentController;
 use App\Http\Controllers\API\AuthDistributorController;
+use App\Http\Controllers\API\DistributionController;
+use App\Http\Controllers\API\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
@@ -34,3 +36,5 @@ Route::prefix('distributor')->group(function () {
     Route::post('login', [AuthDistributorController::class, 'login']);
     Route::post('logout', [AuthDistributorController::class, 'logout']);
 });
+Route::apiResource('report', ReportController::class)->middleware('auth:api');
+Route::apiResource('distribution', DistributionController::class)->middleware('auth:api');

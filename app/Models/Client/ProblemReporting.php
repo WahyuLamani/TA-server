@@ -10,6 +10,11 @@ class ProblemReporting extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'agent_id',
+        'post',
+        'pict'
+    ];
     public function agent()
     {
         $this->belongsTo(Agent::class);

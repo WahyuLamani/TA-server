@@ -41,6 +41,11 @@ class AuthDistributorController extends Controller
             'userable_id' => $distributor->id,
         ]);
 
+        if (Auth::attempt(['email' => $user->email, 'password' => $request->password])) {
+            Auth::user()->last_login = Carbon::now()->toDateTimeString();
+            Auth::user()->save();
+        }
+
         $accessToken = $user->createToken('authToken')->accessToken;
 
         return response(['user' => $validatedData, 'access_token' => $accessToken], 201);
@@ -55,9 +60,7 @@ class AuthDistributorController extends Controller
 
         if (!auth()->attempt($login)) {
             return response(['message' => 'This User does not exist, check your details'], 400);
-        }
-
-        if (Auth::attempt($login)) {
+        } else {
             Auth::user()->last_login = Carbon::now()->toDateTimeString();
             Auth::user()->save();
         }

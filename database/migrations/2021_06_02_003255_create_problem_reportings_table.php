@@ -17,7 +17,7 @@ class CreateProblemReportingsTable extends Migration
             $table->id();
             $table->foreignId('agent_id')->constrained();
             $table->text('post');
-            $table->string('pict');
+            $table->string('pict')->nullable();
             $table->timestamp('added_at');
             $table->timestamps();
         });

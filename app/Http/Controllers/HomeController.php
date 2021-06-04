@@ -27,7 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $count = Agent::where('company_id', Auth::user()->userable->id)->count();
-        $sumDisItem = Distribution::where('agent_id', Auth::user()->id)->sum('dis_item');
+        $sumDisItem = Distribution::join('agents', 'agents.id', '=', 'distributions.agent_id')
+            ->where('agents.company_id', Auth::user()->userable->id)->sum('dis_item');
         // $sum = Model::where('status', 'paid')->sum('sum_field');
         // $date = Carbon::now()->toRfc850String();
         return view('index', compact(['count', 'sumDisItem']));
@@ -35,7 +36,8 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $reports = ProblemReporting::join('agents', 'agents.id', '=', 'problem_reportings.agent_id')
+        $reports = ProblemReporting::select('problem_reportings.*', 'agents.name', 'agents.thumbnail')
+            ->join('agents', 'agents.id', '=', 'problem_reportings.agent_id')
             ->where('agents.company_id', Auth::user()->userable->id)
             ->get();
         return view('profile', compact('reports'));
@@ -49,7 +51,7 @@ class HomeController extends Controller
         return view('edit-profile', compact('user'));
     }
 
-    public function form()
+    public function handle()
     {
         if (!Auth::user()->userable) {
             return view('company.register');
