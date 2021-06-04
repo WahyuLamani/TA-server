@@ -10,6 +10,14 @@ class Distributor extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'address',
+        'telp_num',
+        'location',
+        'thumbnail',
+    ];
+
     public function distribution()
     {
         $this->hasMany(Distribution::class);

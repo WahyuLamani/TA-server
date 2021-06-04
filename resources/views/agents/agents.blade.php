@@ -38,9 +38,35 @@
                                         <td>{{$agent->address}}</td>
                                         <td>{{$agent->telp_num}}</td>
                                         <td><a href="agent/details/{{$agent->id}}">details</a></td>
-                                        <td width="10px"><form action="agent/delete/{{$agent->id}}" method="post">@csrf @method('delete')<button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></form>
+                                        <td width="10px"><span data-toggle="modal" data-target="#exampleModal"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
                                         </td>
                                     </tr>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Ar u sure want to delete this Agent ?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <div class="text-secondary">
+                                                    <h5>Name : {{$agent->name}}</h5>
+                                                    <small>Registered at : {{$agent->created_at->format("d F, Y")}}</small>
+                                                </div>
+                                                <form action="/agent/delete/{{$agent->id}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <div class="d-flax mt-2">
+                                                    <button class="btn btn-sm btn-danger mr-2" type="submit">yes</button>
+                                                    <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">No</button>
+                                                    </div>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @endforeach
                                 </tbody>
                                 <tfoot>

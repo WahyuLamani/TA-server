@@ -21,6 +21,13 @@
                     <img style="width: 180px" src="/storage/{{$agent->thumbnail}}" class="rounded-circle" alt="">
                     <h5 class="mt-3 mb-1">{{$agent->name}}</h5>
                     <p class="m-0">{{$agent->email}}</p>
+                    <form action="/agent/delete/{{$agent->id}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <div class="d-flax mt-2">
+                            <button class="btn btn-sm btn-warning" type="submit">Delete Agent</button>
+                        </div>
+                    </form>
                     {{-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> --}}
                 </div>
             </div>

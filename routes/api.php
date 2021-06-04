@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthAgentController;
+use App\Http\Controllers\API\AuthDistributorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
@@ -21,8 +22,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Passport::routes();
+Route::prefix('agent')->group(function () {
+    Route::get('register', [AuthAgentController::class, 'showCompanies']);
+    Route::post('register', [AuthAgentController::class, 'register']);
+    Route::post('login', [AuthAgentController::class, 'login']);
+    Route::post('logout', [AuthAgentController::class, 'logout']);
+});
 
-
-Route::post('register', [AuthAgentController::class, 'register']);
-Route::post('login', [AuthAgentController::class, 'login']);
-Route::post('logout', [AuthAgentController::class, 'logout']);
+Route::prefix('distributor')->group(function () {
+    Route::post('register', [AuthDistributorController::class, 'register']);
+    Route::post('login', [AuthDistributorController::class, 'login']);
+    Route::post('logout', [AuthDistributorController::class, 'logout']);
+});
