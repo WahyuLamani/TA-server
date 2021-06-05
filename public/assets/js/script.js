@@ -24,6 +24,14 @@
         start: "bottom"
     });
 
+    $('#agent-details').slimscroll({
+        position: "right",
+        size: "10px",
+        height: "350px",
+        // alwaysVisible: true,
+        start: "top"
+    });
+
 
 
 

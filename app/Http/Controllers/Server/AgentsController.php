@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Server;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AllResource;
 use App\Models\Client\Agent;
+use App\Models\Client\Transactions\Distribution;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +20,16 @@ class AgentsController extends Controller
 
     public function details(Agent $agent)
     {
-        $agent = User::select('users.email', 'agents.*')
+        $agent = User::select('users.email', 'users.last_login', 'agents.*')
             ->join('agents', 'agents.id', 'users.userable_id')
             ->where('userable_id', $agent->id)->first();
-        return view('agents.agent-details', compact('agent'));
+
+        $distribution = Distribution::select('agents.name', 'distributions.*')
+            ->join('agents', 'agents.id', 'distributions.agent_id')->get();
+        return view('agents.agent-details', compact([
+            'agent',
+            'distribution'
+        ]));
     }
 
     public function destroy(Agent $agent)

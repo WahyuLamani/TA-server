@@ -55,7 +55,7 @@ class DistributionController extends Controller
      */
     public function show(Distribution $distribution)
     {
-        return response(['distribution' => new ProjectResource($distribution), 'message' => 'Retrieved successfully'], 200);
+        return response(['distribution' => new AllResource($distribution), 'message' => 'Retrieved successfully'], 200);
     }
 
     /**
