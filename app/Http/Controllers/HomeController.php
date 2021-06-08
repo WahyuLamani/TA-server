@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client\Agent;
-use App\Models\Client\ProblemReporting;
+use App\Models\Client\{Agent, Distributor, ProblemReporting};
 use App\Models\Client\Transactions\Distribution;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +54,9 @@ class HomeController extends Controller
     {
         if (!Auth::user()->userable) {
             return view('company.register');
+        } elseif (Auth::user()->userable_type == Agent::class || Auth::user()->userable_type == Distributor::class) {
+            Auth::guard()->logout();
+            return redirect(route('login'));
         } else {
             return redirect(route('home'));
         }
