@@ -19,7 +19,46 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Agents</h4>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title">Agents</h4>
+                            <button data-toggle="modal" data-target="#createAgents" class="btn btn-primary">New Agent</button>
+                        </div>
+                        {{-- Modal Create Agent --}}
+                        <div class="modal fade" id="createAgents" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Agent</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form action="{{route('agent.create')}}" method="post">
+                                        @csrf
+                                        <script>
+                                            let data = 
+                                            console.log(data)
+                                        </script>
+                                        <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{old('email')}}" id="email" placeholder="Enter Agent Email" autocomplete>
+                                        
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                        <div class="d-flex justify-content-between mt-2">
+                                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                        <button type="button" class="btn btn-danger btn-success" data-dismiss="modal">exit</button>
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- End modal --}}
+
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>

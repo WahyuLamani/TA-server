@@ -9,6 +9,7 @@ use App\Models\Client\Transactions\Distribution;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AgentsController extends Controller
 {
@@ -16,6 +17,22 @@ class AgentsController extends Controller
     {
         $agents = Agent::where('company_id', Auth::user()->userable->id)->get();
         return view('agents.agents', compact('agents'));
+    }
+
+    public function create(Request $request)
+    {
+        // $request->validate([
+        //     'email' => 'required|string|email|unique:user',
+        // ]);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('agents')
+                ->withErrors($validator)
+                ->withInput(['data' => 'kambing']);
+        }
     }
 
     public function details(Agent $agent)

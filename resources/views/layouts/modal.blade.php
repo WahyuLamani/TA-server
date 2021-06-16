@@ -15,7 +15,7 @@
             <form action="/agent/delete/{{$agent->id}}" method="post">
                 @csrf
                 @method('delete')
-                <div class="d-flax mt-2">
+                <div class="d-flex mt-2">
                 <button class="btn btn-sm btn-danger mr-2" type="submit">yes</button>
                 <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">No</button>
                 </div>

@@ -1,6 +1,7 @@
 @extends('layouts.apps')
 @section('title', 'Home')
 @section('contents')
+@include('layouts.loader')
     <!--**********************************
             Content body start
         ***********************************-->

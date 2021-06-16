@@ -23,7 +23,6 @@
 
 <body class="h-100">
 
-   @include('layouts.loader')
     
     <!--**********************************
         Main wrapper start
