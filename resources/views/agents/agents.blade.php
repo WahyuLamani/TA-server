@@ -15,6 +15,22 @@
 
     <div class="container-fluid">
         @include('layouts.alert')
+        @error('email')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{$message . ' Please submit again !'}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @enderror
+        @error('name')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{$message . ' Please submit again !'}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @enderror
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -34,13 +50,17 @@
                                     </button>
                                     </div>
                                     <div class="modal-body">
-                                    <form action="{{route('agent.create')}}" method="post">
+                                    <form action="{{route('agent.store')}}" method="post">
                                         @csrf
-                                        <script>
-                                            let data = 
-                                            console.log(data)
-                                        </script>
-                                        <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{old('email')}}" id="email" placeholder="Enter Agent Email" autocomplete>
+                                        
+                                        <input class="form-control @error('name') is-invalid @enderror my-3" type="text" name="name" value="{{old('name')}}" id="name" placeholder="enter Name" autocomplete="off">
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <input class="form-control @error('email') is-invalid @enderror my-3" type="text" name="email" value="{{old('email')}}" id="email" placeholder="Enter Email" autocomplete="off">
                                         
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -74,8 +94,13 @@
                                     @foreach ($agents as $agent)
                                     <tr>
                                         <td><img style="width: 30px" src="/storage/{{$agent->thumbnail}}" class=" rounded-circle mr-3">{{$agent->name}}</td>
+                                        
+                                        @if ($agent->address == null)
+                                        <td colspan="2">{{"This agent has not registered on the mobile app"}}</td>
+                                        @else
                                         <td>{{$agent->address}}</td>
                                         <td>{{$agent->telp_num}}</td>
+                                        @endif
                                         <td><a href="agent/details/{{$agent->id}}">details</a></td>
                                         <td width="10px"><span data-toggle="modal" data-target="#exampleModal"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
                                         </td>

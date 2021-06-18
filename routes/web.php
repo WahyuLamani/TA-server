@@ -18,7 +18,7 @@ Route::middleware('verified')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
     Route::get('/agents', [AgentsController::class, 'index'])->name('agents');
-    Route::post('/agent/create', [AgentsController::class, 'create'])->name('agent.create');
+    Route::post('/agent/store', [AgentsController::class, 'store'])->name('agent.store');
     Route::get('/distributed', [DistributionController::class, 'index'])->name('distributed');
     Route::post('/agent/details', [AgentsController::class, 'liveSearch'])->name('live.search');
     Route::get('/agent/details/{agent:id}', [AgentsController::class, 'details']);

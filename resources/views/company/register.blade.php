@@ -64,7 +64,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="thumbnail" class="col-md-4 col-form-label text-md-right">Thumbnail</label>
                                 <div class="col-md-6">
                                     <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') }}" required autocomplete="thumbnail" autofocus>
@@ -74,7 +74,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row">
                                 <label for="about" class="col-md-4 col-form-label text-md-right">About</label>
                                 <div class="col-md-6">

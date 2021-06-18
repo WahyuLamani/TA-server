@@ -19,7 +19,14 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-title text-gray"><small>Last login at {{\Carbon\Carbon::parse($agent->last_login)->diffForHumans()}}</small></h6>
+                        <h6 class="card-title text-gray">
+                            <small> 
+                            @if ($agent->last_login)
+                                Last login at {{\Carbon\Carbon::parse($agent->last_login)->diffForHumans()}}
+                            @else
+                                {{'Unregistered !'}}
+                            @endif
+                        </small> </h6>
                         <div class="text-center">
                             <img style="width: 180px" src="/storage/{{$agent->thumbnail}}" class="rounded-circle" alt="">
                             <h5 class="mt-3 mb-1">{{$agent->name}}</h5>
@@ -36,7 +43,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title text-black-50">Achievement Details</h4>
-                            <form action="" method="get">@csrf
+                            <form id="live-search-form">
                                 <div class="input-group input-group-sm mb-3">
                                     <input type="text" name="search" id="live-search" class="form-control" data-toggle="tooltip" data-placement="top" title="Example : yyyy-mm-dd" placeholder="Search by date & time">
                                 </div>
@@ -101,32 +108,44 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
 $( document ).ready(function() {
-    $('body').on('keyup', '#live-search', function() {
-        var searchQ = $(this).val();
-        
+    $("#foo").submit(function(event) {
+    var ajaxRequest;
 
-        $.ajax({
-            method : 'POST',
-            url : '{{ route("live.search") }}',
-            dataType : 'json',
-            data : {
-                '_token' : '{{ csrf_token() }}',
-                'agent_id' : '{{ $agent->id }}',
-                searchQ : searchQ,
-            },
-            success: function(res) {
-                var tableRow = ''
+    /* Stop form from submitting normally */
+    event.preventDefault();
 
-                $('#dynamic-row').html('')
-                var i = 1
-                $.each(res, function(index, value){
-                    tableRow = '<tr> <th>'+ i +'</th><td>'+  moment(value.added_at).format('LL') +'</td><td>'+ value.dis_item +'</td><td>'+ value.name +'</td><td> <i class="fa fa-info fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="'+ value.info +'"></i></td> </tr>'
-                    i++
-                    $('#dynamic-row').append(tableRow);
-                });
-            }
-        })
-    })
+    /* Clear result div*/
+    $("#result").html('');
+
+    /* Get from elements values */
+    var values = $(this).serialize();
+
+    /* Send the data using post and put the results in a div. */
+    /* I am not aborting the previous request, because it's an
+       asynchronous request, meaning once it's sent it's out
+       there. But in case you want to abort it you can do it
+       by abort(). jQuery Ajax methods return an XMLHttpRequest
+       object, so you can just use abort(). */
+       ajaxRequest= $.ajax({
+            url: "test.php",
+            type: "post",
+            data: values
+        });
+
+    /*  Request can be aborted by ajaxRequest.abort() */
+
+    ajaxRequest.done(function (response, textStatus, jqXHR){
+
+         // Show successfully for submit message
+         $("#result").html('Submitted successfully');
+    });
+
+    /* On failure of request this function will be called  */
+    ajaxRequest.fail(function (){
+
+        // Show error
+        $("#result").html('There is error while submit');
+    });
 });
 </script>
 @include('layouts.modal')
