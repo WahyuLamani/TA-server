@@ -38,7 +38,7 @@
                             <h4 class="card-title text-black-50">Achievement Details</h4>
                             <form action="" method="get">@csrf
                                 <div class="input-group input-group-sm mb-3">
-                                    <input type="text" name="search" id="search" class="form-control" data-toggle="tooltip" data-placement="top" title="Example : yyyy-mm-dd" placeholder="Search by date & time">
+                                    <input type="text" name="search" id="live-search" class="form-control" data-toggle="tooltip" data-placement="top" title="Example : yyyy-mm-dd" placeholder="Search by date & time">
                                 </div>
                             </form>
                         </div>
@@ -53,11 +53,11 @@
                                         <th scope="col">Info</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="dynamic-row">
                                     @foreach ($distribution as $item)
                                     <tr>
                                         <th>{{$loop->iteration}}</th>
-                                        <td>{{Carbon\Carbon::parse($item->added_at)->format("d F, Y")}}</td>
+                                        <td>{{Carbon\Carbon::parse($item->added_at)->format("F d, Y")}}</td>
                                         <td>{{$item->dis_item .' Carton'}}
                                             {{-- <div class="progress" style="height: 10px">
                                                 <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
@@ -97,5 +97,37 @@
     
     {{-- end your content --}}
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('body').on('keyup', '#live-search', function() {
+        var searchQ = $(this).val();
+        
+
+        $.ajax({
+            method : 'POST',
+            url : '{{ route("live.search") }}',
+            dataType : 'json',
+            data : {
+                '_token' : '{{ csrf_token() }}',
+                'agent_id' : '{{ $agent->id }}',
+                searchQ : searchQ,
+            },
+            success: function(res) {
+                var tableRow = ''
+
+                $('#dynamic-row').html('')
+                var i = 1
+                $.each(res, function(index, value){
+                    tableRow = '<tr> <th>'+ i +'</th><td>'+  moment(value.added_at).format('LL') +'</td><td>'+ value.dis_item +'</td><td>'+ value.name +'</td><td> <i class="fa fa-info fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="'+ value.info +'"></i></td> </tr>'
+                    i++
+                    $('#dynamic-row').append(tableRow);
+                });
+            }
+        })
+    })
+});
+</script>
 @include('layouts.modal')
 @endsection

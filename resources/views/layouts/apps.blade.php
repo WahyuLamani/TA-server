@@ -56,9 +56,10 @@
     <script src="{{asset('assets/js/gleek.js')}}"></script>
     <script src="{{asset('assets/js/styleSwitcher.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
+    
 
 
-  
+
 {{-- data tables --}}
 <script src="{{asset('assets/plugins/tables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
@@ -85,8 +86,8 @@
 
 
 <script src="{{asset('assets/js/dashboard/dashboard-1.js')}}"></script>
-<script>
- 
+<script type="text/javascript">
+    
 </script>
 </body>
 

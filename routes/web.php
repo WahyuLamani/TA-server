@@ -20,6 +20,7 @@ Route::middleware('verified')->group(function () {
     Route::get('/agents', [AgentsController::class, 'index'])->name('agents');
     Route::post('/agent/create', [AgentsController::class, 'create'])->name('agent.create');
     Route::get('/distributed', [DistributionController::class, 'index'])->name('distributed');
+    Route::post('/agent/details', [AgentsController::class, 'liveSearch'])->name('live.search');
     Route::get('/agent/details/{agent:id}', [AgentsController::class, 'details']);
     Route::delete('/agent/delete/{agent:id}', [AgentsController::class, 'destroy']);
     Route::get('/profile/edit', [HomeController::class, 'edit'])->name('profile.edit');

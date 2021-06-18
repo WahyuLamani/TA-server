@@ -7,6 +7,7 @@ use App\Http\Resources\AllResource;
 use App\Models\Client\Agent;
 use App\Models\Client\Transactions\Distribution;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +18,18 @@ class AgentsController extends Controller
     {
         $agents = Agent::where('company_id', Auth::user()->userable->id)->get();
         return view('agents.agents', compact('agents'));
+
+
+        // $data = Distribution::select('agents.name', 'distributions.*')
+        //     ->join('agents', 'agents.id', 'distributions.agent_id')
+        //     ->where('added_at', 'like', '%' . '2' . '%', 'and', 'agents.id', '7');
+        // $value = $data->get();
+
+        // // $value = Carbon::parse($data->added_at)->format("d F, Y");
+        // for ($i = 1; $i <= ($data->count()); $i++) {
+        //     return $i;
+        // };
+        // dd($data->get('dis_item'));
     }
 
     public function create(Request $request)
@@ -47,6 +60,18 @@ class AgentsController extends Controller
             'agent',
             'distribution'
         ]));
+    }
+
+    public function liveSearch(Request $request)
+    {
+        $data = Distribution::select('agents.name', 'distributions.*')
+            ->join('agents', 'agents.id', 'distributions.agent_id')
+            ->where('added_at', 'like', '%' . $request->get('searchQ') . '%', 'and', 'agents.id', $request->get('agent_id'))->get();
+
+        // $value = Carbon::parse($data->added_at)->format("d F, Y");
+        // $data['formater'] = Carbon::parse($data->added_at)->format("d F, Y");
+        // return json_encode($dis);
+        return response($data);
     }
 
     public function destroy(Agent $agent)

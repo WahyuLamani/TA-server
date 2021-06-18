@@ -38,5 +38,5 @@
 
 })(jQuery);
 
-document.querySelector(".sweet-message").onclick=function(){swal(`ahahaha`)} 
+// document.querySelector(".sweet-message").onclick=function(){swal(`ahahaha`)} 
 
