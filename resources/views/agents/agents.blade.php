@@ -96,12 +96,12 @@
                                         <td><img style="width: 30px" src="/storage/{{$agent->thumbnail}}" class=" rounded-circle mr-3">{{$agent->name}}</td>
                                         
                                         @if ($agent->address == null)
-                                        <td colspan="2">{{"This agent has not registered on the mobile app"}}</td>
+                                        <td class="text-center" colspan="3">{{"This agent has not registered on the mobile app"}}</td>
                                         @else
                                         <td>{{$agent->address}}</td>
                                         <td>{{$agent->telp_num}}</td>
-                                        @endif
                                         <td><a href="agent/details/{{$agent->id}}">details</a></td>
+                                        @endif
                                         <td width="10px"><span data-toggle="modal" data-target="#exampleModal"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
                                         </td>
                                     </tr>

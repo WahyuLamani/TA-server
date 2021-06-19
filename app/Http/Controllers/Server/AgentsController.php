@@ -34,12 +34,14 @@ class AgentsController extends Controller
         // $agent->name = ucwords($request->name);
         // $agent->save();
 
-        User::create([
+        $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->email),
             'userable_type' => Agent::class,
             'userable_id' => $agent->id,
         ]);
+
+        $user->createToken('authToken')->accessToken;
         session()->flash('success', ucwords('Agent successfully created'));
         return redirect()->back();
     }
