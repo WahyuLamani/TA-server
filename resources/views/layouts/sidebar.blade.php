@@ -21,8 +21,8 @@
                     <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Menu</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="#">Menu 1</a></li>
-                    <li><a href="#">Menu 2</a></li>
+                    <li><a href="{{route('distributed')}}">Distributions</a></li>
+                    <li><a href="{{route('request.distributor')}}">Request Product</a></li>
                 </ul>
             </li>
     {{-- tambah menu disini --}}

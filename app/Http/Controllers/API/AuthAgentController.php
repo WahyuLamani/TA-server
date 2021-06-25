@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthAgentController extends Controller
@@ -39,6 +40,11 @@ class AuthAgentController extends Controller
         return response(['message' => 'Ur Logined', 'user' => Auth::user(), 'token' => $token], 200);
     }
 
+
+    /**
+     * register user if @var function_getAuth succesfull
+     * accept identifier @var Auth request from Bearer Token
+     */
     public function register(Request $request)
     {
 
@@ -50,11 +56,9 @@ class AuthAgentController extends Controller
         //     // 'email' => 'email|required|unique:users',
         //     // 'password' => 'required|confirmed'
         // ]);
-        /**
-         * pre request
-         * @var email value type json
-         */
+
         $validator = Validator::make($request->all(), [
+            'password' => 'required|confirmed',
             'address' => 'required',
             'telp_num' => 'required|numeric|digits_between:10,14',
         ]);
@@ -65,9 +69,11 @@ class AuthAgentController extends Controller
         /**
          * get agent data
          */
-        $user = User::where('email', $request->email)->first();
-        $agent = Agent::find($user->userable->id);
-
+        // $user = User::where('email', $request->email)->first();
+        Auth::user()->password = Hash::make($request->password);
+        Auth::user()->save();
+        // $agent = Agent::find($user->userable->id);
+        $agent = Agent::find(Auth::user()->userable->id);
         $agent->update([
             'address' => $request->address,
             'telp_num' => $request->telp_num,
@@ -92,17 +98,20 @@ class AuthAgentController extends Controller
 
         // $accessToken = $user->createToken('authToken')->accessToken;
 
-        return response(['message' => 'Successfull', 'user' => $agent], 201);
+        return response(['message' => 'Successfull', 'user' => $agent], 200);
     }
 
     public function login(Request $request)
     {
-        $login = $request->validate([
+        $login = Validator::make($request->all(), [
             'email' => 'email|required',
             'password' => 'required',
         ]);
+        if ($login->fails()) {
+            return response(['message' => $login->errors()]);
+        }
 
-        if (!Auth::attempt($login)) {
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response(['message' => 'This User does not exist, check your details'], 400);
         } else {
             Auth::user()->last_login = Carbon::now()->toDateTimeString();

@@ -43,6 +43,6 @@ class VerificationController extends Controller
 
     protected function verified(Request $request)
     {
-        //
+        // return view('verified');
     }
 }
