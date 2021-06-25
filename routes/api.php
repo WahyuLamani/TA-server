@@ -26,9 +26,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Passport::routes();
 Route::prefix('agent')->group(function () {
     Route::post('register', [AuthAgentController::class, 'getAuth']);
-    Route::patch('register', [AuthAgentController::class, 'register']);
     Route::post('login', [AuthAgentController::class, 'login']);
     Route::post('logout', [AuthAgentController::class, 'logout']);
+    Route::patch('register', [AuthAgentController::class, 'register'])->middleware('auth:api');
 });
 
 Route::prefix('distributor')->group(function () {

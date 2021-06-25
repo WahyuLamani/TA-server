@@ -3,48 +3,71 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AllResource;
 use App\Models\Client\Agent;
-use App\Models\Server\Company;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthAgentController extends Controller
 {
+
     public function getAuth(Request $request)
     {
-        $request->validate([
-            'email' => 'email|required',
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'email|required'
         ]);
+
+        if ($validator->fails()) {
+            return response(['message' => $validator->errors()]);
+        }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->email])) {
             Auth::user()->last_login = Carbon::now()->toDateTimeString();
             Auth::user()->save();
-        }
-        // Auth::user()->sendEmailVerificationNotification();
-        $token = DB::table('oauth_access_tokens')
-            ->select('id')
-            ->where('user_id', Auth::user()->id)->first();
+            $token = Auth::user()->createToken('authToken')->accessToken;
 
-        return response(['message' => 'Ur Logined', 'user' => Auth::user(), 'token' => $token->id], 200);
+            // if (!Auth::user()->email_verified_at) {
+            //     // Auth::user()->sendEmailVerificationNotification();
+            // }
+        } else {
+            return response(['message' => 'Email or password uncorrect'], 404);
+        }
+
+        return response(['message' => 'Ur Logined', 'user' => Auth::user(), 'token' => $token], 200);
     }
 
     public function register(Request $request)
     {
-        dd($request->address);
-        $validatedData = $request->validate([
-            // 'name' => 'required|max:55',
+
+        // $validatedData = $request->validate([
+        //     // 'name' => 'required|max:55',
+        //     'address' => 'required',
+        //     'telp_num' => 'required|numeric|digits_between:10,14',
+        //     // 'thumnail' => 'image|mimes:jpeg,png,jpg|max:5100',
+        //     // 'email' => 'email|required|unique:users',
+        //     // 'password' => 'required|confirmed'
+        // ]);
+        /**
+         * pre request
+         * @var email value type json
+         */
+        $validator = Validator::make($request->all(), [
             'address' => 'required',
             'telp_num' => 'required|numeric|digits_between:10,14',
-            // 'thumnail' => 'image|mimes:jpeg,png,jpg|max:5100',
-            // 'email' => 'email|required|unique:users',
-            // 'password' => 'required|confirmed'
         ]);
-        $agent = Agent::find(Auth::user()->userable->id);
+        if ($validator->fails()) {
+            return response(['message' => $validator->errors()]);
+        }
+
+        /**
+         * get agent data
+         */
+        $user = User::where('email', $request->email)->first();
+        $agent = Agent::find($user->userable->id);
+
         $agent->update([
             'address' => $request->address,
             'telp_num' => $request->telp_num,
@@ -69,7 +92,7 @@ class AuthAgentController extends Controller
 
         // $accessToken = $user->createToken('authToken')->accessToken;
 
-        return response(['message' => 'Successfull', 'user' => Auth::user()->userable], 201);
+        return response(['message' => 'Successfull', 'user' => $agent], 201);
     }
 
     public function login(Request $request)
@@ -96,10 +119,6 @@ class AuthAgentController extends Controller
     }
     public function logout()
     {
-        Auth::user()->tokens->each(function ($token, $key) {
-            $token->delete();
-        });
-
-        return response()->json('Successfully logged out');
+        //
     }
 }

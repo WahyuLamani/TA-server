@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client\Agent;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -45,5 +46,8 @@ class LoginController extends Controller
     {
         $user->last_login = Carbon::now()->toDateTimeString();
         $user->save();
+        // if ($user->userable_type === Agent::class) {
+        //     dd('agent login');
+        // }
     }
 }

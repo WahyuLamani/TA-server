@@ -41,7 +41,7 @@ class AgentsController extends Controller
             'userable_id' => $agent->id,
         ]);
 
-        $user->createToken('authToken')->accessToken;
+        // $user->createToken('authToken')->accessToken;
         session()->flash('success', ucwords('Agent successfully created'));
         return redirect()->back();
     }
