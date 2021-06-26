@@ -25,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $count = Agent::where('company_id', Auth::user()->userable->id)->count();
+        $count = [
+            'agent' => Agent::where('company_id', Auth::user()->userable->id)->count(),
+            'distributor' => Distributor::all()->count()
+        ];
         $sumDisItem = Distribution::join('agents', 'agents.id', '=', 'distributions.agent_id')
             ->where('agents.company_id', Auth::user()->userable->id)->sum('dis_item');
         // $sum = Model::where('status', 'paid')->sum('sum_field');

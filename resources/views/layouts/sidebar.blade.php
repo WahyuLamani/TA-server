@@ -22,6 +22,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{route('distributed')}}">Distributions</a></li>
+                    <li><a href="{{route('distributors')}}">Distributors</a></li>
                     <li><a href="{{route('request.distributor')}}">Request Product</a></li>
                 </ul>
             </li>

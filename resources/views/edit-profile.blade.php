@@ -26,7 +26,6 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name') ?? $user->company_name }}" placeholder="Company Name">
-
                                     @error('company_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{$message}}</strong>

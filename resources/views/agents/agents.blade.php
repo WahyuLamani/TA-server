@@ -1,5 +1,5 @@
 @extends('layouts.apps')
-@section('title', 'User Profile')
+@section('title', 'Agents')
 
 @section('contents')
 <div class="content-body">
@@ -53,14 +53,14 @@
                                     <form action="{{route('agent.store')}}" method="post">
                                         @csrf
                                         
-                                        <input class="form-control @error('name') is-invalid @enderror my-3" type="text" name="name" value="{{old('name')}}" id="name" placeholder="enter Name" autocomplete="off">
+                                        <input class="form-control @error('name') is-invalid @enderror my-3" type="text" name="name" value="{{old('name')}}" id="name" placeholder="Enter agent name" autocomplete="off">
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <input class="form-control @error('email') is-invalid @enderror my-3" type="text" name="email" value="{{old('email')}}" id="email" placeholder="Enter Email" autocomplete="off">
+                                        <input class="form-control @error('email') is-invalid @enderror my-3" type="text" name="email" value="{{old('email')}}" id="email" placeholder="Enter agent email" autocomplete="off">
                                         
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -105,6 +105,7 @@
                                         <td width="10px"><span data-toggle="modal" data-target="#exampleModal"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
                                         </td>
                                     </tr>
+                                    @section('type', 'agent')
                                     @include('layouts.modal')
                                     @endforeach
                                 </tbody>

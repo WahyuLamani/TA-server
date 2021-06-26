@@ -2,17 +2,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ar u sure want to delete this Agent ?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Ar u sure want to delete this @yield('type') ?</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
             <div class="text-secondary">
-                <h5>Name : {{$agent->name}}</h5>
-                <small>Registered at : {{$agent->created_at->format("d F, Y")}}</small>
+                <h5>Name : {{$agent->name ?? $distributor->name}}</h5>
+                <small>Registered at : {{($agent->created_at ?? $distributor->created_at)->format("d F, Y")}}</small>
             </div>
-            <form action="/agent/delete/{{$agent->id}}" method="post">
+            <form action="/@yield('type')/delete/{{$agent->id ?? $distributor->id}}" method="post">
                 @csrf
                 @method('delete')
                 <div class="d-flex mt-2">
