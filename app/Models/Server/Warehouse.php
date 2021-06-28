@@ -5,14 +5,9 @@ namespace App\Models\Server;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Warehouse extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'product_name',
-        'unit_value'
-    ];
 
     public function company()
     {

@@ -2,8 +2,6 @@
 
 namespace App\Models\Client\Transactions;
 
-use App\Models\Client\Agent;
-use App\Models\Client\Distributor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +11,7 @@ class Distribution extends Model
 
     protected $fillable = [
         'agent_id',
-        'distributor_id',
+        'order_id',
         'dis_item',
         'info'
     ];
@@ -24,8 +22,8 @@ class Distribution extends Model
         $this->belongsTo(Agent::class);
     }
 
-    public function distributor()
+    public function order()
     {
-        $this->belongsTo(Distributor::class);
+        $this->belongsTo(Order::class);
     }
 }

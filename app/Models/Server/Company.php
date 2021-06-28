@@ -25,4 +25,9 @@ class Company extends Model
     {
         return $this->hasMany(Agent::class);
     }
+
+    public function warehouse()
+    {
+        $this->hasMany(Warehouse::class);
+    }
 }
