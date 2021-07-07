@@ -24,16 +24,21 @@ class Agent extends Model
 
     public function company()
     {
-        $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function distribution()
     {
-        $this->hasMany(Distribution::class);
+        return $this->hasMany(Distribution::class);
     }
 
-    public function problemreporting()
+    public function container()
     {
-        $this->hasMany(ProblemReporting::class);
+        return $this->hasMany(Container::class);
     }
+
+    // public function problemreporting()
+    // {
+    //     $this->hasMany(ProblemReporting::class);
+    // }
 }

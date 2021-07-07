@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProblemReportingsTable extends Migration
+class CreateContainerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateProblemReportingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('problem_reportings', function (Blueprint $table) {
+        Schema::create('container', function (Blueprint $table) {
             $table->id();
-            $table->string('userable_type')->nullable();
-            $table->integer('userable_id')->nullable();
-            $table->text('post');
-            $table->string('pict')->nullable();
-            $table->timestamp('added_at');
+            $table->foreignId('agent_id');
+            $table->foreignId('warehouse_id');
+            $table->integer('amount');
+            $table->integer('count_down_amount');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateProblemReportingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('problem_reportings');
+        Schema::dropIfExists('container');
     }
 }

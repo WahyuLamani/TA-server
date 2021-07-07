@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWarehousesTable extends Migration
+class CreateWarehouseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,10 @@ class CreateWarehousesTable extends Migration
     {
         Schema::create('warehouse', function (Blueprint $table) {
             $table->id();
-            $table->foreign('company_id');
+            $table->foreignId('company_id');
+            $table->foreignId('product_type_id');
             $table->integer('amount');
-            $table->string('unit');
+            $table->integer('count_down_amount');
             $table->timestamps();
         });
     }

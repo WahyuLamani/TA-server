@@ -29,28 +29,15 @@ class HomeController extends Controller
             'agent' => Agent::where('company_id', Auth::user()->userable->id)->count(),
             'distributor' => Distributor::all()->count()
         ];
-        $sumDisItem = Distribution::join('agents', 'agents.id', '=', 'distributions.agent_id')
-            ->where('agents.company_id', Auth::user()->userable->id)->sum('dis_item');
-        // $sum = Model::where('status', 'paid')->sum('sum_field');
-        // $date = Carbon::now()->toRfc850String();
-        return view('index', compact(['count', 'sumDisItem']));
-    }
-
-    public function profile()
-    {
         $reports = ProblemReporting::select('problem_reportings.*', 'agents.name', 'agents.thumbnail')
             ->join('agents', 'agents.id', '=', 'problem_reportings.agent_id')
             ->where('agents.company_id', Auth::user()->userable->id)
             ->get();
-        return view('profile', compact('reports'));
-    }
-
-    public function edit()
-    {
-        $user = Auth::user()->userable;
-        // $array = explode('/', $user->thumbnail);
-        // $user->thumbnail = end($array);
-        return view('edit-profile', compact('user'));
+        $sumDisItem = Distribution::join('agents', 'agents.id', '=', 'distributions.agent_id')
+            ->where('agents.company_id', Auth::user()->userable->id)->sum('amount');
+        // $sum = Model::where('status', 'paid')->sum('sum_field');
+        // $date = Carbon::now()->toRfc850String();
+        return view('index', compact(['count', 'sumDisItem', 'reports']));
     }
 
     public function handle()

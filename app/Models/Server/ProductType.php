@@ -2,28 +2,27 @@
 
 namespace App\Models\Server;
 
-use App\Models\Client\Container;
+use App\Models\Client\Transactions\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Warehouse extends Model
+class ProductType extends Model
 {
     use HasFactory;
 
-    protected $table = 'warehouse';
 
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
 
-    public function product_type()
+    public function warehouse()
     {
-        return $this->hasMany(ProductType::class);
+        return $this->belongsTo(ProductType::class);
     }
 
-    public function container()
+    public function order()
     {
-        return $this->hasMany(Container::class);
+        return $this->belongsTo(Order::class);
     }
 }

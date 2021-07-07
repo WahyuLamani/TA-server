@@ -22,9 +22,9 @@
                     <div class="card-header">
                         <h4 class="text-black-50">Company Profile</h4>
                         <div class="card-body">
-                            <div class="media align-items-center mb-4">
+                            <div class="media align-items-center mb-3">
                                 @if (Auth::user()->userable->thumbnail > 0)
-                                <img class="mr-3" src="{{asset("storage/" . Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
+                                <img class="mr-1" src="{{asset("storage/" . Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
                                 @endif
                                 <div class="media-body">
                                     <h4 class="mb-0 text-black-50">{{ Auth::user()->userable->ceo_name}}</h4>
@@ -54,7 +54,7 @@
                         </div>
 
                         <h4>About Me</h4>
-                        <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
+                        <p class="text-muted">{{ Auth::user()->userable->about}}</p>
                         <ul class="card-profile__info">
                             <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>{{ Auth::user()->userable->company_telp_num }}</span></li>
                             <li><strong class="text-dark mr-4">Login Email</strong> <span>{{ Auth::user()->email }}</span></li>
@@ -90,26 +90,54 @@
                     </div>
                 </div> --}}
 
-                <div class="card" id="reporting">
-                    <h3 class="mt-3 ml-3 text-black-50 text-center">Agents Problem Reporting</h3>
-                    @foreach ($reports as $row)
-                        <div class="media media-reply">
-                            <img class="mr-2 ml-1 circle-rounded" src="{{asset("storage/" . $row->thumbnail)}}" width="50" height="50">
-                            <div class="media-body">
-                                <div class="d-sm-flex justify-content-between mb-2">
-                                    <h5 class="mb-sm-0">{{$row->name}}<small class="text-muted ml-3">{{$row->created_at->diffForHumans()}}</small></h5>
-                                    <div class="media-reply__link">
-                                        {{-- <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                        <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button> --}}
-                                    </div>
-                                </div>
-                                
-                                <p>{{$row->post}}</p>
-                            </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4>Table Hover</h4>
                         </div>
-                    @endforeach
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>1</th>
+                                        <td>Kolor Tea Shirt For Man</td>
+                                        <td><span class="badge badge-primary px-2">Sale</span>
+                                        </td>
+                                        <td>January 22</td>
+                                        <td class="color-primary">$21.56</td>
+                                    </tr>
+                                    <tr>
+                                        <th>2</th>
+                                        <td>Kolor Tea Shirt For Women</td>
+                                        <td><span class="badge badge-danger px-2">Tax</span>
+                                        </td>
+                                        <td>January 30</td>
+                                        <td class="color-success">$55.32</td>
+                                    </tr>
+                                    <tr>
+                                        <th>3</th>
+                                        <td>Blue Backpack For Baby</td>
+                                        <td><span class="badge badge-success px-2">Extended</span>
+                                        </td>
+                                        <td>January 25</td>
+                                        <td class="color-danger">$14.85</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+
                 </div>
             </div>
         </div>

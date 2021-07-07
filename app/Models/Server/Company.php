@@ -3,6 +3,7 @@
 namespace App\Models\Server;
 
 use App\Models\Client\Agent;
+use App\Models\Client\Transactions\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,5 +30,15 @@ class Company extends Model
     public function warehouse()
     {
         $this->hasMany(Warehouse::class);
+    }
+
+    public function order()
+    {
+        $this->hasMany(Order::class);
+    }
+
+    public function product_type()
+    {
+        $this->hasMany(ProductType::class);
     }
 }

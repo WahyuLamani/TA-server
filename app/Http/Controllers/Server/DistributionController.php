@@ -11,12 +11,13 @@ class DistributionController extends Controller
 {
     public function index()
     {
-        return view('distribution.index', [
+        dd(Distribution::select('distributions.*', 'agents.name', 'agents.thumbnail', 'distributors.name as disname', 'distributors.thumbnail as disthumbnail')
+        ->join('distributors', 'distributors.id', 'distributions.distributor_id')
+        ->join('agents', 'agents.id', 'distributions.agent_id')
+        ->where('agents.company_id', Auth::user()->userable->id)->get());
+        return view('distribution.distribution', [
             'distributions' =>
-            Distribution::select('distributions.*', 'agents.name', 'agents.thumbnail', 'distributors.name as disname', 'distributors.thumbnail as disthumbnail')
-                ->join('distributors', 'distributors.id', 'distributions.distributor_id')
-                ->join('agents', 'agents.id', 'distributions.agent_id')
-                ->where('agents.company_id', Auth::user()->userable->id)->get()
+            
         ]);
     }
 }

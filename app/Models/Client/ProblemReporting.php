@@ -15,8 +15,8 @@ class ProblemReporting extends Model
         'post',
         'pict'
     ];
-    public function agent()
+    public function userable()
     {
-        $this->belongsTo(Agent::class);
+        return $this->morphTo();
     }
 }

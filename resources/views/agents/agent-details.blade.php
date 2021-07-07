@@ -146,6 +146,32 @@ $( document ).ready(function() {
         // Show error
         $("#result").html('There is error while submit');
     });
+
+// core code
+
+    $('body').on('keyup','#live-search', function(){
+        var searchQuest = $(this).val();
+
+
+        $.ajax({
+            method : 'post',
+            url : '{{ route("live.search") }}',
+            dataType : 'json',
+            data : {
+                '_token' : '{{ csrt_token() }}',
+                searchQuest : searchQuest,
+            },
+            success: function(res){
+                var tableRow = ''
+
+                $('#dynamic-row').html('')
+
+                $.each(res, function(index, value){
+                    tableRow = ''
+                })
+            }
+        })
+    })
 });
 </script>
 @include('layouts.modal')

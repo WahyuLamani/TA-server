@@ -15,9 +15,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreign('distributor_id');
+            $table->foreignId('distributor_id');
+            $table->foreignId('company_id')->nullable();
+            $table->foreignId('product_type_id')->nullable();
             $table->integer('req_amount');
-            $table->boolean('on_progress')->default('false');
+            $table->boolean('on_progress')->default(0);
+            $table->foreignId('agent_id')->nullable();
             $table->timestamps();
         });
     }

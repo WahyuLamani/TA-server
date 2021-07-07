@@ -19,11 +19,11 @@ class Distribution extends Model
 
     public function agent()
     {
-        $this->belongsTo(Agent::class);
+        return $this->belongsTo(Agent::class);
     }
 
     public function order()
     {
-        $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class);
     }
 }
