@@ -108,67 +108,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
 $( document ).ready(function() {
-    $("#foo").submit(function(event) {
-    var ajaxRequest;
-
-    /* Stop form from submitting normally */
-    event.preventDefault();
-
-    /* Clear result div*/
-    $("#result").html('');
-
-    /* Get from elements values */
-    var values = $(this).serialize();
-
-    /* Send the data using post and put the results in a div. */
-    /* I am not aborting the previous request, because it's an
-       asynchronous request, meaning once it's sent it's out
-       there. But in case you want to abort it you can do it
-       by abort(). jQuery Ajax methods return an XMLHttpRequest
-       object, so you can just use abort(). */
-       ajaxRequest= $.ajax({
-            url: "test.php",
-            type: "post",
-            data: values
-        });
-
-    /*  Request can be aborted by ajaxRequest.abort() */
-
-    ajaxRequest.done(function (response, textStatus, jqXHR){
-
-         // Show successfully for submit message
-         $("#result").html('Submitted successfully');
-    });
-
-    /* On failure of request this function will be called  */
-    ajaxRequest.fail(function (){
-
-        // Show error
-        $("#result").html('There is error while submit');
-    });
-
-// core code
-
-    $('body').on('keyup','#live-search', function(){
-        var searchQuest = $(this).val();
-
-
+    $('body').on('keyup', '#live-search', function() {
+        var searchQ = $(this).val();
+        
         $.ajax({
-            method : 'post',
+            method : 'POST',
             url : '{{ route("live.search") }}',
             dataType : 'json',
             data : {
-                '_token' : '{{ csrt_token() }}',
-                searchQuest : searchQuest,
+                '_token' : '{{ csrf_token() }}',
+                'agent_id' : '{{ $agent->id }}',
+                searchQ : searchQ,
             },
-            success: function(res){
+            success: function(res) {
                 var tableRow = ''
-
                 $('#dynamic-row').html('')
-
+                var i = 1
                 $.each(res, function(index, value){
-                    tableRow = ''
-                })
+                    tableRow = '<tr> <th>'+ i +'</th><td>'+  moment(value.added_at).format('LL') +'</td><td>'+ value.amount +'</td><td>'+ value.name +'</td><td> <i class="fa fa-info fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="'+ value.info +'"></i></td> </tr>'
+                    i++
+                    $('#dynamic-row').append(tableRow);
+                });
             }
         })
     })

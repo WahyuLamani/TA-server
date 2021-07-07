@@ -32,7 +32,7 @@
                     <i class="icon-note menu-icon"></i><span class="nav-text">Services</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{route('distributed')}}">Distributions</a></li>
+                    <li><a href="/warehouse">Warehouse</a></li>
                     <li><a href="{{route('distributors')}}">Distributors</a></li>
                     <li><a href="{{route('request.distributor')}}">Request Product</a></li>
                 </ul>

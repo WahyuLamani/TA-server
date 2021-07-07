@@ -22,4 +22,9 @@ class Distributor extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function post()
+    {
+        return $this->morphMany(Post::class, 'owner');
+    }
 }

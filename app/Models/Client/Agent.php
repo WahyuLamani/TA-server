@@ -37,8 +37,8 @@ class Agent extends Model
         return $this->hasMany(Container::class);
     }
 
-    // public function problemreporting()
-    // {
-    //     $this->hasMany(ProblemReporting::class);
-    // }
+    public function post()
+    {
+        return $this->morphMany(Post::class, 'owner');
+    }
 }

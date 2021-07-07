@@ -41,4 +41,9 @@ class Company extends Model
     {
         $this->hasMany(ProductType::class);
     }
+
+    public function post()
+    {
+        return $this->morphMany(Post::class, 'owner');
+    }
 }
