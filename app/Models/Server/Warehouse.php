@@ -12,6 +12,13 @@ class Warehouse extends Model
 
     protected $table = 'warehouse';
 
+    protected $fillable = [
+        'product_type_id',
+        'amount',
+        'count_down_amount'
+    ];
+
+
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -19,7 +26,7 @@ class Warehouse extends Model
 
     public function product_type()
     {
-        return $this->hasMany(ProductType::class);
+        return $this->belongsTo(ProductType::class);
     }
 
     public function container()

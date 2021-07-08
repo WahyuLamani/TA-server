@@ -18,7 +18,7 @@ class ProductType extends Model
 
     public function warehouse()
     {
-        return $this->belongsTo(ProductType::class);
+        return $this->hasMany(ProductType::class);
     }
 
     public function order()

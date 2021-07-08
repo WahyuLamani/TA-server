@@ -29,17 +29,17 @@ class Company extends Model
 
     public function warehouse()
     {
-        $this->hasMany(Warehouse::class);
+        return $this->hasMany(Warehouse::class);
     }
 
     public function order()
     {
-        $this->hasMany(Order::class);
+        return $this->hasMany(Order::class);
     }
 
     public function product_type()
     {
-        $this->hasMany(ProductType::class);
+        return $this->hasMany(ProductType::class);
     }
 
     public function post()

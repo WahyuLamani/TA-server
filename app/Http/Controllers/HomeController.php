@@ -49,9 +49,8 @@ class HomeController extends Controller
         // $sumDisItem = Distribution::join('agents', 'agents.id', '=', 'distributions.agent_id')
         //     ->where('agents.company_id', Auth::user()->userable->id)->sum('amount');
         $sumDisItem = Distribution::whereHas('agent', function ($q) {
-            $q->where('company_id', Auth::user()->userable->company_id);
-        });
-        dd($sumDisItem->sum('amount'));
+            $q->where('company_id', Auth::user()->userable->id);
+        })->sum('amount');
         // $sum = Model::where('status', 'paid')->sum('sum_field');
         // $date = Carbon::now()->toRfc850String();
         return view('index', compact(['count', 'sumDisItem', 'posts']));
