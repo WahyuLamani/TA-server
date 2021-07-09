@@ -31,7 +31,7 @@
                             <img style="width: 180px" src="/storage/{{$agent->thumbnail}}" class="rounded-circle" alt="">
                             <h5 class="mt-3 mb-1">{{$agent->name}}</h5>
                             <p class="m-0">{{$agent->user->email}}</p>
-                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal" type="submit">Delete Agent</button>
+                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#{{$agent->name}}" type="submit">Delete Agent</button>
  
                             {{-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> --}}
                         </div>

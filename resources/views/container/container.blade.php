@@ -44,7 +44,7 @@
                             @foreach ($agents as $row)
                                 <div class="card">
                                     <div class="card-header">
-                                    <h5 class="mb-0 collapsed text-bold text-info" data-toggle="collapse" data-target="#{{$row->name}}" aria-expanded="false" aria-controls="collapseOne"><i class="fa" aria-hidden="true"></i>{{ 'Nama : '.$row->name.$row->id }}</h5>
+                                    <h5 class="mb-0 @if($loop->iteration != '1') collapsed @endif text-bold text-info" data-toggle="collapse" data-target="#{{$row->name}}" aria-expanded="false" aria-controls="collapseOne"><i class="fa" aria-hidden="true"></i>{{ 'Nama : '.$row->name.$row->id }}</h5>
                                     </div>
                                     <div id="{{$row->name}}" class="collapse @if($loop->iteration == '1') show @endif" data-parent="#accordion-one">
                                         <div class="card-body">
@@ -59,7 +59,7 @@
                                                             <th>Jumlah</th>
                                                             <th>Jenis</th>
                                                             <th>Sisa</th>
-                                                            <th>Edit</th>
+                                                            <th>Edit status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -77,15 +77,20 @@
                                                             <td>{{ $container->amount.' '.$container->warehouse->product_type->unit }}</td>
                                                             <td class="text-primary"><b>{{ $container->warehouse->product_type->type }}</b></td>
                                                             <td class="text-primary"><b>{{ $container->count_down_amount .' '.$container->warehouse->product_type->unit }}</b></td>
-                                                            <td colspan="20">
-                                                                <form action="/agent-container/handle/{{$container->id}}" method="post">
-                                                                    @csrf
-                                                                    @if ($container->on_truck === 0)
-                                                                    <button type="submit" class="btn mb-1 btn-success btn-sm">On</button>
-                                                                    @else
-                                                                    <button type="submit" class="btn mb-1 btn-danger btn-sm">Off</button>
-                                                                    @endif
-                                                                </form>
+                                                            <td style="width:100px">
+                                                                <div class="d-flex justify-content-between">
+                                                                    <form action="/agent-container/handle/{{$container->id}}" method="post">
+                                                                        @csrf
+                                                                        @if ($container->on_truck === 0)
+                                                                        <button class="btn tombol-keluar" type="submit"><i class="fa fa-toggle-on fa-lg" aria-hidden="true"></i></button>
+                                                                        @else
+                                                                        <button class="tombol-keluar" type="submit"><i class="fa fa-toggle-off fa-lg" aria-hidden="true"></i></button>
+                                                                        @endif
+                                                                    </form>
+                                                                    <span data-toggle="modal" data-target="#{{$container->agent->name.$container->id}}"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
+                                                                    @section('type', 'container')
+                                                                    @include('layouts.modal')
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         @endforeach
@@ -94,8 +99,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer">
-                                        <form action="{{route('container.store')}}" method="POST">
+                                    <div class="card-footer mb-0">
+                                        <form action="{{route('container.store')}}" method="POST" class="mt-3 ">
                                             @csrf
                                             <input type="hidden" name="agent_id" value="{{$row->id}}">
                                             <div class="row">
@@ -126,7 +131,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 d-inline">
                                                     <button type="submit" class="btn mt-1 btn-rounded btn-success">Submit</button>
                                                 </div>
                                             </div>

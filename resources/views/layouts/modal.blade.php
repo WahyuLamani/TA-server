@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{$agent->name ?? $distributor->name ?? $container->agent->name.$container->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,10 +9,19 @@
             </div>
             <div class="modal-body">
             <div class="text-secondary">
-                <h5>Name : {{$agent->name ?? $distributor->name}}</h5>
-                <small>Registered at : {{($agent->created_at ?? $distributor->created_at)->format("d F, Y")}}</small>
+                <h5>@if ($container)
+                    Sisa Produk :
+                    @else
+                    Name :
+                    @endif {{$agent->name ?? $distributor->name ?? $container->count_down_amount}}</h5>
+                <small>@if ($container)
+                    Tanggal pengambilan :
+                    @else
+                    Registered at :
+                    @endif
+                     {{($agent->created_at ?? $distributor->created_at ?? $container->created_at)->format("d F, Y")}}</small>
             </div>
-            <form action="/@yield('type')/delete/{{$agent->id ?? $distributor->id}}" method="post">
+            <form action="/@yield('type')/delete/{{$agent->id ?? $distributor->id ?? $container->id}}" method="post">
                 @csrf
                 @method('delete')
                 <div class="d-flex mt-2">

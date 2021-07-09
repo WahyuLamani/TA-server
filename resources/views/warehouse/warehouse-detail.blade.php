@@ -18,118 +18,38 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Accordion</h4>
-                        <p class="text-muted"><code></code>
-                        </p>
-                        <div id="accordion-one" class="accordion">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fa" aria-hidden="true"></i> Accordion Header One</h5>
-                                </div>
-                                <div id="collapseOne" class="collapse show" data-parent="#accordion-one">
-                                    <div class="card-body">
-                                        <div class="custom-media-object-2">
-                                            <div class="media border-bottom-1 p-t-15">
-                                                <img class="mr-3 rounded-circle" src="images/avatar/1.jpg" alt="">
-                                                <div class="media-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            <h5>John Tomas</h5>
-                                                            <p>tomas@example.com</p>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <p class="text-muted f-s-14">10 Deals</p>
-                                                        </div>
-                                                        <div class="col-lg-5 text-right">
-                                                            <h5 class="text-muted"><i class="cc BTC m-r-5"></i> <span class="BTC m-l-10">Send BTC</span></h5>
-                                                            <p class="f-s-13 text-muted">Last 10 min ago</p>
-                                                        </div>
-                                                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"><i class="fa fa-university fa-2x mr-2" aria-hidden="true"></i>Warehouse record</h4>
+                            <div class="custom-media-object-2">
+                                @foreach ($container as $row)
+                                    <div class="media border-bottom-1 p-t-15">
+                                        <img class="mr-3 rounded-circle" width="55px" src="/storage/{{$row->agent->thumbnail}}" alt="">
+                                        <div class="media-body">
+                                            <div class="row mt-2">
+                                                <div class="col-lg-5">
+                                                    <h5>{{ $row->agent->name }}</h5>
+                                                    <p>{{ $row->agent->telp_num }}</p>
                                                 </div>
-                                            </div>
-                                            <div class="media border-bottom-1 p-t-15">
-                                                <img class="mr-3 rounded-circle" src="images/avatar/2.jpg" alt="">
-                                                <div class="media-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            <h5>Elora Smith</h5>
-                                                            <p>elorasmith@example.com</p>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <p class="text-muted f-s-14">8 Deals</p>
-                                                        </div>
-                                                        <div class="col-lg-5 text-right">
-                                                            <h5 class="text-muted"><i class="cc LTC m-r-5"></i> <span class="LTC m-l-10">Send LTC</span></h5>
-                                                            <p class="f-s-13 text-muted">Last 20 min ago</p>
-                                                        </div>
-                                                    </div>
+                                                <div class="col-lg-2">
+                                                    <strong class="text-muted text-info f-s-14">{{$row->amount.' '.$row->warehouse->product_type->unit.' '.$row->warehouse->product_type->type}}</strong>
                                                 </div>
-                                            </div>
-                                            <div class="media border-bottom-1 p-t-15">
-                                                <img class="mr-3 rounded-circle" src="images/avatar/3.jpg" alt="">
-                                                <div class="media-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            <h5>John Abraham</h5>
-                                                            <p>abraham@example.com</p>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <p class="text-muted f-s-14">3 Deals</p>
-                                                        </div>
-                                                        <div class="col-lg-5 text-right">
-                                                            <h5 class="text-muted"><i class="cc BTC m-r-5"></i> <span class="BTC m-l-10">Send BTC</span></h5>
-                                                            <p class="f-s-13 text-muted">Last 10 min ago</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="media p-t-15">
-                                                <img class="mr-3 rounded-circle" src="images/avatar/1.jpg" alt="">
-                                                <div class="media-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-5">
-                                                            <h5>John Abraham</h5>
-                                                            <p>abraham@example.com</p>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <p class="text-muted f-s-14">3 Deals</p>
-                                                        </div>
-                                                        <div class="col-lg-5 text-right">
-                                                            <h5 class="text-muted"><i class="cc BTC m-r-5"></i> <span class="BTC m-l-10">Send BTC</span></h5>
-                                                            <p class="f-s-13 text-muted">Last 10 min ago</p>
-                                                        </div>
-                                                    </div>
+                                                <div class="col-lg-5 text-right">
+                                                    @if ($row->on_truck == 1)
+                                                        <h5 class="text-muted"><i class="fa fa-truck BTC m-r-5" aria-hidden="true"></i></i> <span class="BTC m-l-10">On truck</span></h5>
+                                                    @else 
+                                                        <h5 class="text-muted"></i> <span class="text-danger">Clear</span></h5>
+                                                    @endif
+                                                    <p class="f-s-13 text-muted">Diambil tanggal : {{$row->created_at->format("F d, Y, g:i:s a")}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa" aria-hidden="true"></i> Accordion Header Two</h5>
-                                </div>
-                                <div id="collapseTwo" class="collapse" data-parent="#accordion-one">
-                                    <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa" aria-hidden="true"></i> Accordion Header Tne</h5>
-                                </div>
-                                <div id="collapseThree" class="collapse" data-parent="#accordion-one">
-                                    <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree"><i class="fa" aria-hidden="true"></i> Accordion Header Tne</h5>
-                                </div>
-                                <div id="collapseFour" class="collapse" data-parent="#accordion-one">
-                                    <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</div>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-lg-center">
+                            {{ $container->links('vendor.pagination.simple-bootstrap-4') }}
                         </div>
                     </div>
                 </div>

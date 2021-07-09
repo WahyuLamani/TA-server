@@ -37,6 +37,7 @@ Route::middleware('verified')->group(function () {
     Route::get('agent-container', [ContainerController::class, 'index'])->name('container');
     Route::post('agent-container', [ContainerController::class, 'store'])->name('container.store');
     Route::post('agent-container/handle/{container:id}', [ContainerController::class, 'handle']);
+    Route::delete('/container/delete/{container:id}', [ContainerController::class, 'destroy']);
 
 
     Route::resource('/warehouse', WarehouseController::class);

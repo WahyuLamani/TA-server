@@ -64,4 +64,9 @@ class ContainerController extends Controller
 
         return redirect()->back();
     }
+
+    public function destroy(Container $container)
+    {
+        dd($container);
+    }
 }

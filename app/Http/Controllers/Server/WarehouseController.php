@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Server;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client\Agent;
+use App\Models\Client\Container;
 use App\Models\Server\{ProductType, Warehouse};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,7 +70,10 @@ class WarehouseController extends Controller
      */
     public function show(Warehouse $warehouse)
     {
-        return view('warehouse.warehouse-detail', compact('warehouse'));
+        $container = Container::where('warehouse_id', $warehouse->id)->paginate(5);
+        return view('warehouse.warehouse-detail', compact([
+            'container'
+        ]));
     }
 
     /**
