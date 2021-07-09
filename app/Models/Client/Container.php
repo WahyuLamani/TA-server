@@ -2,6 +2,7 @@
 
 namespace App\Models\Client;
 
+use App\Models\Client\Transactions\Distribution;
 use App\Models\Server\Warehouse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,10 +13,17 @@ class Container extends Model
 
     protected $table = 'container';
 
+    protected $fillable = [
+        'warehouse_id',
+        'amount',
+        'count_down_amount'
+    ];
 
-    public function agent()
+
+
+    public function distribution()
     {
-        return $this->belongsTo(Agent::class);
+        return $this->belongsTo(Distribution::class);
     }
 
     public function warehouse()

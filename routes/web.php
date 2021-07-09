@@ -1,9 +1,10 @@
 <?php
 
+
 use App\Http\Controllers\Auth\UpdateUserController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Server\{AgentsController, CompanyController, DistributorController, DistributionController, WarehouseController};
+use App\Http\Controllers\Server\{AgentsController, CompanyController, ContainerController, DistributorController, DistributionController, WarehouseController};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,11 @@ Route::middleware('verified')->group(function () {
 
     Route::get('/distribution', [DistributionController::class, 'index'])->name('distributed');
     Route::view('/distribution-request', 'home')->name('request.distributor');
+
+    Route::get('agent-container', [ContainerController::class, 'index'])->name('container');
+    Route::post('agent-container', [ContainerController::class, 'store'])->name('container.store');
+    Route::post('agent-container/handle/{container:id}', [ContainerController::class, 'handle']);
+
 
     Route::resource('/warehouse', WarehouseController::class);
 });

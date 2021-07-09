@@ -2,9 +2,7 @@
 
 namespace App\Models\Client;
 
-use App\Models\Distribution;
 use App\Models\User;
-use App\Models\Client\ProblemReporting;
 use App\Models\Server\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,14 +20,14 @@ class Agent extends Model
         'thumbnail',
     ];
 
+    public function user()
+    {
+        return $this->morphOne(User::class, 'userable');
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);
-    }
-
-    public function distribution()
-    {
-        return $this->hasMany(Distribution::class);
     }
 
     public function container()

@@ -15,7 +15,7 @@ class CreateDistributionsTable extends Migration
     {
         Schema::create('distributions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agent_id');
+            $table->foreignId('container_id');
             $table->foreignId('order_id');
             $table->integer('amount');
             $table->text('info')->nullable();

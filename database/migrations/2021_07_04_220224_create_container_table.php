@@ -19,6 +19,7 @@ class CreateContainerTable extends Migration
             $table->foreignId('warehouse_id');
             $table->integer('amount');
             $table->integer('count_down_amount');
+            $table->boolean('on_truck')->default(1);
             $table->timestamps();
         });
     }

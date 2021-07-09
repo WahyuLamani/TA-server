@@ -21,8 +21,8 @@
                     <div class="card-body">
                         <h6 class="card-title text-gray">
                             <small> 
-                            @if ($agent->last_login)
-                                Last login at {{\Carbon\Carbon::parse($agent->last_login)->diffForHumans()}}
+                            @if ($agent->user->last_login)
+                                Last login at {{\Carbon\Carbon::parse($agent->user->last_login)->diffForHumans()}}
                             @else
                                 {{'Unregistered !'}}
                             @endif
@@ -30,7 +30,7 @@
                         <div class="text-center">
                             <img style="width: 180px" src="/storage/{{$agent->thumbnail}}" class="rounded-circle" alt="">
                             <h5 class="mt-3 mb-1">{{$agent->name}}</h5>
-                            <p class="m-0">{{$agent->email}}</p>
+                            <p class="m-0">{{$agent->user->email}}</p>
                             <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal" type="submit">Delete Agent</button>
  
                             {{-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> --}}
