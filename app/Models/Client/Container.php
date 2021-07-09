@@ -30,4 +30,9 @@ class Container extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
+
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class);
+    }
 }
