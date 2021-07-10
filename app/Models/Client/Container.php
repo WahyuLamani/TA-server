@@ -23,7 +23,7 @@ class Container extends Model
 
     public function distribution()
     {
-        return $this->belongsTo(Distribution::class);
+        return $this->hasMany(Distribution::class);
     }
 
     public function warehouse()

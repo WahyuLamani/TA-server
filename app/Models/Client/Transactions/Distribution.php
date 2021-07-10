@@ -2,7 +2,8 @@
 
 namespace App\Models\Client\Transactions;
 
-use App\Models\Client\{Agent, Container};
+use App\Models\Client\Container;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,20 @@ class Distribution extends Model
 
     public function container()
     {
-        return $this->hasMany(Container::class);
+        return $this->belongsTo(Container::class);
+    }
+
+    public function scopeByContainer($query)
+    {
+        return $query->whereHas('container');
+    }
+
+    public function scopeByAgent($query, $agent)
+    {
+        return $query->whereHas('container', function (Builder $q) use ($agent) {
+            $q->whereHas('agent', function (Builder $q) use ($agent) {
+                $q->where('company_id', $agent);
+            });
+        });
     }
 }
