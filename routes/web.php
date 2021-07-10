@@ -2,6 +2,8 @@
 
 
 use App\Http\Controllers\Auth\UpdateUserController;
+use App\Http\Controllers\Dashboard\AgentPostController;
+use App\Http\Controllers\Dashboard\DistributorPostController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Server\{AgentsController, CompanyController, ContainerController, DistributorController, DistributionController, WarehouseController};
@@ -34,10 +36,13 @@ Route::middleware('verified')->group(function () {
     Route::get('/distribution', [DistributionController::class, 'index'])->name('distributed');
     Route::view('/distribution-request', 'home')->name('request.distributor');
 
-    Route::get('agent-container', [ContainerController::class, 'index'])->name('container');
-    Route::post('agent-container', [ContainerController::class, 'store'])->name('container.store');
-    Route::post('agent-container/handle/{container:id}', [ContainerController::class, 'handle']);
+    Route::get('/agent-container', [ContainerController::class, 'index'])->name('container');
+    Route::post('/agent-container', [ContainerController::class, 'store'])->name('container.store');
+    Route::post('/agent-container/handle/{container:id}', [ContainerController::class, 'handle']);
     Route::delete('/container/delete/{container:id}', [ContainerController::class, 'destroy']);
+
+    Route::get('/post/agent/{post:id}', [AgentPostController::class, 'detail']);
+    Route::get('/post/distributor/{post:id}', [DistributorPostController::class, 'detail']);
 
 
     Route::resource('/warehouse', WarehouseController::class);

@@ -29,7 +29,14 @@ class HomeController extends Controller
             'agent' => Agent::where('company_id', Auth::user()->userable->id)->count(),
             'distributor' => Distributor::all()->count()
         ];
-        $posts = Post::byOwner(Agent::class)->byCompanyId(Auth::user()->userable->id)->get();
+        $agent = Post::byOwner(Agent::class)->byCompanyId(Auth::user()->userable->id)->get();
+        $distributors = Post::byOwner(Distributor::class)->get();
+
+        session()->put([
+            'agent' => $agent,
+            'distributors' => $distributors
+        ]);
+        // dd($posts);
 
         // $fecthPost = [];
         // foreach ($posts as $i) {
@@ -47,7 +54,7 @@ class HomeController extends Controller
         // })->get();
         // code baru
         $sumDisItem = Distribution::byAgent(Auth::user()->userable->id)->sum('amount');
-        return view('index', compact(['count', 'sumDisItem', 'posts']));
+        return view('index', compact(['count', 'sumDisItem']));
     }
 
     public function handle()

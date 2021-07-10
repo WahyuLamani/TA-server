@@ -2,7 +2,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header chnges-color">
-            
+          
         </div>
         <!--**********************************
             Nav header end
@@ -26,13 +26,70 @@
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-                        @auth
+                        <li class="icons dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span class="badge badge-pill gradient-1">{{ session('posts')->count() }}</span>
+                            </a>
+                            <div class="drop-down animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-heading d-flex justify-content-between">
+                                    <span class="">{{ session('posts')->count() }} Agent Posts</span>  
+                                    
+                                </div>
+                                <div class="dropdown-content-body" id="posts-agent">
+                                    <ul>
+                                       @foreach (session('posts') as $row)
+                                            <li class="notification-unread">
+                                                <a href="post/agent/{{ $row->id }}">
+                                                    <img class="float-left mr-3 avatar-img" src="/storage/{{$row->owner->thumbnail}}" alt="">
+                                                    <div class="notification-content">
+                                                        <div class="notification-heading">{{ $row->owner->name }}</div>
+                                                        <div class="notification-timestamp text-dark">{{ $row->created_at->diffForhumans() }}</div>
+                                                        <div class="notification-text">{{ $row->post }}</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                       @endforeach
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li class="icons dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span class="badge badge-pill gradient-2">{{ session('distributors')->count() }}</span>
+                            </a>
+                            <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
+                                <div class="dropdown-content-heading d-flex justify-content-between">
+                                    <span class="">{{ session('distributors')->count() }} Distributor posts</span>  
+                                    
+                                </div>
+                                <div class="dropdown-content-body" id="posts-distributor">
+                                    <ul>
+                                        @foreach (session('distributors') as $row)
+                                            <li class="notification-unread">
+                                                <a href="post/distributor/{{ $row->id }}">
+                                                    <img class="float-left mr-3 avatar-img" src="/storage/{{$row->owner->thumbnail}}" alt="">
+                                                    <div class="notification-content">
+                                                        <div class="notification-heading">{{ $row->owner->name }}</div>
+                                                        <div class="notification-timestamp text-dark">{{ $row->created_at->diffForhumans() }}</div>
+                                                        <div class="notification-text">{{ $row->post }}</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                       @endforeach
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                        </li>
+
                         <li class="icons dropdown d-none d-md-flex" data-toggle="dropdown">
                             <a href="" class="log-user">
                                 <span>{{ucwords(Auth::user()->userable->ceo_name)}}</span>
                             </a>
                         </li>
-                        @endauth
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
@@ -54,6 +111,7 @@
                                 </div>
                             </div>
                         </li>
+
                     </ul>
                 </div>
             </div>

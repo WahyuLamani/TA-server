@@ -155,29 +155,7 @@
                 </div>
 
 
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="card" id="reporting">
-                            <h5 class="mt-3 ml-3 text-black-50">Agent Post</h5><hr>
-                            @foreach ($posts as $row)
-                                <div class="media media-reply">
-                                    <img class="mr-2 ml-1 circle-rounded" src="{{asset("storage/" . $row->owner->thumbnail)}}" width="50" height="50">
-                                    <div class="media-body">
-                                        <div class="d-sm-flex justify-content-between mb-2">
-                                            <h5 class="mb-sm-0">{{$row->owner->name}}<small class="text-muted ml-3">{{$row->created_at->diffForHumans()}}</small></h5>
-                                            <div class="media-reply__link">
-                                                {{-- <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                                <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button> --}}
-                                            </div>
-                                        </div>
-                                        <p>{{$row->post}}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+        
                 {{-- <div class="row">
                     <div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6">
 

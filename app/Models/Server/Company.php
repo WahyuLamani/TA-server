@@ -3,6 +3,7 @@
 namespace App\Models\Server;
 
 use App\Models\Client\Agent;
+use App\Models\Client\Post;
 use App\Models\Client\Transactions\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
