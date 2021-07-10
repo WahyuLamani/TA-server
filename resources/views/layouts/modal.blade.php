@@ -9,12 +9,12 @@
             </div>
             <div class="modal-body">
             <div class="text-secondary">
-                <h5>@if ($container)
+                <h5>@if ($container ?? false)
                     Sisa Produk :
                     @else
                     Name :
                     @endif {{$agent->name ?? $distributor->name ?? $container->count_down_amount}}</h5>
-                <small>@if ($container)
+                <small>@if ($container ?? false)
                     Tanggal pengambilan :
                     @else
                     Registered at :
