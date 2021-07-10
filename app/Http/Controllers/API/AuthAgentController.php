@@ -126,8 +126,4 @@ class AuthAgentController extends Controller
             'access_token' => $accessToken
         ], 200);
     }
-    public function logout()
-    {
-        //
-    }
 }

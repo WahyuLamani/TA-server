@@ -75,8 +75,4 @@ class AuthDistributorController extends Controller
             'access_token' => $accessToken
         ]);
     }
-    public function logout()
-    {
-        //
-    }
 }
