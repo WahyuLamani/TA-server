@@ -29,16 +29,16 @@
                         <li class="icons dropdown">
                             <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
                                 <i class="mdi mdi-email-outline"></i>
-                                <span class="badge badge-pill gradient-1">{{ session('posts')->count() }}</span>
+                                <span class="badge badge-pill gradient-1">{{ session('agent')->count() }}</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
-                                    <span class="">{{ session('posts')->count() }} Agent Posts</span>  
+                                    <span class="">{{ session('agent')->count() }} Agent Posts</span>  
                                     
                                 </div>
                                 <div class="dropdown-content-body" id="posts-agent">
                                     <ul>
-                                       @foreach (session('posts') as $row)
+                                       @foreach (session('agent') as $row)
                                             <li class="notification-unread">
                                                 <a href="post/agent/{{ $row->id }}">
                                                     <img class="float-left mr-3 avatar-img" src="/storage/{{$row->owner->thumbnail}}" alt="">

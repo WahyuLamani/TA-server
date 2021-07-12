@@ -23,7 +23,6 @@
                 <ul aria-expanded="false">
                     <li><a href="{{route('agents')}}">Agents</a></li>
                     <li><a href="{{route('distributors')}}">Distributors</a></li>
-                    <li><a href="{{route('distributed')}}">Distributions</a></li>
                     <li><a href="{{route('request.distributor')}}">Order Request</a></li>
                 </ul>
             </li>
@@ -34,7 +33,6 @@
                 <ul aria-expanded="false">
                     <li><a href="/warehouse">Warehouse</a></li>
                     <li><a href="{{route('container')}}">Agent Truck</a></li>
-                    <li><a href="{{route('request.distributor')}}">Request Product</a></li>
                 </ul>
             </li>
     {{-- tambah menu disini --}}
