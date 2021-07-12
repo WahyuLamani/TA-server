@@ -108,7 +108,7 @@
                 
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Distributions tracking</h5>
@@ -151,6 +151,34 @@
                                 </div>
                             </div>
                         </div>                        
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4><i class="fa fa-truck fa-lg mr-2" aria-hidden="true"></i>Agent on truck</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($agentOnline as $row)
+                                            <tr>
+                                                <th>{{ $loop->iteration }}</th>
+                                                <td>{{ $row->name }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

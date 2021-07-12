@@ -31,12 +31,10 @@ class HomeController extends Controller
         ];
         $agent = Post::byOwner(Agent::class)->byCompanyId(Auth::user()->userable->id)->get();
         $distributors = Post::byOwner(Distributor::class)->get();
-
         session()->put([
             'agent' => $agent,
             'distributors' => $distributors
         ]);
-        // dd($posts);
 
         // $fecthPost = [];
         // foreach ($posts as $i) {
@@ -44,8 +42,7 @@ class HomeController extends Controller
         //         array_push($fecthPost, $i);
         //     }
         // }
-        // dd(collect($fecthPost));
-
+        $agentOnline = Agent::byContainerOnTruck()->get();
         // code lama
         // $sumDisItem = Distribution::whereHas('container', function ($q) {
         //     $q->whereHas('agent', function ($q) {
@@ -54,7 +51,7 @@ class HomeController extends Controller
         // })->get();
         // code baru
         $sumDisItem = Distribution::byCompany(Auth::user()->userable->id)->sum('amount');
-        return view('index', compact(['count', 'sumDisItem']));
+        return view('index', compact(['count', 'sumDisItem', 'agentOnline']));
     }
 
     public function handle()

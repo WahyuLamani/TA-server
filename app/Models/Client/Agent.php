@@ -39,4 +39,11 @@ class Agent extends Model
     {
         return $this->morphMany(Post::class, 'owner');
     }
+
+    public function scopeByContainerOnTruck($query)
+    {
+        return $query->whereHas('container', function ($q) {
+            $q->where('on_truck', 1);
+        });
+    }
 }

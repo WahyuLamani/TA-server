@@ -30,11 +30,6 @@ class Distribution extends Model
         return $this->belongsTo(Container::class);
     }
 
-    public function scopeByContainer($query)
-    {
-        return $query->whereHas('container');
-    }
-
     public function scopeByCompany($query, $company_id)
     {
         return $query->whereHas('container', function (Builder $q) use ($company_id) {

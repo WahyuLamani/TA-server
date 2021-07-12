@@ -44,9 +44,9 @@
                             @foreach ($agents as $row)
                                 <div class="card">
                                     <div class="card-header">
-                                    <h5 class="mb-0 @if($loop->iteration != '1') collapsed @endif text-bold text-info" data-toggle="collapse" data-target="#{{$row->name}}" aria-expanded="false" aria-controls="collapseOne"><i class="fa" aria-hidden="true"></i>{{ 'Nama : '.$row->name.$row->id }}</h5>
+                                    <h5 class="mb-0 collapsed text-bold text-info" data-toggle="collapse" data-target="#{{$row->name}}" aria-expanded="false" aria-controls="collapseOne"><i class="fa" aria-hidden="true"></i>{{ 'Nama : '.$row->name.$row->id }}</h5>
                                     </div>
-                                    <div id="{{$row->name}}" class="collapse @if($loop->iteration == '1') show @endif" data-parent="#accordion-one">
+                                    <div id="{{$row->name}}" class="collapse" data-parent="#accordion-one">
                                         <div class="card-body">
                                             
                                             <div class="table-responsive">
