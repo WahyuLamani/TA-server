@@ -16,7 +16,7 @@ class CreateDistributionsTable extends Migration
         Schema::create('distributions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('container_id');
-            $table->foreignId('order_id');
+            $table->foreignId('order_id')->nullable();
             $table->integer('amount');
             $table->text('info')->nullable();
             $table->timestamp('added_at');
