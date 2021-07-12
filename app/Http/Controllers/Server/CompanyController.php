@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Server\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,6 +19,8 @@ class CompanyController extends Controller
         if (!isset($data['thumbnail'])) {
             $data['thumbnail'] = 'images/avatar/default.png';
         }
+        $data['slug'] = Str::slug($request->company_name);
+
         // store data
         $Company = Company::create($data);
         $user = User::find(Auth::user()->id);

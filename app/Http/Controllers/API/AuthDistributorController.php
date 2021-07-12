@@ -7,6 +7,7 @@ use App\Models\Client\Distributor;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,6 +26,7 @@ class AuthDistributorController extends Controller
 
         $distributor = Distributor::create([
             'name' => ucwords($request->name),
+            'slug' => Str::slug($request->name),
             'company_id' => $request->company_id,
             'address' => $request->address,
             'thumbnail' => 'images/avatar/default.png',
@@ -68,10 +70,10 @@ class AuthDistributorController extends Controller
         }
 
         $accessToken = Auth::user()->createToken('authToken')->accessToken;
+        $user = Auth::user()->load('userable');
 
         return response([
-            'user' => Auth::user(),
-            'user_detail' => Auth::user()->userable,
+            'user' => $user,
             'access_token' => $accessToken
         ]);
     }

@@ -17,6 +17,7 @@ class CreateAgentsTable extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained()->casecadeOnDelete();
             $table->string('name');
+            $table->string('slug');
             $table->string('address')->nullable();
             $table->char('location', 255)->nullable();
             $table->string('telp_num')->nullable();

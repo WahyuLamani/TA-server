@@ -12,6 +12,7 @@ class Distributor extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'address',
         'telp_num',
         'location',

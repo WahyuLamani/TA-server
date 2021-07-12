@@ -12,6 +12,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function distribution()
     {
         return $this->hasOne(Distribution::class);

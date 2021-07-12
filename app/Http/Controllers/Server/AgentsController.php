@@ -7,6 +7,7 @@ use App\Models\Client\Agent;
 use App\Models\Client\Transactions\Distribution;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,6 +29,7 @@ class AgentsController extends Controller
 
         $agent = auth()->user()->userable->agent()->create([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
             'thumbnail' => 'images/avatar/default.png',
         ]);
         // $agent = new Agent();
