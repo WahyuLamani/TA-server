@@ -53,7 +53,7 @@ class HomeController extends Controller
         //     });
         // })->get();
         // code baru
-        $sumDisItem = Distribution::byAgent(Auth::user()->userable->id)->sum('amount');
+        $sumDisItem = Distribution::byCompany(Auth::user()->userable->id)->sum('amount');
         return view('index', compact(['count', 'sumDisItem']));
     }
 

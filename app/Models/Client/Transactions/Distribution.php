@@ -35,11 +35,11 @@ class Distribution extends Model
         return $query->whereHas('container');
     }
 
-    public function scopeByAgent($query, $agent)
+    public function scopeByCompany($query, $company_id)
     {
-        return $query->whereHas('container', function (Builder $q) use ($agent) {
-            $q->whereHas('agent', function (Builder $q) use ($agent) {
-                $q->where('company_id', $agent);
+        return $query->whereHas('container', function (Builder $q) use ($company_id) {
+            $q->whereHas('agent', function (Builder $q) use ($company_id) {
+                $q->where('company_id', $company_id);
             });
         });
     }
