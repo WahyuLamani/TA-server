@@ -17,6 +17,7 @@ class ApiHomeController extends Controller
             return response(['message' => 'welcome ' . Auth::user()->userable->name], 200);
         } else {
             $company = Company::all();
+            $company->load('product_type');
             return response([
                 'companyList' => AllResource::collection($company),
                 'message' =>  'welcome ' . Auth::user()->userable->name
