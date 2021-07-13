@@ -1,4 +1,4 @@
-<div class="modal fade" id="{{$agent->name ?? $distributor->name ?? $container->agent->name.$container->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{$agent->slug ?? $distributor->slug ?? $container->agent->slug.$container->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

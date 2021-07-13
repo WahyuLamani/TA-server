@@ -2,6 +2,7 @@
 
 namespace App\Models\Client;
 
+use App\Models\Client\Transactions\Order;
 use App\Models\User;
 use App\Models\Server\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,6 +35,11 @@ class Agent extends Model
     public function container()
     {
         return $this->hasMany(Container::class);
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function post()

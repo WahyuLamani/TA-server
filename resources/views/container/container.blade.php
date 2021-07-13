@@ -87,7 +87,7 @@
                                                                         <button class="tombol-keluar" type="submit"><i class="fa fa-toggle-off fa-lg" aria-hidden="true"></i></button>
                                                                         @endif
                                                                     </form>
-                                                                    <span data-toggle="modal" data-target="#{{$container->agent->name.$container->id}}"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
+                                                                    <span data-toggle="modal" data-target="#{{$container->agent->slug.$container->id}}"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
                                                                     @section('type', 'container')
                                                                     @include('layouts.modal')
                                                                 </div>

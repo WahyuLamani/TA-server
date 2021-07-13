@@ -37,7 +37,7 @@ class AuthAgentController extends Controller
             return response(['message' => 'Email or password uncorrect'], 404);
         }
 
-        return response(['message' => 'Ur Logined', 'user' => Auth::user(), 'token' => $token], 200);
+        return response(['message' => 'Register', 'user' => Auth::user(), 'token' => $token], 200);
     }
 
 
@@ -71,6 +71,7 @@ class AuthAgentController extends Controller
          */
         // $user = User::where('email', $request->email)->first();
         Auth::user()->password = Hash::make($request->password);
+        Auth::user()->last_login = Carbon::now()->toDateTimeString();
         Auth::user()->save();
         // $agent = Agent::find($user->userable->id);
         $agent = Agent::find(Auth::user()->userable->id);
@@ -118,11 +119,11 @@ class AuthAgentController extends Controller
             Auth::user()->save();
         }
 
+        $user = Auth::user()->load('userable');
         $accessToken = Auth::user()->createToken('authToken')->accessToken;
 
         return response([
-            'user' => Auth::user(),
-            'user_detail' => Auth::user()->userable,
+            'user' => $user,
             'access_token' => $accessToken
         ], 200);
     }

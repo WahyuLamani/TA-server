@@ -2,6 +2,7 @@
 
 namespace App\Models\Client\Transactions;
 
+use App\Models\Client\Agent;
 use App\Models\Client\Distributor;
 use App\Models\Server\Company;
 use App\Models\Server\ProductType;
@@ -31,6 +32,11 @@ class Order extends Model
 
     public function product_type()
     {
-        return $this->hasMany(ProductType::class);
+        return $this->belongsTo(ProductType::class);
+    }
+
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class);
     }
 }

@@ -44,7 +44,7 @@
                                         <td>{{$distributor->created_at->format("d F, Y")}}</td>
                                         <td><a href="distributor/details/{{$distributor->id}}">details</a></td>
                                         @endif
-                                        <td width="10px"><span data-toggle="modal" data-target="#exampleModal"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
+                                        <td width="10px"><span data-toggle="modal" data-target="#{{$distributor->slug}}"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
                                         </td>
                                     </tr>
                                     @section('type', 'distributor')
