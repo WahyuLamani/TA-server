@@ -34,7 +34,8 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = Validator::make($request->all(), [
-            'req_amount' => 'required|integer'
+            'req_amount' => 'required|integer',
+            'product_type_id' => 'required'
         ]);
         if ($order->fails()) {
             return response(['message' => $order->errors()]);
