@@ -63,14 +63,20 @@
                 </div>  
             </div>
             <div class="col-lg-8 col-xl-8">
-                {{-- <div class="card">
+                <div class="card">
                     <div class="card-body">
-                        <form action="#" class="form-profile">
+                        <form action="{{ route('profile.posting') }}" method="post" class="form-profile">
+                            @csrf
                             <div class="form-group">
-                                <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
+                                <textarea name="post"  class="form-control @error('post') is-invalid @enderror" id="textarea" cols="30" rows="2" placeholder="Post a new message">{{ old('post') }}</textarea>
+                                @error('post')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                             <div class="d-flex align-items-center">
-                                <ul class="mb-0 form-profile__icons">
+                                {{-- <ul class="mb-0 form-profile__icons">
                                     <li class="d-inline-block">
                                         <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
                                     </li>
@@ -83,14 +89,36 @@
                                     <li class="d-inline-block">
                                         <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
                                     </li>
-                                </ul>
-                                <button class="btn btn-primary px-3 ml-4">Send</button>
+                                </ul> --}}
+                                <button type="submit" class="btn btn-primary px-3 ml-4">Send</button>
                             </div>
                         </form>
                     </div>
-                </div> --}}
+                </div>
 
-                <div class="card">
+                <div class="card" id="profile">
+                    <div class="card-body">
+                        @foreach (Auth::user()->userable->post as $post)
+                            <div class="media media-reply">
+                                <img class="mr-3 circle-rounded" src="/storage/{{ $post->owner->thumbnail }}" width="50" height="50">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-2">
+                                        <h5 class="mb-sm-0">{{ $post->owner->ceo_name }} <small class="text-muted ml-3">post at {{$post->created_at->diffForHumans()}}</small></h5>
+                                        <div class="media-reply__link">
+                                            <button data-toggle="modal" data-target="#{{$post->owner->slug.$post->id}}" class="btn btn-transparent p-2"><i class="fa fa-trash-o fa-lg"></i></button>
+                                            <button class="btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-pencil-square-o fa-lg"></i></button>
+                                        </div>
+                                    </div>
+                                    <p>{{ $post->post }}</p>
+                                </div>
+                            </div>
+                            @section('type', 'company-post')
+                            @include('layouts.modal')
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="card mt-5">
                     <div class="card-body">
                         <div class="card-title">
                             <h4>Table Hover</h4>
@@ -138,7 +166,6 @@
                 </div>
 
 
-                </div>
             </div>
         </div>
     </div>

@@ -38,6 +38,13 @@
         // alwaysVisible: true,
         start: "top"
     });
+    $('#profile').slimscroll({
+        position: "right",
+        size: "10px",
+        height: "300px",
+        // alwaysVisible: true,
+        start: "top"
+    });
 
 
 

@@ -2,7 +2,7 @@
 
 
 use App\Http\Controllers\Auth\UpdateUserController;
-use App\Http\Controllers\Dashboard\{AgentPostController, DistributorPostController, ProfileController, ShowOrderController};
+use App\Http\Controllers\Dashboard\{AgentPostController, CompanyPostController, DistributorPostController, ProfileController, ShowOrderController};
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Server\{AgentsController, CompanyController, ContainerController, DistributorController, DistributionController, WarehouseController};
 use Illuminate\Support\Facades\{Auth, Route};
@@ -17,6 +17,8 @@ Route::middleware('verified')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile', [CompanyPostController::class, 'posting'])->name('profile.posting');
+    Route::delete('/company-post/delete/{post:id}', [CompanyPostController::class, 'destroy']);
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/update/{user:id}', [UpdateUserController::class, 'update'])->name('profile.update');
 
