@@ -32,4 +32,10 @@ class Post extends Model
             $q->where('company_id', $company_id);
         });
     }
+    public function scopeByAgentId($query, $agent_id)
+    {
+        return $query->whereHasMorph('owner', Agent::class, function (Builder $q) use ($agent_id) {
+            $q->where('id', $agent_id);
+        });
+    }
 }

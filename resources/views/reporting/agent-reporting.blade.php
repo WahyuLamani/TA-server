@@ -18,8 +18,12 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Slides only</h4>
-                        <img src="/storage/{{$post->owner->thumbnail}}" class="img-fluid" alt="...">
+                        <h4 class="card-title">Pict</h4>
+                        @if ($post->pict)
+                            <img src="/storage/{{$post->pict}}" class="img-fluid" alt="...">
+                        @else
+                            <strong class="text-secondary">No images</strong>
+                        @endif
                     </div>
                 </div>
             </div>

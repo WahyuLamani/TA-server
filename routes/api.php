@@ -1,32 +1,22 @@
 <?php
 
 use App\Http\Controllers\API\Agent\GetOrderController;
-use App\Http\Controllers\API\{ApiHomeController, AuthAgentController, AuthDistributorController, DistributionController};
+use App\Http\Controllers\API\{ApiHomeController, AuthAgentController, AuthDistributorController, DistributionController, PostController};
 use App\Http\Controllers\API\Distributor\OrderController;
 use App\Http\Controllers\API\LogoutController;
-use App\Http\Controllers\API\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Passport::routes();
 
-Route::get('home', [ApiHomeController::class, 'index'])->middleware('auth:api');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('logout', LogoutController::class);
+    Route::get('home', [ApiHomeController::class, 'index']);
+    Route::post('post', [PostController::class, 'store']);
+});
 Route::prefix('agent')->group(function () {
     Route::post('login', [AuthAgentController::class, 'login']);
     Route::post('register', [AuthAgentController::class, 'getAuth']);
@@ -50,8 +40,3 @@ Route::prefix('distributor')->group(function () {
         Route::delete('order/{order:id}', [OrderController::class, 'deleteOrder']);
     });
 });
-
-Route::apiResource('report', ReportController::class)->middleware('auth:api');
-Route::apiResource('distribution', DistributionController::class)->middleware('auth:api');
-
-Route::post('logout', LogoutController::class)->middleware('auth:api');
