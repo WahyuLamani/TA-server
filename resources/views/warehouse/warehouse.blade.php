@@ -159,6 +159,55 @@
                     </div>
                 </div>
             </div>
+
+            {{-- modal tambah type produk --}}
+            <div class="modal fade" id="createProductType">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add new warehouse data</h5>
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('product-type') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Type Product</label>
+                                            <input name="product_type" value="{{old('product_type')}}" type="text" class="form-control @error('product_type') is-invalid @enderror" id="recipient-name">
+                                            @error('product_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Unit</label>
+                                            <input name="product_unit" value="{{old('product_unit')}}" type="text" class="form-control @error('product_unit') is-invalid @enderror" id="recipient-name">
+                                            @error('product_unit')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <button type="submit" class="btn btn-info">Save data</button>
+                            </form>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>z
+            {{-- end modal --}}
         </div>
     </div>
 </div>

@@ -42,7 +42,8 @@ class HomeController extends Controller
         //         array_push($fecthPost, $i);
         //     }
         // }
-        $agentOnline = Agent::byContainerOnTruck()->get();
+        $agentOnline = Agent::where('company_id', Auth::user()->userable->id)
+            ->byContainerOnTruck()->get();
         // code lama
         // $sumDisItem = Distribution::whereHas('container', function ($q) {
         //     $q->whereHas('agent', function ($q) {

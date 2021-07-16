@@ -70,10 +70,33 @@ class WarehouseController extends Controller
      */
     public function show(Warehouse $warehouse)
     {
-        $container = Container::where('warehouse_id', $warehouse->id)->paginate(5);
+
+        $container = Container::where('warehouse_id', $warehouse->id)->paginate(2);
         return view('warehouse.warehouse-detail', compact([
             'container'
         ]));
+    }
+
+    /**
+     * create product type
+     * @param Request
+     * @return redirect
+     */
+
+    public function createProductType(Request $request)
+    {
+        $request->validate([
+            'product_type' => 'required',
+            'product_unit' => 'required'
+        ]);
+
+        Auth::user()->userable->product_type()->create([
+            'type' => $request->product_type,
+            'unit' => $request->product_unit
+        ]);
+
+        session()->flash('success', 'Product type successfully created!!');
+        return redirect()->back();
     }
 
     /**

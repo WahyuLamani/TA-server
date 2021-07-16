@@ -45,4 +45,5 @@ Route::middleware('verified')->group(function () {
 
 
     Route::resource('/warehouse', WarehouseController::class);
+    Route::post('/warehouse/product-type', [WarehouseController::class, 'createProductType'])->name('product-type');
 });

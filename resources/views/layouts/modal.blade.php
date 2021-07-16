@@ -1,4 +1,10 @@
-<div class="modal fade" id="{{$agent->slug ?? ($post->owner->slug.$post->id) ?? $distributor->slug ?? ($container->agent->slug.$container->id)}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@if ($post->owner->slug ?? false)
+    @php
+        $modalUrl = $post->owner->slug.$post->id;
+    @endphp
+@endif
+
+<div class="modal fade" id="{{$agent->slug ?? $modalUrl ?? $distributor->slug ?? ($container->agent->slug.$container->id)}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

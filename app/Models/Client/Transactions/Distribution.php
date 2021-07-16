@@ -38,4 +38,12 @@ class Distribution extends Model
             });
         });
     }
+    public function scopeByAgent($query, $agent_id)
+    {
+        return $query->whereHas('container', function (Builder $q) use ($agent_id) {
+            $q->whereHas('agent', function (Builder $q) use ($agent_id) {
+                $q->where('id', $agent_id);
+            });
+        });
+    }
 }

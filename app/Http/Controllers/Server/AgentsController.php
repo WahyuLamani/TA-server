@@ -50,12 +50,14 @@ class AgentsController extends Controller
 
     public function details(Agent $agent)
     {
+        if ($agent->company_id !== Auth::user()->userable->id) {
+            abort(404);
+        }
         // $agent = User::select('users.email', 'users.last_login', 'agents.*')
         //     ->join('agents', 'agents.id', 'users.userable_id')
         //     ->where('userable_id', $agent->id)->first();
 
-        $distribution = Distribution::select('agents.name', 'distributions.*')
-            ->join('agents', 'agents.id', 'distributions.agent_id')->get();
+        $distribution = Distribution::byAgent($agent->id)->get();
         return view('agents.agent-details', compact([
             'agent',
             'distribution'
