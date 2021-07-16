@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\API\Agent\GetOrderController;
-use App\Http\Controllers\API\{ApiHomeController, AuthAgentController, AuthDistributorController, DistributionController, PostController};
+use App\Http\Controllers\API\Agent\{GetOrderController, ApiContainerController};
+use App\Http\Controllers\API\{ApiHomeController, AuthAgentController, AuthDistributorController, PostController};
 use App\Http\Controllers\API\Distributor\OrderController;
 use App\Http\Controllers\API\LogoutController;
+use App\Http\Controllers\API\Transactions\DistributionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
@@ -23,10 +24,13 @@ Route::prefix('agent')->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         Route::patch('register', [AuthAgentController::class, 'register']);
+        Route::patch('container/{container:id}', [ApiContainerController::class, 'statusControll']);
         Route::get('order', [GetOrderController::class, 'index']);
         Route::patch('order', [GetOrderController::class, 'acceptOrder']);
         Route::patch('order/{order:id}', [GetOrderController::class, 'cancelReceiveOrder']);
         Route::delete('order/{order:id}', [GetOrderController::class, 'deleteReceiveOrder']);
+        Route::post('distribution-no-order/{container:id}', [DistributionController::class, 'distributedNoOrder']);
+        Route::post('distribution-with-order/{order:id}', [DistributionController::class, 'distributedWithOrder']);
     });
 });
 

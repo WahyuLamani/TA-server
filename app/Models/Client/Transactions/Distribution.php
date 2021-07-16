@@ -14,8 +14,9 @@ class Distribution extends Model
     protected $fillable = [
         'agent_id',
         'order_id',
-        'dis_item',
-        'info'
+        'amount',
+        'info',
+        'added_at'
     ];
 
 

@@ -12,7 +12,10 @@ class GetOrderController extends Controller
 {
     public function index()
     {
-        $orderLists  = Order::where('on_progress', 0)->get();
+        $orderLists  = Order::where('on_progress', 0)
+            ->where('company_id', Auth::user()->userable->company_id)
+            ->orWhere('company_id', null)
+            ->get();
         $orderLists->load('distributor');
         $orderLists->load('product_type');
         $receivedOrders = Order::where('agent_id', Auth::user()->userable->id)->get();
