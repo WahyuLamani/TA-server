@@ -43,7 +43,8 @@ Route::middleware('verified')->group(function () {
     Route::get('/post/agent/{post:id}', [AgentPostController::class, 'detail']);
     Route::get('/post/distributor/{post:id}', [DistributorPostController::class, 'detail']);
 
-
-    Route::resource('/warehouse', WarehouseController::class);
+    Route::get('/warehouse', [WarehouseController::class, 'index']);
+    Route::get('/warehouse/{warehouse:id}', [WarehouseController::class, 'detail']);
+    Route::post('/warehouse', [WarehouseController::class, 'store']);
     Route::post('/warehouse/product-type', [WarehouseController::class, 'createProductType'])->name('product-type');
 });

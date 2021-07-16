@@ -70,8 +70,8 @@
                                                         <select name="product_type" class="form-control form-control-sm @error('product_type') is-invalid @enderror">
                                                             <option disabled selected>Pilih Product type</option>
                                                             @foreach ($products as $row)
-                                                            <option value="{{ $row->id }}">{{ $row->type }}</option>
-                                                            @endforeach
+                                                            <option value="{{ $row->id }}">{{ $row->type.' '.$row->unit }}</option>
+                                                            @endforeach 
                                                         </select>
                                                         @error('product_type')
                                                             <span class="invalid-feedback" role="alert">

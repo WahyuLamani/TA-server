@@ -68,9 +68,11 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Warehouse $warehouse)
+    public function detail(Warehouse $warehouse)
     {
-
+        if ($warehouse->company_id !== Auth::user()->userable->id) {
+            abort(404);
+        }
         $container = Container::where('warehouse_id', $warehouse->id)->paginate(2);
         return view('warehouse.warehouse-detail', compact([
             'container'
