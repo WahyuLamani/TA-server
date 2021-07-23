@@ -1,9 +1,9 @@
 <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header chnges-color">
-          
-        </div>
+        
+        <img class="logo-stylis" src="{{asset('assets/images/logo.png')}}" alt="" srcset="">
+        
         <!--**********************************
             Nav header end
         ***********************************-->

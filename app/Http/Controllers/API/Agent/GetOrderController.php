@@ -10,25 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class GetOrderController extends Controller
 {
-    public function index()
-    {
-        $orderLists  = Order::where('on_progress', 1)
-            ->where('company_id', Auth::user()->userable->company_id)
-            ->orWhere('company_id', null)
-            ->get();
-        $orderLists->load('distributor');
-        $orderLists->load('product_type');
-        $receivedOrders = Order::where('agent_id', Auth::user()->userable->id)->get();
-        $receivedOrders->load('distributor');
-        $receivedOrders->load('product_type');
-
-        return response([
-            'orderList' => AllResource::collection($orderLists),
-            'receivedOrder' => AllResource::collection($receivedOrders),
-            'message' => 'Get successfully'
-        ], 200);
-    }
-
     public function acceptOrder(Request $request)
     {
         $order = Order::find($request->order_id);
