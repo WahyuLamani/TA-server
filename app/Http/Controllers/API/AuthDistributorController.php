@@ -54,27 +54,4 @@ class AuthDistributorController extends Controller
 
         return response(['user' => $validatedData, 'access_token' => $accessToken], 201);
     }
-
-    public function login(Request $request)
-    {
-        $login = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required',
-        ]);
-
-        if (!auth()->attempt($login)) {
-            return response(['message' => 'This User does not exist, check your details'], 400);
-        } else {
-            Auth::user()->last_login = Carbon::now()->toDateTimeString();
-            Auth::user()->save();
-        }
-
-        $accessToken = Auth::user()->createToken('authToken')->accessToken;
-        $user = Auth::user()->load('userable');
-
-        return response([
-            'user' => $user,
-            'access_token' => $accessToken
-        ]);
-    }
 }

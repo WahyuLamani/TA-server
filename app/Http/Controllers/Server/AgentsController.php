@@ -74,8 +74,8 @@ class AgentsController extends Controller
 
     public function destroy(Agent $agent)
     {
+        $agent->user->delete();
         $agent->delete();
-        User::where('userable_id', $agent->id)->delete();
         // User::find($agent->id, 'userable_id')->token()->revoke();
         session()->flash('success', ucwords('Agent Has Ben Deleted'));
         return redirect()->to('agents');

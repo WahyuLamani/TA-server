@@ -31,6 +31,12 @@
             <form action="/@yield('type')/delete/{{$agent->id ?? $post->id ?? $distributor->id ?? $container->id}}" method="post">
                 @csrf
                 @method('delete')
+                @if ($container ?? false)
+                    <div class="form-check form-check-inline mt-3 mb-1">
+                        <input name="refund" class="form-check-input ml-3" type="checkbox" id="inlineCheckbox1" value="1" checked>
+                        <label class="form-check-label" for="inlineCheckbox1">Pengembalian produk ke-gudang?</label>
+                    </div>
+                @endif
                 <div class="d-flex mt-2">
                 <button class="btn btn-sm btn-danger mr-2" type="submit">yes</button>
                 <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">No</button>

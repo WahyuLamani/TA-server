@@ -44,9 +44,9 @@
                             @foreach ($agents as $row)
                                 <div class="card">
                                     <div class="card-header">
-                                    <h5 class="mb-0 collapsed text-bold text-info" data-toggle="collapse" data-target="#{{$row->name}}" aria-expanded="false" aria-controls="collapseOne"><i class="fa" aria-hidden="true"></i>{{ 'Nama : '.$row->name }}</h5>
+                                    <h5 class="mb-0 collapsed text-bold text-info" data-toggle="collapse" data-target="#{{$row->slug}}" aria-expanded="false" aria-controls="collapseOne"><i class="fa" aria-hidden="true"></i>{{ 'Nama : '.$row->name }}</h5>
                                     </div>
-                                    <div id="{{$row->name}}" class="collapse" data-parent="#accordion-one">
+                                    <div id="{{$row->slug}}" class="collapse" data-parent="#accordion-one">
                                         <div class="card-body">
                                             
                                             <div class="table-responsive">

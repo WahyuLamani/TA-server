@@ -65,8 +65,14 @@ class ContainerController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Container $container)
+    public function destroy(Request $request, Container $container)
     {
-        dd($container);
+        if (isset($request->refund)) {
+            $container->warehouse->count_down_amount = $container->warehouse->count_down_amount + $container->count_down_amount;
+            $container->warehouse->save();
+        }
+        $container->delete();
+        session()->flash('success', isset($request->refund) ? 'Barang berhasil di kembalikan ke gudang' : 'barang terhapus');
+        return redirect()->back();
     }
 }

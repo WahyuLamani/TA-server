@@ -12,7 +12,7 @@ class GetOrderController extends Controller
 {
     public function index()
     {
-        $orderLists  = Order::where('on_progress', 0)
+        $orderLists  = Order::where('on_progress', 1)
             ->where('company_id', Auth::user()->userable->company_id)
             ->orWhere('company_id', null)
             ->get();
@@ -33,7 +33,7 @@ class GetOrderController extends Controller
     {
         $order = Order::find($request->order_id);
         $order->update([
-            'on_progress' => 1,
+            'on_progress' => 2,
             'agent_id' => $request->user()->userable->id,
             'company_id' => $request->user()->userable->company->id
         ]);
@@ -43,7 +43,7 @@ class GetOrderController extends Controller
     public function cancelReceiveOrder(Order $order)
     {
         $order->update([
-            'on_progress' => 0,
+            'on_progress' => 1,
             'agent_id' => null,
             'company_id' => null
         ]);

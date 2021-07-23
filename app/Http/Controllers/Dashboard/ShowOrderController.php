@@ -12,10 +12,10 @@ class ShowOrderController extends Controller
     public function show()
     {
         $orderLists = Order::where('company_id', Auth::user()->userable->id)
-            ->where('on_progress', 0)
+            ->where('on_progress', 1)
             ->paginate(4, ['*'], 'orderLists');
         $orderAccepts = Order::where('company_id', Auth::user()->userable->id)
-            ->where('on_progress', 1)
+            ->where('on_progress', 2)
             ->paginate(4, ['*'], 'orderAccepts');
 
         return view('order.order', compact([

@@ -47,7 +47,7 @@ class OrderController extends Controller
 
     public function deleteOrder(Order $order)
     {
-        if ($order->on_progress === 1) {
+        if ($order->on_progress == 2 || $order->on_progress == 3) {
             return response(['message' => 'Please confirm with agent who receive this order']);
         } else {
             $order->delete();

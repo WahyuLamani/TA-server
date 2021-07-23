@@ -101,30 +101,4 @@ class AuthAgentController extends Controller
 
         return response(['message' => 'Successfull', 'user' => $agent], 200);
     }
-
-    public function login(Request $request)
-    {
-        $login = Validator::make($request->all(), [
-            'email' => 'email|required',
-            'password' => 'required',
-        ]);
-        if ($login->fails()) {
-            return response(['message' => $login->errors()]);
-        }
-
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return response(['message' => 'This User does not exist, check your details'], 400);
-        } else {
-            Auth::user()->last_login = Carbon::now()->toDateTimeString();
-            Auth::user()->save();
-        }
-
-        $user = Auth::user()->load('userable');
-        $accessToken = Auth::user()->createToken('authToken')->accessToken;
-
-        return response([
-            'user' => $user,
-            'access_token' => $accessToken
-        ], 200);
-    }
 }

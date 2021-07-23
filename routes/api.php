@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Agent\{GetOrderController, ApiContainerController};
-use App\Http\Controllers\API\{ApiHomeController, AuthAgentController, AuthDistributorController, PostController};
+use App\Http\Controllers\API\{ApiHomeController, AuthAgentController, AuthDistributorController, AuthLoginController, PostController};
 use App\Http\Controllers\API\Distributor\OrderController;
 use App\Http\Controllers\API\LogoutController;
 use App\Http\Controllers\API\Transactions\DistributionController;
@@ -13,13 +13,14 @@ use Laravel\Passport\Passport;
 Passport::routes();
 
 
+
+Route::post('login', AuthLoginController::class);
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', LogoutController::class);
     Route::get('home', [ApiHomeController::class, 'index']);
     Route::post('post', [PostController::class, 'store']);
 });
 Route::prefix('agent')->group(function () {
-    Route::post('login', [AuthAgentController::class, 'login']);
     Route::post('register', [AuthAgentController::class, 'getAuth']);
 
     Route::middleware('auth:api')->group(function () {
@@ -35,7 +36,6 @@ Route::prefix('agent')->group(function () {
 });
 
 Route::prefix('distributor')->group(function () {
-    Route::post('login', [AuthDistributorController::class, 'login']);
     Route::post('register', [AuthDistributorController::class, 'register']);
 
     Route::middleware('auth:api')->group(function () {

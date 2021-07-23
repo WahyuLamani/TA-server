@@ -62,6 +62,8 @@ class DistributionController extends Controller
             'amount' => $order->req_amount,
             'added_at' => Carbon::now()
         ]);
+        $order->on_progress = 3;
+        $order->save();
         return response(['message' => 'Distributed Succesfully', 'Distribution' => new AllResource($distribution)], 200);
     }
 }
