@@ -42,9 +42,20 @@ class Distribution extends Model
     public function scopeByAgent($query, $agent_id)
     {
         return $query->whereHas('container', function (Builder $q) use ($agent_id) {
-            $q->whereHas('agent', function (Builder $q) use ($agent_id) {
-                $q->where('id', $agent_id);
-            });
+            $q->where('agent_id', $agent_id);
+        });
+    }
+    public function scopeByDistributor($query, $distributor_id)
+    {
+        return $query->whereHas('order', function (Builder $q) use ($distributor_id) {
+            $q->where('distributor_id', $distributor_id);
+        });
+    }
+
+    public function scopeByProductType($query, $product_type_id)
+    {
+        return $query->whereHas('order', function (Builder $q) use ($product_type_id) {
+            $q->where('product_type_id', $product_type_id);
         });
     }
 }

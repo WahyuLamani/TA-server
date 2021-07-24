@@ -18,6 +18,15 @@
     outline: none;
 }
 
-.chnges-color {
+/* .chnges-color {
+    position: fixed;
     background-color: #e0e0e0de !important;
+} */
+
+.logo-stylis {
+    display: flex;
+    position: fixed;
+    width: 230px;
+    height: auto;
+    padding: 5px;
 }

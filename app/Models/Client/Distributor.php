@@ -3,6 +3,7 @@
 namespace App\Models\Client;
 
 use App\Models\Client\Transactions\Order;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +23,11 @@ class Distributor extends Model
     public function order()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function user()
+    {
+        return $this->morphOne(User::class, 'userable');
     }
 
     public function post()

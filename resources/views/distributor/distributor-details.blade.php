@@ -21,32 +21,29 @@
                     <div class="card-body">
                         <h6 class="card-title text-gray">
                             <small> 
-                            @if ($agent->user->last_login)
-                                Last login at {{\Carbon\Carbon::parse($agent->user->last_login)->diffForHumans()}}
+                            @if ($distributor->user->last_login)
+                                Last login at {{\Carbon\Carbon::parse($distributor->user->last_login)->diffForHumans()}}
                             @else
                                 {{'Unregistered !'}}
                             @endif
                         </small> </h6>
                         <div class="text-center">
-                            <img style="width: 180px" src="/storage/{{$agent->thumbnail}}" class="rounded-circle" alt="">
-                            <h5 class="mt-3 mb-1">{{$agent->name}}</h5>
-                            <p class="m-0">{{$agent->user->email}}</p>
-                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#{{$agent->slug}}" type="submit">Delete Agent</button>
+                            <img style="width: 180px" src="/storage/{{$distributor->thumbnail}}" class="rounded-circle" alt="">
+                            <h5 class="mt-3 mb-1">{{$distributor->name}}</h5>
+                            <p class="m-0">{{$distributor->user->email}}</p>
+                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#{{$distributor->slug}}" type="submit">Delete Agent</button>
+ 
+                            {{-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> --}}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9">
-                {{-- <div class="card" id="agent-details"> --}}
+                {{-- <div class="card" id="distributor-details"> --}}
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title text-black-50">Achievement Details</h4>
-                            {{-- <form id="live-search-form">
-                                <div class="input-group input-group-sm mb-3">
-                                    <input type="text" name="search" id="live-search" class="form-control" data-toggle="tooltip" data-placement="top" title="Example : yyyy-mm-dd" placeholder="Search by date & time">
-                                </div>
-                            </form> --}}
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
@@ -55,20 +52,20 @@
                                         <th>#</th>
                                         <th>Date & time</th>
                                         <th>Items</th>
-                                        <th>Distributor</th>
-                                        <th>info</th>
+                                        <th>Agent</th>
+                                        <th>Tanggal order</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($distribution->get() as $item)
                                     <tr>
                                         <th>{{$loop->iteration}}</th>
-                                        <td>{{Carbon\Carbon::parse($item->added_at)->format("F d, Y")}}</td>
+                                        <td>{{Carbon\Carbon::parse($item->added_at)->format("d F, Y")}}</td>
                                         <td>{{$item->amount.' '.$item->order->product_type->type.'/'.$item->order->product_type->unit}}
                                         </td>
-                                        <td>{{$item->order->distributor->name}}
+                                        <td>{{$item->order->agent->name}}
                                         </td>
-                                        <td><i class="fa fa-info fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{$item->info}}"></i></td>
+                                        <td>{{$item->order->created_at->format("d F, Y")}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -77,8 +74,8 @@
                                         <th>#</th>
                                         <th>Date & time</th>
                                         <th>Items</th>
-                                        <th>Distributor</th>
-                                        <th>info</th>
+                                        <th>Agent</th>
+                                        <th>Tanggal order</th>
                                     </tr>
                                 </tfoot>
                             </table>

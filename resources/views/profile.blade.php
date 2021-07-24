@@ -31,7 +31,7 @@
                                     <p class="text-muted mb-0">{{ Auth::user()->userable->company_email }}</p>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                         
                         <div class="row mb-5">
                             {{-- <div class="col">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
 
-                <div class="card mt-5">
+                {{-- <div class="card mt-5">
                     <div class="card-body">
                         <div class="card-title">
                             <h4>Table Hover</h4>
@@ -163,7 +163,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
 
             </div>

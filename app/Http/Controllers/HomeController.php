@@ -51,8 +51,8 @@ class HomeController extends Controller
         //     });
         // })->get();
         // code baru
-        $sumDisItem = Distribution::byCompany(Auth::user()->userable->id)->sum('amount');
-        return view('index', compact(['count', 'sumDisItem', 'agentOnline']));
+        $distributed = Distribution::byCompany(Auth::user()->userable->id)->orderBy('created_at', 'DESC')->get();
+        return view('index', compact(['count', 'distributed', 'agentOnline']));
     }
 
     public function handle()
