@@ -1,5 +1,7 @@
 FROM php:7.4-fpm-alpine
 
+RUN sed -i 's/9000/9001/' /usr/local/etc/php-fpm.d/zz-docker.conf
+
 RUN apk update && apk add --no-cache \
     bash \
     icu-dev \
@@ -44,6 +46,5 @@ COPY --chown=www:www . /var/www
 USER www
 
 # Expose port 9001 and start php-fpm server
-RUN sed -i 's/9000/9001/' /usr/local/etc/php-fpm.d/zz-docker.conf
 EXPOSE 9001
 CMD ["php-fpm"]
