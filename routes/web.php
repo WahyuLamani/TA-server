@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\{Auth, Route};
 
 
 // Auth::routes();
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
 Route::middleware('verified')->group(function () {
     Route::get('/', [HomeController::class, 'handle'])->name('handle');
     Route::post('/', [CompanyController::class, 'create'])->name('company.create');
