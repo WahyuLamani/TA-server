@@ -18,7 +18,7 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        $warehouse = Warehouse::where('company_id', Auth::user()->userable->id)->get();
+        $warehouse = Warehouse::where('company_id', Auth::user()->userable->id)->paginate(6);
         $products = ProductType::whereHas('company', function ($q) {
             $q->where('company_id', Auth::user()->userable->id);
         })->get();
@@ -73,7 +73,7 @@ class WarehouseController extends Controller
         if ($warehouse->company_id !== Auth::user()->userable->id) {
             abort(404);
         }
-        $container = Container::where('warehouse_id', $warehouse->id)->paginate(2);
+        $container = Container::where('warehouse_id', $warehouse->id)->paginate(6);
         return view('warehouse.warehouse-detail', compact([
             'container'
         ]));

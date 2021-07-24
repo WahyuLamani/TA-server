@@ -93,34 +93,38 @@
                         </div>
                         {{-- end modal --}}
 
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Jenis</th>
-                                    <th>Total</th>
-                                    <th>Tanggal di buat</th>
-                                    <th>Tanggal di perbarui</th>
-                                    <th>Sisa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($warehouse as $row)
-                                <tr onclick="window.location='/warehouse/{{ $row->id }}';">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Jenis</th>
+                                        <th>Total</th>
+                                        <th>Tanggal di buat</th>
+                                        <th>Tanggal di perbarui</th>
+                                        <th>Sisa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($warehouse as $row)
+                                    <tr onclick="window.location='/warehouse/{{ $row->id }}';">
 
-                                    <th>{{ $loop->iteration }}</th>
-                                    <td>{{ $row->product_type->type }}</td>
-                                    <td>{{ $row->amount.' '.$row->product_type->unit }}</td>
-                                    <td>{{ $row->created_at->format("F d, Y, g:i:s a") }}</td>
-                                    <td>{{ $row->updated_at->format("F d, Y, g:i:s a") }}</td>
-                                    <td class="text-primary"><b>{{ $row->count_down_amount.' '.$row->product_type->unit }}</b></td>
+                                        <th>{{ $loop->iteration }}</th>
+                                        <td>{{ $row->product_type->type }}</td>
+                                        <td>{{ $row->amount.' '.$row->product_type->unit }}</td>
+                                        <td>{{ $row->created_at->format("F d, Y, g:i:s a") }}</td>
+                                        <td>{{ $row->updated_at->format("F d, Y, g:i:s a") }}</td>
+                                        <td class="text-primary"><b>{{ $row->count_down_amount.' '.$row->product_type->unit }}</b></td>
 
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer d-flex justify-content-lg-center">
+                            {{-- {{ $orders->links('vendor.pagination.bootstrap-4') }} --}}
+                            {{$warehouse->links('vendor.pagination.bootstrap-4')}}  
+                        </div>
                     </div>
                 </div>
             </div>

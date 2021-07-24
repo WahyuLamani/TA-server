@@ -51,7 +51,7 @@ class HomeController extends Controller
         //     });
         // })->get();
         // code baru
-        $distributed = Distribution::byCompany(Auth::user()->userable->id)->orderBy('created_at', 'DESC')->get();
+        $distributed = Distribution::byCompany(Auth::user()->userable->id)->orderBy('created_at', 'DESC')->paginate(5);
         return view('index', compact(['count', 'distributed', 'agentOnline']));
     }
 

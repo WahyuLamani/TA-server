@@ -145,8 +145,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Distributions tracking</h4>
-                                <div id="activity">
+                                <h4 class="card-title">Distributions tracking</h4>=
                                     @forelse ($distributed as $item)
                                     <div class="media border-bottom-1 pt-3 pb-3">
                                         <img width="35" src="/storage/{{$item->container->agent->thumbnail}}" class="mr-3 rounded-circle">
@@ -161,6 +160,9 @@
                                     @empty
                                         <p class="text-secondary">Have No Distributed</p>
                                     @endforelse
+                                <div class="card-footer d-flex justify-content-lg-center">
+                                    {{-- {{ $orders->links('vendor.pagination.bootstrap-4') }} --}}
+                                    {{$distributed->links('vendor.pagination.bootstrap-4')}}  
                                 </div>
                             </div>
                         </div>
