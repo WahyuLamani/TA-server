@@ -20,7 +20,7 @@ class DistributorController extends Controller
     public function details(Distributor $distributor)
     {
         $product_type = ProductType::where('company_id', Auth::user()->userable->id);
-        $distribution = Distribution::byDistributor($distributor->id);
+        $distribution = Distribution::byDistributor($distributor->id)->byCompany(Auth::user()->userable->id);
 
         return view('distributor.distributor-details', compact([
             'distributor',
