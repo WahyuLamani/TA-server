@@ -44,12 +44,12 @@
                                     <p class="mt-2 login-form__footer">Dont have account? <a href="{{ route('register') }}" class="text-primary">Sign Up</a> now</p>
                                 </div>
                                 <div class="col md-7 justify-content-between">
-                                    <p> 
+                                    {{-- <p> 
                                     @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         Forgot Your Password?
                                     </a>
-                                    </p>
+                                    </p> --}}
                                 </div>
                             </div>
                             @endif
