@@ -19,14 +19,14 @@ class DistributionController extends Controller
             'amount' => 'required|integer',
         ]);
         if ($validator->fails()) {
-            return response(['message' => $validator->errors()]);
+            return response(['errors' => $validator->errors()]);
         }
 
         if ($container->on_truck === 0) {
-            return response(['message' => 'Please update truck status'], 404);
+            return response(['errors' => 'Please update truck status'], 404);
         }
         if ($container->count_down_amount < $request->amount) {
-            return response(['message' => 'Product on the truck is not enough'], 404);
+            return response(['errors' => 'Product on the truck is not enough'], 404);
         }
         $container->count_down_amount = $container->count_down_amount - $request->amount;
         $container->save();
@@ -49,10 +49,10 @@ class DistributionController extends Controller
                 });
             })->first();
         if ($container === null) {
-            return response(['message' => "This product not in your truck"], 404);
+            return response(['errors' => "This product not in your truck"], 404);
         }
         if ($container->count_down_amount < $order->req_amount) {
-            return response(['message' => 'Product on the truck is not enough'], 404);
+            return response(['errors' => 'Product on the truck is not enough'], 404);
         }
         $container->count_down_amount = $container->count_down_amount - $order->req_amount;
         $container->save();

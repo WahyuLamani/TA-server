@@ -20,6 +20,8 @@ class CompanyController extends Controller
             $data['thumbnail'] = 'images/avatar/default.png';
         }
         $data['slug'] = Str::slug($request->company_name);
+        $data['ceo_name'] = ucwords($data['ceo_name']);
+        $data['company_name'] = ucwords($data['company_name']);
 
         // store data
         $Company = Company::create($data);

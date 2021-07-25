@@ -60,7 +60,7 @@ class OrderController extends Controller
             'product_type_id' => 'required'
         ]);
         if ($order->fails()) {
-            return response(['message' => $order->errors()]);
+            return response(['errors' => $order->errors()]);
         }
         $request->user()->userable->order()->create($request->all());
 

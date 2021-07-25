@@ -17,7 +17,7 @@ class PostController extends Controller
             'pict' => 'image|mimes:jpeg,png,jpg|max:5100'
         ]);
         if ($validation->fails()) {
-            return response(['message' => $validation->errors()], 400);
+            return response(['errors' => $validation->errors()], 400);
         }
         if (isset($request->pict)) {
             $pictUrl = $request->file('pict')->store("images/posts");

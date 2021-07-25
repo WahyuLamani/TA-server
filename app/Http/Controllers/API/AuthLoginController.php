@@ -24,7 +24,7 @@ class AuthLoginController extends Controller
             'password' => 'required',
         ]);
         if ($login->fails()) {
-            return response(['message' => $login->errors()]);
+            return response(['errors' => $login->errors()]);
         }
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {

@@ -28,7 +28,7 @@ class AgentsController extends Controller
         ]);
 
         $agent = auth()->user()->userable->agent()->create([
-            'name' => $request->name,
+            'name' => ucwords($request->name),
             'slug' => Str::slug($request->name),
             'thumbnail' => 'images/avatar/default.png',
         ]);

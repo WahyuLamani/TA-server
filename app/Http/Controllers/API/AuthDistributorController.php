@@ -8,14 +8,13 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\{Auth, Hash, Validator};
 
 class AuthDistributorController extends Controller
 {
     public function register(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|max:55',
             'address' => 'required',
             'telp_num' => 'required|numeric|digits_between:10,14',
@@ -23,6 +22,9 @@ class AuthDistributorController extends Controller
             'email' => 'email|required|unique:users',
             'password' => 'required|confirmed'
         ]);
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()]);
+        }
 
         $distributor = Distributor::create([
             'name' => ucwords($request->name),
@@ -44,7 +46,7 @@ class AuthDistributorController extends Controller
             'userable_type' => Distributor::class,
             'userable_id' => $distributor->id,
         ]);
-
+        $user->load('userable');
         if (Auth::attempt(['email' => $user->email, 'password' => $request->password])) {
             Auth::user()->last_login = Carbon::now()->toDateTimeString();
             Auth::user()->save();
@@ -52,6 +54,6 @@ class AuthDistributorController extends Controller
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
-        return response(['user' => $validatedData, 'access_token' => $accessToken], 201);
+        return response(['user' => $user, 'access_token' => $accessToken], 201);
     }
 }
