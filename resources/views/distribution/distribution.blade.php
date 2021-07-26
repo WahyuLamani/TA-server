@@ -24,19 +24,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($distributions as $data)
+                                                @foreach ($distributions->paginate(6) as $data)
                                                 <tr>
-                                                    <td><img src="{{"/storage/".$data->thumbnail}}" class=" rounded-circle mr-3" alt="">{{$data->name}}</td>
+                                                    <td><img src="{{"/storage/".$data->thumbnail}}" class=" rounded-circle mr-3" alt="">{{$data->order->agent->name}}</td>
                                                     {{-- <td>iPhone X</td> --}}
                                                     <td>
-                                                        <small>{{$data->dis_item . ' Carton'}}</small>
+                                                        <small>{{$data->amount.' item '.$data->container->warehouse->product_type->type.'/'.$data->container->warehouse->product_type->unit}}</small>
                                                     </td>
-                                                    <td><img src="{{"/storage/".$data->disthumbnail}}" class=" rounded-circle mr-3" alt="">{{$data->disname}}</td>
+                                                    <td><img src="{{"/storage/".$data->order->distributor->thumbnail}}" class=" rounded-circle mr-3" alt="">{{$data->order->distributor->name}}</td>
                                                     {{-- <td>iPhone X</td> --}}
-                                                    <td><i class="fa fa-circle-o text-success mr-2"></i>{{Carbon\Carbon::parse($data->added_at)->format("d F, Y")}}</td>
-                                                    <td>
-                                                        {{$data->info}}
-                                                    </td>
+                                                    <td><i class="fa fa-circle-o text-success mr-2"></i>{{$data->created_at->format("d F, Y")}}</td>
+                                                    @if ($data->info)
+                                                        <td>{{$data->info}}</td>
+                                                    @else
+                                                        <td>-</td>
+                                                    @endif
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -44,7 +46,29 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-footer d-flex justify-content-lg-center">
+                                {{$distributions->paginate(6)->links('vendor.pagination.bootstrap-4')}}  
+                            </div>
                         </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">jumlah produk yang terdistribusi</h4>
+                                <div class="basic-list-group">
+                                    <ul class="list-group">
+                                        @forelse ($product_type as $row)
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">{{$row->type.' / '.$row->unit}} <span class="badge badge-primary badge-pill">{{$distributions->byProductType($row->id)->sum('amount')}}</span>
+                                        @empty
+                                            <p class="text-secondary">Produk kosong</p>
+                                        @endforelse
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
