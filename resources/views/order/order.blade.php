@@ -33,7 +33,7 @@
                                 <tbody>
                                     @foreach ($orderLists as $order)
                                         <tr>
-                                            <td><img style="width: 25px" src="/storage/{{$order->distributor->thumbnail}}" class=" rounded-circle mr-3"><a href="/distributor/details/{{ $order->distributor->id }}">{{ $order->distributor->name }}</a></td>
+                                            <td><img style="width: 25px" src="{{asset("/storage/".$order->distributor->thumbnail)}}" class=" rounded-circle mr-3"><a href="/distributor/details/{{ $order->distributor->id }}">{{ $order->distributor->name }}</a></td>
                                             <td>{{ $order->distributor->address }}</td>
                                             <td><b>{{ $order->distributor->telp_num }}</b></td>
                                             <td class="text-primary"><strong>{{ $order->req_amount.' '.$order->product_type->type.' '.$order->product_type->unit}}</strong></td>
@@ -72,11 +72,11 @@
                                 <tbody>
                                     @foreach ($orderAccepts as $order)
                                         <tr>
-                                            <td><img style="width: 25px" src="/storage/{{$order->distributor->thumbnail}}" class=" rounded-circle mr-3"><a href="/distributor/details/{{ $order->distributor->id }}">{{ $order->distributor->name }}</a></td>
+                                            <td><img style="width: 25px" src="{{asset("/storage/".$order->distributor->thumbnail)}}" class=" rounded-circle mr-3"><a href="/distributor/details/{{ $order->distributor->id }}">{{ $order->distributor->name }}</a></td>
                                             <td>{{ $order->distributor->address }}</td>
                                             <td><b>{{ $order->distributor->telp_num }}</b></td>
                                             <td class="text-primary"><strong>{{ $order->req_amount.' '.$order->product_type->type.' '.$order->product_type->unit}}</strong></td>
-                                            <td><img style="width: 25px" src="/storage/{{$order->agent->thumbnail}}" class=" rounded-circle mr-3"><a href="/agent/details/{{ $order->agent->id }}">{{ $order->agent->name }}</a></td>
+                                            <td><img style="width: 25px" src="{{asset("/storage/".$order->agent->thumbnail)}}" class=" rounded-circle mr-3"><a href="/agent/details/{{ $order->agent->id }}">{{ $order->agent->name }}</a></td>
                                             <td>{{ $order->updated_at->format('d, M Y') }}</td>
                                         </tr>
                                     @endforeach

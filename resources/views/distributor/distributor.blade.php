@@ -34,7 +34,7 @@
                                 <tbody>
                                     @foreach ($distributors as $distributor)
                                     <tr>
-                                        <td><img style="width: 30px" src="/storage/{{$distributor->thumbnail}}" class=" rounded-circle mr-3">{{$distributor->name}}</td>
+                                        <td><img style="width: 30px" src="{{asset("/storage/".$distributor->thumbnail)}}" class=" rounded-circle mr-3">{{$distributor->name}}</td>
                                         
                                         @if ($distributor->address == null)
                                         <td class="text-center" colspan="3">{{"This distributor has not registered on the mobile app"}}</td>

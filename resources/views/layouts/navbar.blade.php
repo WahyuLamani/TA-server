@@ -41,7 +41,7 @@
                                        @foreach (session('agent') as $row)
                                             <li class="notification-unread">
                                                 <a href="/post/agent/{{ $row->id }}">
-                                                    <img class="float-left mr-3 avatar-img" src="/storage/{{$row->owner->thumbnail}}" alt="">
+                                                    <img class="float-left mr-3 avatar-img" src="{{asset("/storage/".$row->owner->thumbnail)}}" alt="">
                                                     <div class="notification-content">
                                                         <div class="notification-heading">{{ $row->owner->name }}</div>
                                                         <div class="notification-timestamp text-dark">{{ $row->created_at->diffForhumans() }}</div>

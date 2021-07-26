@@ -28,7 +28,7 @@
                             @endif
                         </small> </h6>
                         <div class="text-center">
-                            <img style="width: 180px" src="/storage/{{$distributor->thumbnail}}" class="rounded-circle" alt="">
+                            <img style="width: 180px" src="{{asset("/storage/".$distributor->thumbnail)}}" class="rounded-circle" alt="">
                             <h5 class="mt-3 mb-1">{{$distributor->name}}</h5>
                             <p class="m-0">{{$distributor->user->email}}</p>
                             <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#{{$distributor->slug}}" type="submit">Delete Agent</button>
