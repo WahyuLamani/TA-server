@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Slides only</h4>
-                        <img src="{{asset("/storage/".$post->owner->thumbnail)}}" class="img-fluid" alt="...">
+                        <img src="{{asset("/uploads/".$post->owner->thumbnail)}}" class="img-fluid" alt="...">
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <div class="media align-items-center mb-4">
-                            <img class="mr-3" src="{{asset("/storage/".$post->owner->thumbnail)}}" width="80" height="80" alt="">
+                            <img class="mr-3" src="{{asset("/uploads/".$post->owner->thumbnail)}}" width="80" height="80" alt="">
                             <div class="media-body">
                                 <h3 class="mb-0">{{$post->owner->name}}</h3>
                                 <p class="text-muted mb-0">{{$post->owner->telp_num}}</p>

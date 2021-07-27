@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Server\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\{Auth, Hash};
+use Illuminate\Support\Facades\Storage;
 
 
 class UpdateUserController extends Controller
@@ -28,9 +28,9 @@ class UpdateUserController extends Controller
                     'thumnail' => 'image|mimes:jpeg,png,jpg|max:5100',
                 ]);
                 if ($company->thumbnail !== 'images/avatar/default.png') {
-                    \Storage::delete($company->thumbnail);
+                    Storage::disk('public2')->delete($company->thumbnail);
                 }
-                $thumnailUrl = $request->file('thumnail')->store("images/avatar");
+                $thumnailUrl = $request->file('thumnail')->store("images/avatar", 'public2');
                 // $company->update([
                 //     'thumnail' => $thumnailUrl,
                 // ]);

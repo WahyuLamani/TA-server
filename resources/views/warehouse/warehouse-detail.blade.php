@@ -24,7 +24,7 @@
                             <div class="custom-media-object-2">
                                 @foreach ($container as $row)
                                     <div class="media border-bottom-1 p-t-15">
-                                        <img class="mr-3 rounded-circle" width="55px" src="{{asset("/storage/".$row->agent->thumbnail)}}" alt="">
+                                        <img class="mr-3 rounded-circle" width="55px" src="{{asset("/uploads/".$row->agent->thumbnail)}}" alt="">
                                         <div class="media-body">
                                             <div class="row mt-2">
                                                 <div class="col-lg-5">

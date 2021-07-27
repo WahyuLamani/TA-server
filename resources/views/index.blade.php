@@ -148,7 +148,7 @@
                                 <h4 class="card-title">Distributions tracking</h4>
                                     @forelse ($distributed as $item)
                                     <div class="media border-bottom-1 pt-3 pb-3">
-                                        <img width="35" src="{{asset("/storage/".$item->container->agent->thumbnail)}}" class="mr-3 rounded-circle">
+                                        <img width="35" src="{{asset("/uploads/".$item->container->agent->thumbnail)}}" class="mr-3 rounded-circle">
                                         <div class="media-body">
                                             <h5>Produk {{$item->order->product_type->type.'/'.$item->order->product_type->unit}} sebanyak <strong class="text-primary">{{$item->amount}}</strong></h5>
                                             <p class="mb-0"> <b><a class="text-primary" href="/agent/details/{{$item->container->agent->id}}">[{{strtoupper($item->container->agent->name)}}]</a></b> mendistribusikan produk kepada <b><a class="text-primary" href="/distributor/details/{{$item->order->distributor->id}}">[{{strtoupper($item->order->distributor->name)}}]</a></b> pada alamat <b><a href="https://www.google.co.id/maps/search/{{$item->order->distributor->address}}" target="_blank">{{$item->order->distributor->address}}</a></b></p>

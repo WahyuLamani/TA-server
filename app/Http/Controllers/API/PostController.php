@@ -20,7 +20,7 @@ class PostController extends Controller
             return response(['errors' => $validation->errors()], 400);
         }
         if (isset($request->pict)) {
-            $pictUrl = $request->file('pict')->store("images/posts");
+            $pictUrl = $request->file('pict')->store("images/posts", 'public2');
             $post = Auth::user()->userable->post()->create([
                 'post' => $request->post,
                 'pict' => $pictUrl
