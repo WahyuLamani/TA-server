@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Auth\UpdateUserController;
+use App\Http\Controllers\Clients\HomeController as ClientsHomeController;
 use App\Http\Controllers\Dashboard\{AgentPostController, CompanyPostController, DistributorPostController, ProfileController, ShowOrderController};
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Server\{AgentsController, CompanyController, ContainerController, DistributorController, DistributionController, WarehouseController};
@@ -12,10 +13,16 @@ use Illuminate\Support\Facades\{Auth, Route};
 // Auth::routes();
 // Auth::routes(['verify' => true]);
 Auth::routes();
-Route::middleware('verified')->group(function () {
+
+// Route::middleware('verified')->group(function () {
+Route::middleware('auth')->group(function () {
+
     Route::get('/', [HomeController::class, 'handle'])->name('handle');
     Route::post('/', [CompanyController::class, 'create'])->name('company.create');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/clients', [ClientsHomeController::class, 'index'])->name('clients');
+
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile', [CompanyPostController::class, 'posting'])->name('profile.posting');

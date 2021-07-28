@@ -59,9 +59,9 @@ class HomeController extends Controller
     {
         if (!Auth::user()->userable) {
             return view('company.register');
-        } elseif (Auth::user()->userable_type == Agent::class || Auth::user()->userable_type == Distributor::class) {
-            Auth::guard()->logout();
-            return redirect(route('login'));
+        }
+        if (Auth::user()->userable_type == Agent::class || Auth::user()->userable_type == Distributor::class) {
+            return redirect(route('clients'));
         } else {
             return redirect(route('home'));
         }

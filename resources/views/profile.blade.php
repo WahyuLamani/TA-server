@@ -20,41 +20,37 @@
             <div class="col-lg-4 col-xl-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="text-black-50">Company Profile</h4>
+                        <h4 class="text-black-50">Profile</h4>
+                        @if (Auth::user()->userable_type === "App\Models\Client\Agent" || Auth::user()->userable_type === "App\Models\Client\Distributor")
                         <div class="card-body">
                             <div class="media align-items-center mb-3">
-                                @if (Auth::user()->userable->thumbnail > 0)
                                 <img class="mr-1" src="{{asset("/uploads/". Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
-                                @endif
+                                <div class="media-body">
+                                    <h4 class="mb-0 text-black-50">{{ Auth::user()->userable->name}}</h4>
+                                    <p class="text-muted mb-0">{{ Auth::user()->userable->email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @else
+                        <div class="card-body">
+                            <div class="media align-items-center mb-3">
+                                <img class="mr-1" src="{{asset("/uploads/". Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
                                 <div class="media-body">
                                     <h4 class="mb-0 text-black-50">{{ Auth::user()->userable->ceo_name}}</h4>
                                     <p class="text-muted mb-0">{{ Auth::user()->userable->company_email }}</p>
                                 </div>
                             </div>
                         </div>
-                        
+                        @endif
                         <div class="row mb-5">
-                            {{-- <div class="col">
-                                <div class="card card-profile text-center">
-                                    <span class="mb-1 text-primary"><i class="icon-people"></i></span>
-                                    <h3 class="mb-0">263</h3>
-                                    <p class="text-muted px-4">Following</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card card-profile text-center">
-                                    <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
-                                    <h3 class="mb-0">263</h3>
-                                    <p class="text-muted">Followers</p>
-                                </div>
-                            </div> --}}
                             <div class="col-12 text-center">
                                 <a href="{{ route('profile.edit') }}" class="btn btn-danger px-5">Update Profile</a>
                             </div>
                         </div>
-
+                        @if (Auth::user()->userable_type === "App\Models\Server\Company")
                         <h4>About Me</h4>
                         <p class="text-muted">{{ Auth::user()->userable->about}}</p>
+                        @endif
                         <ul class="card-profile__info">
                             <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>{{ Auth::user()->userable->company_telp_num }}</span></li>
                             <li><strong class="text-dark mr-4">Login Email</strong> <span>{{ Auth::user()->email }}</span></li>
@@ -76,20 +72,6 @@
                                     @enderror
                             </div>
                             <div class="d-flex align-items-center">
-                                {{-- <ul class="mb-0 form-profile__icons">
-                                    <li class="d-inline-block">
-                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                    </li>
-                                </ul> --}}
                                 <button type="submit" class="btn btn-primary px-3 ml-4">Send</button>
                             </div>
                         </form>

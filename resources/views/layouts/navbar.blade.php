@@ -1,7 +1,6 @@
 <!--**********************************
             Nav header start
         ***********************************-->
-        
         <img class="logo-stylis" src="{{asset('assets/images/logo.png')}}" alt="" srcset="">
         
         <!--**********************************
@@ -21,11 +20,18 @@
                 </div>
                 <div class="header-left">
                     <div class="py-4 ml-2">
+                        
+                        @if (Auth::user()->userable_type === "App\Models\Client\Agent" || Auth::user()->userable_type === "App\Models\Client\Distributor")
+                        <h3 class="text-gray">Welcome, {{ucwords(Auth::user()->userable->name)}}</h3>
+                        @else
                         <h3 class="text-gray">{{ucwords(Auth::user()->userable->company_name)}}</h3>
+                        @endif
                     </div>
                 </div>
+                
                 <div class="header-right">
                     <ul class="clearfix">
+                        @if (Auth::user()->userable_type === "App\Models\Server\Company")
                         <li class="icons dropdown">
                             <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
                                 <i class="mdi mdi-email-outline"></i>
@@ -84,7 +90,35 @@
                                 </div>
                             </div>
                         </li>
-
+                        @endif
+                        @if (Auth::user()->userable_type === "App\Models\Client\Agent" || Auth::user()->userable_type === "App\Models\Client\Distributor")
+                        <li class="icons dropdown d-none d-md-flex" data-toggle="dropdown">
+                            <a href="" class="log-user">
+                                <span>{{ucwords(Auth::user()->userable->name)}}</span>
+                            </a>
+                        </li>
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="{{asset("/uploads/" . Auth::user()->userable->thumbnail)}}" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="{{route('profile')}}"><i class="icon-user"></i> <span>Profile</span></a>
+                                        </li>
+                                        <hr class="my-2">
+                                        <li><form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <i class="icon-key"></i><button class="tombol-keluar ml-2" type="submit">Logout</button>
+                                        </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        @else
                         <li class="icons dropdown d-none d-md-flex" data-toggle="dropdown">
                             <a href="" class="log-user">
                                 <span>{{ucwords(Auth::user()->userable->ceo_name)}}</span>
@@ -111,7 +145,7 @@
                                 </div>
                             </div>
                         </li>
-
+                        @endif
                     </ul>
                 </div>
             </div>

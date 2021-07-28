@@ -21,6 +21,7 @@
                             <form class="form-valide" action="/profile/update/{{Auth::user()->id}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
+                                @if (Auth::user()->userable_type === "App\Models\Server\Company")
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="company_name">Company Name
                                     </label>
@@ -33,6 +34,8 @@
                                     @enderror
                                     </div>
                                 </div>
+        
+                                
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="name">Name
                                     </label>
@@ -46,6 +49,21 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @else
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="name">Name
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') ?? $user->name }}" placeholder="Enter Name">
+
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="email">Email
                                     </label>
@@ -59,11 +77,12 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @if (Auth::user()->userable_type === "App\Models\Server\Company")
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="address">Company Address
+                                    <label class="col-lg-4 col-form-label" for="address">Address
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') ?? $user->company_address }}" placeholder="Company Address..">
+                                        <textarea class="form-control @error('address') is-invalid @enderror" name="address" rows="3">{{ old('address') ?? $user->company_address }}</textarea>
 
                                         @error('address')
                                             <span class="invalid-feedback" role="alert">
@@ -72,6 +91,21 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @else
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="address">Address
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <textarea class="form-control @error('address') is-invalid @enderror" name="address" rows="3">{{ old('address') ?? $user->address }}</textarea>
+                                        @error('address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                @endif
+                                @if (Auth::user()->userable_type === "App\Models\Server\Company")
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="telp_num">Telp.Number
                                     </label>
@@ -85,6 +119,21 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @else
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="telp_num">Telp.Number
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control  @error('telp_num') is-invalid @enderror" id="telp_num" name="telp_num" value="{{ old('telp_num') ?? $user->telp_num }}" placeholder="Telp.Number">
+
+                                        @error('telp_num')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="thumnail">Thumnail
                                     </label>
