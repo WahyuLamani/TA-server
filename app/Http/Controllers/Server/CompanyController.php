@@ -26,7 +26,6 @@ class CompanyController extends Controller
         // store data
         $Company = Company::create($data);
         $user = User::find(Auth::user()->id);
-        $user->userable_type = Company::class;
         $user->userable_id = $Company->id;
         $user->save();
         return redirect(route('home'));

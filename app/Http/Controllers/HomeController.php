@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client\{Agent, Distributor, Post};
 use App\Models\Client\Transactions\Distribution;
+use App\Models\Server\Company;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -57,8 +58,11 @@ class HomeController extends Controller
 
     public function handle()
     {
-        if (!Auth::user()->userable) {
+        if (Auth::user()->userable_type == Company::class && !Auth::user()->userable) {
             return view('company.register');
+        }
+        if (Auth::user()->userable_type == Agent::class && !Auth::user()->userable->address) {
+            return view('clients.register.agent-form-register');
         }
         if (Auth::user()->userable_type == Agent::class || Auth::user()->userable_type == Distributor::class) {
             return redirect(route('clients'));

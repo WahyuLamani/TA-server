@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Server\Company;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -71,6 +72,7 @@ class RegisterController extends Controller
             // 'company_name' => $data['company_name'],
             // 'name' => $data['name'],
             'email' => $data['email'],
+            'userable_type' => Company::class,
             // 'address' => $data['address'],
             // 'telp_num' => $data['telp_num'],
             'password' => Hash::make($data['password']),
