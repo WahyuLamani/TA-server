@@ -20,8 +20,8 @@
                                         <div class="col-xl-4 col-md-4 col-sm-3 mb-4 mb-sm-0">
                                             <div class="list-group" id="list-tab" role="tablist">
                                                 <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">On truck list</a> 
-                                                <a class="list-group-item list-group-item-action" id="list-profile-list"
-                                                data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Distribution</a> 
+                                                {{-- <a class="list-group-item list-group-item-action" id="list-profile-list"
+                                                data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Distribution</a>  --}}
                                                 {{-- <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab"
                                                 aria-controls="messages">Messages</a> 
                                                 <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a> --}}
@@ -71,11 +71,11 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane fade" id="list-profile" role="tabpanel">
+                                                {{-- <div class="tab-pane fade" id="list-profile" role="tabpanel">
                                                     <p>
                                                         test
                                                     </p>
-                                                </div>
+                                                </div> --}}
                                                 {{-- <div class="tab-pane fade" id="list-messages">
                                                     <p></p>
                                                 </div>
