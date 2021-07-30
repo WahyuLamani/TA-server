@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Auth\UpdateUserController;
+use App\Http\Controllers\Clients\GetOrderController;
 use App\Http\Controllers\Clients\HomeController as ClientsHomeController;
 use App\Http\Controllers\Dashboard\{AgentPostController, CompanyPostController, DistributorPostController, ProfileController, ShowOrderController};
 use App\Http\Controllers\HomeController;
@@ -22,6 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/clients', [ClientsHomeController::class, 'index'])->name('clients');
+    Route::post('/clients', [GetOrderController::class, 'order']);
+    Route::patch('/clients/{order:id}', [GetOrderController::class, 'acceptOrder']);
+    Route::post('/clients/{order:id}', [GetOrderController::class, 'distributed']);
+    Route::patch('/clients/accept/{order:id}', [GetOrderController::class, 'completeOrder']);
+    Route::delete('/clients/delete/{order:id}', [GetOrderController::class, 'delete']);
 
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

@@ -20,11 +20,18 @@ class ProductType extends Model
 
     public function warehouse()
     {
-        return $this->hasMany(ProductType::class);
+        return $this->hasMany(Warehouse::class);
     }
 
     public function order()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function scopeByValueOnWarehouse($query)
+    {
+        return $query->whereHas('warehouse', function ($q) {
+            $q->where('count_down_amount', '>', 0);
+        });
     }
 }
