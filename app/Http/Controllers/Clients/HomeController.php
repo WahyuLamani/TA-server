@@ -13,9 +13,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->userable_type === Company::class) {
-            return redirect(route('home'));
-        }
+
         if (Auth::user()->userable_type === Distributor::class) {
 
             $orderWaiting = Order::where('agent_id', null)

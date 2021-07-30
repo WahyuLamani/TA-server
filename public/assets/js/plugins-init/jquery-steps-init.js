@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     "use strict"
 
     var form = $("#step-form-horizontal");
@@ -6,10 +6,9 @@
         headerTag: "h4",
         bodyTag: "section",
         transitionEffect: "slideLeft",
-        autoFocus: true, 
+        autoFocus: true,
         transitionEffect: "slideLeft",
-        onStepChanging: function (event, currentIndex, newIndex)
-        {
+        onStepChanging: function (event, currentIndex, newIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";
             return form.valid();
         }
@@ -20,13 +19,13 @@
         headerTag: "h4",
         bodyTag: "section",
         // Disables the finish button (required if pagination is enabled)
-        enableFinishButton: false, 
+        enableFinishButton: false,
         // Disables the next and previous buttons (optional)
-        enablePagination: false, 
+        enablePagination: false,
         // Enables all steps from the begining
-        enableAllSteps: true, 
+        enableAllSteps: true,
         // Removes the number from the title
-        titleTemplate: "#title#" 
+        titleTemplate: "#title#"
     });
 
     var form3 = $('#step-form-vertical');
@@ -34,7 +33,7 @@
         headerTag: "h4",
         bodyTag: "section",
         transitionEffect: "slideLeft",
-        stepsOrientation: "vertical" ,
+        stepsOrientation: "vertical",
         // onStepChanging: function (event, currentIndex, newIndex)
         // {
         //     form3.validate().settings.ignore = ":disabled,:hidden";

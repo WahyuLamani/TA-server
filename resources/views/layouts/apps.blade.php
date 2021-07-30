@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
     {{-- data tables --}}
     <link href="{{asset('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+
+    <link href="{{asset('assets/plugins/jquery-steps/css/jquery.steps.css')}}" rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/mystyle.css')}}" rel="stylesheet">
@@ -52,7 +54,10 @@
     <script src="{{asset('assets/js/styleSwitcher.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
     
-
+{{-- form stepts --}}
+<script src="{{asset('assets/plugins/jquery-steps/build/jquery.steps.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins-init/jquery-steps-init.js')}}"></script>
 
 
 {{-- data tables --}}

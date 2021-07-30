@@ -40,18 +40,26 @@
                                 <button type="submit" class="btn login-form__btn submit w-100">Sign In</button>
                             </form>
                             <div class="row">
-                                <div class="col md-5">
-                                    <p class="mt-2 login-form__footer">Dont have account? <a href="{{ route('register') }}" class="text-primary">Sign Up</a> now</p>
+                                <div class="col md-12 d-flex justify-content-between">
+                                    <p class=" login-form__footer">Buat akun Company <a href="{{ route('register') }}" class="text-primary">Sekarang</a></p>
+                                    <p class=" login-form__footer">Daftar <a href="{{ route('distributor.register') }}" class="text-primary">Distributor</a></p>
                                 </div>
-                                <div class="col md-7 justify-content-between">
-                                    {{-- <p> 
+                            </div>
+                            <div class="row">
+                                <div class="col md-12 d-flex justify-content-between">
+                                    <p class=" login-form__footer">Registrasi <a href="{{route('agent.register')}}" class="text-primary">Agent </a> sekarang</p>
+                                </div>
+                            </div>
+
+                                {{-- <div class="col md-7 justify-content-between">
+                                    <p> 
                                     @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         Forgot Your Password?
                                     </a>
-                                    </p> --}}
+                                    </p>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
