@@ -64,6 +64,7 @@
                                     </div>
                                 </div>
                                 @endif
+                                @if (Auth::user()->userable_type === "App\Models\Server\Company")
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="email">Email
                                     </label>
@@ -77,7 +78,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @if (Auth::user()->userable_type === "App\Models\Server\Company")
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="address">Address
                                     </label>
