@@ -212,7 +212,7 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between mb-3">
                                             <h6 class="card-title">{{$order->req_amount.' '.$order->product_type->type.' '.$order->product_type->unit}}</h6>
-                                            @if ($order->on_progress === 'Accepted')
+                                            @if ($order->on_progress === 'Accepted' && $order->distribution === null)
                                                 <form action="/clients/{{$order->id}}" method="post">
                                                     @csrf
                                                     @method('patch')
