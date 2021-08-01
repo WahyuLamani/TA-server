@@ -306,6 +306,93 @@
                         @endif
                     </div>
                 </div>
+                @if (Auth::user()->userable_type === "App\Models\Client\Agent")
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Distribution List</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Produk</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Tanggal Terdistribusi</th>
+                                                <th>Distributor</th>
+                                                <th>info</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($distributions as $dist)
+                                            <tr>
+                                                <td><small>{{$dist->amount.' item '.$dist->container->warehouse->product_type->type.'/'.$dist->container->warehouse->product_type->unit}}</small></td>
+                                                <td>{{$dist->order->created_at->format('d M, y')}}</td>
+                                                <td>{{$dist->created_at->format('d M, y')}}</td>
+                                                <td><img src="{{asset("/uploads/".$dist->order->distributor->thumbnail)}}" width="30px" class=" rounded-circle mr-3" alt="">{{$dist->order->distributor->name}}</td>
+                                                <td>{{$dist->info}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Produk</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Tanggal Terdistribusi</th>
+                                                <th>Distributor</th>
+                                                <th>info</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @else
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Distribution List</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>Produk</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Tanggal Terdistribusi</th>
+                                                <th>Agent</th>
+                                                <th>info</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($distributions as $dist)
+                                            <tr>
+                                                <td><small>{{$dist->amount.' item '.$dist->container->warehouse->product_type->type.'/'.$dist->container->warehouse->product_type->unit}}</small></td>
+                                                <td>{{$dist->order->created_at->format('d M, y')}}</td>
+                                                <td>{{$dist->created_at->format('d M, y')}}</td>
+                                                <td><img src="{{asset("/uploads/".$dist->order->agent->thumbnail)}}" width="30px" class="rounded-circle mr-3" alt="">{{$dist->order->agent->name}}</td>
+                                                <td>{{$dist->info}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Produk</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Tanggal Terdistribusi</th>
+                                                <th>Agent</th>
+                                                <th>info</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 
             </div>
         </div>

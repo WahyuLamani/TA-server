@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client\{Agent, Container, Distributor, Post};
+use App\Models\Client\Transactions\Distribution;
 use App\Models\Client\Transactions\Order;
 use App\Models\Server\{Company, ProductType};
 use Illuminate\Http\Request;
@@ -23,10 +24,13 @@ class HomeController extends Controller
 
             $productList = ProductType::byValueOnWarehouse()->get();
 
+            $distributions = Distribution::byDistributor(Auth::user()->userable->id)->get();
+
             return view('clients.index', compact([
                 'orderWaiting',
                 'orderAccepted',
                 'productList',
+                'distributions',
             ]));
         }
         if (Auth::user()->userable_type === Agent::class) {
@@ -39,10 +43,13 @@ class HomeController extends Controller
             $containers = Container::where('agent_id', Auth::user()->userable->id)
                 ->where('count_down_amount', '>', '0')->get();
 
+            $distributions = Distribution::byAgent(Auth::user()->userable->id)->get();
+
             return view('clients.index', compact([
                 'orderLists',
                 'receivedOrders',
-                'containers'
+                'containers',
+                'distributions'
             ]));
         }
     }
