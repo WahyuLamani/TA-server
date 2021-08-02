@@ -43,7 +43,7 @@ return [
         ],
         'public2' => [
             'driver' => 'local',
-            'root'   => public_path() . '/uploads',
+            'root'   => public_path() . '/assets',
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],

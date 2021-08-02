@@ -329,7 +329,7 @@
                                                 <td><small>{{$dist->amount.' item '.$dist->container->warehouse->product_type->type.'/'.$dist->container->warehouse->product_type->unit}}</small></td>
                                                 <td>{{$dist->order->created_at->format('d M, y')}}</td>
                                                 <td>{{$dist->created_at->format('d M, y')}}</td>
-                                                <td><img src="{{asset('uploads/'.$dist->order->distributor->thumbnail)}}" width="30px" class=" rounded-circle mr-3" alt="">{{$dist->order->distributor->name}}</td>
+                                                <td><img src="{{asset('assets/'.$dist->order->distributor->thumbnail)}}" width="30px" class=" rounded-circle mr-3" alt="">{{$dist->order->distributor->name}}</td>
                                                 <td>{{$dist->info}}</td>
                                             </tr>
                                             @endforeach
@@ -372,7 +372,7 @@
                                                 <td><small>{{$dist->amount.' item '.$dist->container->warehouse->product_type->type.'/'.$dist->container->warehouse->product_type->unit}}</small></td>
                                                 <td>{{$dist->order->created_at->format('d M, y')}}</td>
                                                 <td>{{$dist->created_at->format('d M, y')}}</td>
-                                                <td><img src="{{asset('uploads/'.$dist->order->agent->thumbnail)}}" width="30px" class="rounded-circle mr-3" alt="">{{$dist->order->agent->name}}</td>
+                                                <td><img src="{{asset('assets/'.$dist->order->agent->thumbnail)}}" width="30px" class="rounded-circle mr-3" alt="">{{$dist->order->agent->name}}</td>
                                                 <td>{{$dist->info}}</td>
                                             </tr>
                                             @endforeach
