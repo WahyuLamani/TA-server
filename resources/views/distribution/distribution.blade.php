@@ -27,12 +27,12 @@
                                             <tbody>
                                                 @foreach ($distributions->paginate(6) as $data)
                                                 <tr>
-                                                    <td><img src="{{asset('assets/'.$data->order->agent->thumbnail)}}" class=" rounded-circle mr-3" alt="">{{$data->order->agent->name}}</td>
+                                                    <td><img src="{{asset('uploads/'.$data->order->agent->thumbnail)}}" class=" rounded-circle mr-3" alt="">{{$data->order->agent->name}}</td>
                                                     {{-- <td>iPhone X</td> --}}
                                                     <td>
                                                         <small>{{$data->amount.' item '.$data->container->warehouse->product_type->type.'/'.$data->container->warehouse->product_type->unit}}</small>
                                                     </td>
-                                                    <td><img src="{{asset('assets/'.$data->order->distributor->thumbnail)}}" class=" rounded-circle mr-3" alt="">{{$data->order->distributor->name}}</td>
+                                                    <td><img src="{{asset('uploads/'.$data->order->distributor->thumbnail)}}" class=" rounded-circle mr-3" alt="">{{$data->order->distributor->name}}</td>
                                                     {{-- <td>iPhone X</td> --}}
                                                     <td><i class="fa fa-circle-o text-success mr-2"></i>{{$data->created_at->format("d F, Y")}}</td>
                                                     @if($data->order->on_progress === 'Accepted')

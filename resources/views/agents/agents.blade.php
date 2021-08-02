@@ -93,7 +93,7 @@
                                 <tbody>
                                     @foreach ($agents as $agent)
                                     <tr>
-                                        <td><img style="width: 30px" src="{{asset('assets/'.$agent->thumbnail)}}" class=" rounded-circle mr-3">{{$agent->name}}</td>
+                                        <td><img style="width: 30px" src="{{asset('uploads/'.$agent->thumbnail)}}" class=" rounded-circle mr-3">{{$agent->name}}</td>
                                         <td>{{$agent->address}}</td>
                                         <td>{{$agent->telp_num}}</td>
                                         <td><a href="agent/details/{{$agent->id}}">details</a></td>
