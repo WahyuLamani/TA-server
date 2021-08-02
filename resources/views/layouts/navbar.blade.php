@@ -1,8 +1,17 @@
 <!--**********************************
             Nav header start
         ***********************************-->
-        <img class="logo-stylis" src="{{asset('assets/images/logo.png')}}" alt="" srcset="">
-        
+        {{-- <img class="logo-stylis" src="{{asset('assets/images/logo.png')}}" alt="" srcset=""> --}}
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <b class="logo-abbr text-white">DTS</b>
+                    <span class="brand-title text-white">
+                        DTS Mineral Water
+                    </span>
+                </a>
+            </div>
+        </div>
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -47,7 +56,7 @@
                                        @foreach (session('agent') as $row)
                                             <li class="notification-unread">
                                                 <a href="/post/agent/{{ $row->id }}">
-                                                    <img class="float-left mr-3 avatar-img" src="{{asset("/uploads/".$row->owner->thumbnail)}}" alt="">
+                                                    <img class="float-left mr-3 avatar-img" src="{{asset('uploads/'.$row->owner->thumbnail)}}" alt="">
                                                     <div class="notification-content">
                                                         <div class="notification-heading">{{ $row->owner->name }}</div>
                                                         <div class="notification-timestamp text-dark">{{ $row->created_at->diffForhumans() }}</div>
@@ -76,7 +85,7 @@
                                         @foreach (session('distributors') as $row)
                                             <li class="notification-unread">
                                                 <a href="post/distributor/{{ $row->id }}">
-                                                    <img class="float-left mr-3 avatar-img" src="{{asset("/uploads/".$row->owner->thumbnail)}}" alt="">
+                                                    <img class="float-left mr-3 avatar-img" src="{{asset('uploads/'.$row->owner->thumbnail)}}" alt="">
                                                     <div class="notification-content">
                                                         <div class="notification-heading">{{ $row->owner->name }}</div>
                                                         <div class="notification-timestamp text-dark">{{ $row->created_at->diffForhumans() }}</div>
@@ -100,7 +109,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="{{asset("/uploads/" . Auth::user()->userable->thumbnail)}}" height="40" width="40" alt="">
+                                <img src="{{asset('uploads/'. Auth::user()->userable->thumbnail)}}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -127,7 +136,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="{{asset("uploads/" . Auth::user()->userable->thumbnail)}}" height="40" width="40" alt="">
+                                <img src="{{asset('uploads/'. Auth::user()->userable->thumbnail)}}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">

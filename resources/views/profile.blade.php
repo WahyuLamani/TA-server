@@ -24,7 +24,7 @@
                         @if (Auth::user()->userable_type === "App\Models\Client\Agent" || Auth::user()->userable_type === "App\Models\Client\Distributor")
                         <div class="card-body">
                             <div class="media align-items-center mb-3">
-                                <img class="mr-1" src="{{asset("/uploads/". Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
+                                <img class="mr-1" src="{{asset('uploads/'. Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
                                 <div class="media-body">
                                     <h4 class="mb-0 text-black-50">{{ Auth::user()->userable->name}}</h4>
                                     <p class="text-muted mb-0">{{ Auth::user()->userable->email }}</p>
@@ -34,7 +34,7 @@
                         @else
                         <div class="card-body">
                             <div class="media align-items-center mb-3">
-                                <img class="mr-1" src="{{asset("/uploads/". Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
+                                <img class="mr-1" src="{{asset('uploads/'. Auth::user()->userable->thumbnail)}}" width="80" height="80" alt="">
                                 <div class="media-body">
                                     <h4 class="mb-0 text-black-50">{{ Auth::user()->userable->ceo_name}}</h4>
                                     <p class="text-muted mb-0">{{ Auth::user()->userable->company_email }}</p>
@@ -82,7 +82,7 @@
                     <div class="card-body">
                         @foreach (Auth::user()->userable->post as $post)
                             <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="{{asset("/uploads/".$post->owner->thumbnail)}}" width="50" height="50">
+                                <img class="mr-3 circle-rounded" src="{{asset('uploads/'.$post->owner->thumbnail)}}" width="50" height="50">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
                                         <h5 class="mb-sm-0">{{ $post->owner->ceo_name }} <small class="text-muted ml-3">post at {{$post->created_at->diffForHumans()}}</small></h5>
