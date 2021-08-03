@@ -38,7 +38,6 @@ class UpdateUserController extends Controller
                 $userable->save();
             }
             if (Auth::user()->userable_type === Company::class) {
-                dd($userable);
                 if ($request->company_name !== $userable->company_name) {
                     $request->validate([
                         'company_name' => 'required|string|max:255',
