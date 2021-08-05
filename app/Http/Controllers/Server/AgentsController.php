@@ -51,15 +51,17 @@ class AgentsController extends Controller
     public function details(Agent $agent)
     {
         if ($agent->company_id !== Auth::user()->userable->id) {
-            abort(404);
+            abort(403);
         }
 
+        $distributed = Distribution::byAgent($agent->id)->orderBy('created_at', 'DESC')->paginate(5);
         $product_type = ProductType::where('company_id', Auth::user()->userable->id);
         $distribution = Distribution::byAgent($agent->id);
         return view('agents.agent-details', compact([
             'product_type',
             'distribution',
-            'agent'
+            'agent',
+            'distributed'
         ]));
     }
 

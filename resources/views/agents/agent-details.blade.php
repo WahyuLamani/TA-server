@@ -90,10 +90,7 @@
 
 
         <div class="row">
-            <div class="col-lg-3">
-
-            </div>
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -125,6 +122,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Tracking agent</h4>
+                            @forelse ($distributed as $item)
+                            <div class="media border-bottom-1 pt-3 pb-3">
+                                <img width="35" src="{{asset('uploads/'.$item->container->agent->thumbnail)}}" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>Produk {{$item->order->product_type->type.'/'.$item->order->product_type->unit}} sebanyak <strong class="text-primary">{{$item->amount}}</strong></h5>
+                                    <p class="mb-0"> <b><a class="text-primary" href="/agent/details/{{$item->container->agent->id}}">[{{strtoupper($item->container->agent->name)}}]</a></b> mendistribusikan produk kepada <b><a class="text-primary" href="/distributor/details/{{$item->order->distributor->id}}">[{{strtoupper($item->order->distributor->name)}}]</a></b> pada alamat <b><a href="https://www.google.co.id/maps/search/{{$item->order->distributor->address}}" target="_blank">{{$item->order->distributor->address}}</a></b></p>
+                                    @if ($item->info) 
+                                        <p>Info : {{$item->info}}</p>
+                                    @endif
+                                </div><span class="text-muted "><strong>{{$item->created_at->format("F d, Y, g:i:s a") }}</strong></span>
+                            </div>
+                            @empty
+                                <p class="text-secondary">Have No Distributed</p>
+                            @endforelse
+                        <div class="card-footer d-flex justify-content-lg-center">
+                            {{-- {{ $orders->links('vendor.pagination.bootstrap-4') }} --}}
+                            {{$distributed->links('vendor.pagination.bootstrap-4')}}  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
 
 
