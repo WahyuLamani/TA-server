@@ -10,8 +10,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
     {{-- data tables --}}
     <link href="{{asset('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
+    {{-- steps form --}}
     <link href="{{asset('assets/plugins/jquery-steps/css/jquery.steps.css')}}" rel="stylesheet">
+    {{-- toastr --}}
+    <link href="{{asset('assets/plugins/toastr/css/toastr.min.css')}}" rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/mystyle.css')}}" rel="stylesheet">
@@ -52,43 +54,24 @@
     <script src="{{asset('assets/js/settings.js')}}"></script>
     <script src="{{asset('assets/js/gleek.js')}}"></script>
     <script src="{{asset('assets/js/styleSwitcher.js')}}"></script>
+    
+    {{-- form stepts --}}
+    <script src="{{asset('assets/plugins/jquery-steps/build/jquery.steps.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins-init/jquery-steps-init.js')}}"></script>
+    
+
+    {{-- data tables --}}
+    <script src="{{asset('assets/plugins/tables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+
+
+    {{-- toastr --}}
+    <script src="{{asset('assets/plugins/toastr/js/toastr.min.js')}}"></script>
+
+    {{-- myscripts --}}
     <script src="{{asset('assets/js/script.js')}}"></script>
-    
-{{-- form stepts --}}
-<script src="{{asset('assets/plugins/jquery-steps/build/jquery.steps.min.js')}}"></script>
-<script src="{{asset('assets/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('assets/js/plugins-init/jquery-steps-init.js')}}"></script>
-
-
-{{-- data tables --}}
-<script src="{{asset('assets/plugins/tables/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
-
-<!-- Chartjs -->
-{{-- <script src="{{asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script> --}}
-<!-- Circle progress -->
-{{-- <script src="{{asset('assets/plugins/circle-progress/circle-progress.min.js')}}"></script> --}}
-<!-- Datamap -->
-{{-- <script src="{{asset('assets/plugins/d3v3/index.js')}}"></script>
-<script src="{{asset('assets/plugins/topojson/topojson.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datamaps/datamaps.world.min.js')}}"></script> --}}
-<!-- Morrisjs -->
-{{-- <script src="{{asset('assets/plugins/raphael/raphael.min.js')}}"></script>
-<script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script> --}}
-<!-- Pignose Calender -->
-{{-- <script src="{{asset('assets/plugins/moment/moment.min.js')}}"></script>
-<script src="{{asset('assets/plugins/pg-calendar/js/pignose.calendar.min.js')}}"></script> --}}
-<!-- ChartistJS -->
-{{-- <script src="{{asset('assets/plugins/chartist/js/chartist.min.js')}}"></script>
-<script src="{{asset('assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}"></script> --}}
-
-
-
-{{-- <script src="{{asset('assets/js/dashboard/dashboard-1.js')}}"></script> --}}
-<script type="text/javascript">
-    
-</script>
 </body>
 
 </html>

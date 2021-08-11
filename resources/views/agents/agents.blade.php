@@ -37,7 +37,10 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title">Agents</h4>
-                            <button data-toggle="modal" data-target="#createAgents" class="btn btn-primary">New Agent</button>
+                            <div>
+                                <a href="{{route('export.agent')}}"  id="toastr-export-agents" class="btn btn-sm btn-dark"><i class="fa fa-download" aria-hidden="true"></i> Export</a>
+                                <button data-toggle="modal" data-target="#createAgents" class="btn btn-sm btn-primary">New Agent</button>
+                            </div>
                         </div>
                         {{-- Modal Create Agent --}}
                         <div class="modal fade" id="createAgents" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

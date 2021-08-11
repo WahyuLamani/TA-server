@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\UpdateUserController;
 use App\Http\Controllers\Clients\ClientRegisterController;
 use App\Http\Controllers\Clients\GetOrderController;
 use App\Http\Controllers\Clients\HomeController as ClientsHomeController;
-use App\Http\Controllers\Dashboard\{AgentPostController, CompanyPostController, DistributorPostController, ProfileController, ShowOrderController};
+use App\Http\Controllers\Dashboard\{AgentPostController, CompanyPostController, DistributorPostController, ExportController, ProfileController, ShowOrderController};
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Server\{AgentsController, CompanyController, ContainerController, DistributorController, DistributionController, WarehouseController};
 use Illuminate\Support\Facades\{Auth, Route};
@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('server')->group(function () {
         Route::get('/agents', [AgentsController::class, 'index'])->name('agents');
+        Route::get('/agents/export', [ExportController::class, 'exportAgents'])->name('export.agent');
         Route::post('/agent/store', [AgentsController::class, 'store'])->name('agent.store');
         Route::get('/agent/details/{agent:id}', [AgentsController::class, 'details']);
         Route::delete('/agent/delete/{agent:id}', [AgentsController::class, 'destroy']);
