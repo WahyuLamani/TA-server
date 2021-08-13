@@ -48,13 +48,15 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('server')->group(function () {
         Route::get('/agents', [AgentsController::class, 'index'])->name('agents');
-        Route::get('/agents/export', [ExportController::class, 'exportAgents'])->name('export.agent');
         Route::post('/agent/store', [AgentsController::class, 'store'])->name('agent.store');
         Route::get('/agent/details/{agent:id}', [AgentsController::class, 'details']);
         Route::delete('/agent/delete/{agent:id}', [AgentsController::class, 'destroy']);
         Route::get('/distributors', [DistributorController::class, 'index'])->name('distributors');
         Route::get('/distributor/details/{distributor:id}', [DistributorController::class, 'details']);
         Route::delete('/distributor/delete/{distributor:id}', [DistributorController::class, 'destroy']);
+
+        Route::get('/agents/export', [ExportController::class, 'exportAgents'])->name('export.agent');
+        Route::get('/distribution/export', [ExportController::class, 'exportDistributions'])->name('export.distributions');
 
         Route::get('/distribution', [DistributionController::class, 'index'])->name('distributed');
         Route::get('/distribution-request', [ShowOrderController::class, 'show'])->name('request.distributor');

@@ -10,9 +10,10 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
+                                <a href="{{route('export.distributions')}}" class="btn btn-sm btn-dark md-auto"><i class="fa fa-download" aria-hidden="true"></i> Export</a>
                                 <div class="active-member">
                                     <div class="table-responsive">
-                                        <table class="table table-xs mb-0">
+                                        <table class="table table-striped table-bordered zero-configuration">
                                             <thead>
                                                 <tr>
                                                     <th>Sales Agent</th>
@@ -21,12 +22,11 @@
                                                     <th>Distributors</th>
                                                     <th>Date Created</th>
                                                     <th>Status Order</th>
-                                                    <th>Info</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($distributions->paginate(6) as $data)
-                                                <tr>
+                                                @foreach ($distributions->get() as $data)
+                                                <tr onclick="window.location='/distributions/{{ $data->code }}';">
                                                     <td><img src="{{asset('uploads/'.$data->order->agent->thumbnail)}}" class=" rounded-circle mr-3" alt="">{{$data->order->agent->name}}</td>
                                                     {{-- <td>iPhone X</td> --}}
                                                     <td>
@@ -40,11 +40,6 @@
                                                     @else
                                                     <td><span class="badge badge-success">Cleared</span></td>
                                                     @endif
-                                                    @if ($data->info)
-                                                        <td>{{$data->info}}</td>
-                                                    @else
-                                                        <td>-</td>
-                                                    @endif
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -52,9 +47,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-lg-center">
+                            {{-- <div class="card-footer d-flex justify-content-lg-center">
                                 {{$distributions->paginate(6)->links('vendor.pagination.bootstrap-4')}}  
-                            </div>
+                            </div> --}}
                         </div>                        
                     </div>
                 </div>
