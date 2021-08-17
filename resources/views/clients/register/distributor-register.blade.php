@@ -4,6 +4,7 @@
 <main class="py-5 mt-5">
    
     <div class="container">
+        @include('layouts.alert')
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Distributor Register</h5>

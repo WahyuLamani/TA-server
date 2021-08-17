@@ -7,6 +7,7 @@
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
                     <div class="form-input-content">
+                        @include('layouts.alert')
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 <a class="text-center" href="{{url('/')}}"> <h4>{{ config('app.name') }}</h4></a>

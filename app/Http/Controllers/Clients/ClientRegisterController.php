@@ -7,14 +7,14 @@ use App\Models\Client\{Agent, Distributor};
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Auth, Hash};
+use Illuminate\Support\Facades\{Auth, Hash, Validator};
 use Illuminate\Support\Str;
 
 class ClientRegisterController extends Controller
 {
     public function distributorRegister(Request $request)
     {
-        $request->validate([
+        $validation = Validator::make($request->all(), [
             'email' => 'email|required|unique:users',
             'password' => 'required|confirmed',
             'firstName' => 'required',
@@ -25,6 +25,14 @@ class ClientRegisterController extends Controller
             'telp_num' => 'required|numeric|digits_between:10,14',
             // 'thumnail' => 'image|mimes:jpeg,png,jpg|max:5100',
         ]);
+
+        if ($validation->fails()) {
+            // $encode = json_encode($validation->errors()->messages());
+            return redirect()
+                ->route('distributor.register')
+                ->with('error', 'Harap Lengkapi formulir dengan benar !')
+                ->withInput();
+        }
 
         $name = $request->firstName . ' ' . $request->lastName;
         $address = $request->address . ' ,' . $request->kota . '. Kode Pos ' . $request->kode_pos;
@@ -46,7 +54,7 @@ class ClientRegisterController extends Controller
             Auth::user()->last_login = Carbon::now()->toDateTimeString();
             Auth::user()->save();
         }
-        return redirect()->route('clients');
+        // return redirect()->route('clients');
     }
 
 
@@ -60,7 +68,7 @@ class ClientRegisterController extends Controller
             Auth::user()->save();
             return redirect()->route('handle');
         } else {
-            return redirect()->route('agent.register');
+            return redirect()->route('agent.register')->with('error', 'Email tidak Terdaftar');
         }
     }
 
