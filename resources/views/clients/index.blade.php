@@ -17,7 +17,7 @@
                                 <h4 class="card-title">Container</h4>
                                 <div class="basic-list-group">
                                     <div class="row">
-                                        <div class="col-xl-4 col-md-4 col-sm-3 mb-4 mb-sm-0">
+                                        <div style="z-index:0" class="col-xl-4 col-md-4 col-sm-3 mb-4 mb-sm-0">
                                             <div class="list-group" id="list-tab" role="tablist">
                                                 <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">On truck list</a> 
                                                 {{-- <a class="list-group-item list-group-item-action" id="list-profile-list"
