@@ -60,7 +60,7 @@
                                                     <div class="notification-content">
                                                         <div class="notification-heading">{{ $row->owner->name }}</div>
                                                         <div class="notification-timestamp text-dark">{{ $row->created_at->diffForhumans() }}</div>
-                                                        <div class="notification-text">{{ $row->post }}</div>
+                                                        <div class="notification-text">{!! $row->post !!}</div>
                                                     </div>
                                                 </a>
                                             </li>
@@ -89,7 +89,7 @@
                                                     <div class="notification-content">
                                                         <div class="notification-heading">{{ $row->owner->name }}</div>
                                                         <div class="notification-timestamp text-dark">{{ $row->created_at->diffForhumans() }}</div>
-                                                        <div class="notification-text">{{ $row->post }}</div>
+                                                        <div class="notification-text">{!! $row->post !!}</div>
                                                     </div>
                                                 </a>
                                             </li>

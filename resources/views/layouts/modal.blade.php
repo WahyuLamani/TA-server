@@ -20,7 +20,7 @@
                     @else
                     Name :
                     @endif 
-                    {{$agent->name ?? $distributor->name ?? $post->post ?? $container->count_down_amount}}</h5>
+                    {!!$agent->name ?? $distributor->name ?? $post->post ?? $container->count_down_amount!!}</h5>
                 <small>@if ($container ?? false)
                     Tanggal pengambilan :
                     @else

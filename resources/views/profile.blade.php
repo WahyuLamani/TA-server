@@ -3,7 +3,6 @@
 
 @section('contents')
 <div class="content-body">
-
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
@@ -13,7 +12,6 @@
         </div>
     </div>
     <!-- row -->
-
     <div class="container-fluid">
         @include('layouts.alert')
         <div class="row">
@@ -59,95 +57,106 @@
                 </div>  
             </div>
             <div class="col-lg-8 col-xl-8">
+                <div class="click2edit m-b-40"></div>
+                <button onclick="edit(0)" class="edit btn mb-1 btn-secondary">Buat Laporan <span class="btn-icon-right"><i class="fa fa-envelope"></i></span>
+                </button>
+                <button id="update" class="hidden update btn btn-sm btn-success mt-2" onclick="update(0,0)" type="button">Save</button>
+                <button onclick="cancel(0)" class="hidden cancel  btn btn-sm btn-danger mt-2">Cancel</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('profile.posting') }}" method="post" class="form-profile">
-                            @csrf
-                            <div class="form-group">
-                                <textarea name="post"  class="form-control @error('post') is-invalid @enderror" id="textarea" cols="30" rows="2" placeholder="Post a new message">{{ old('post') }}</textarea>
-                                @error('post')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <button type="submit" class="btn btn-primary px-3 ml-4">Send</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card" id="profile">
-                    <div class="card-body">
+                        <h3 class="card-title text-black-50">Daftar Laporan</h3>
                         @foreach (Auth::user()->userable->post as $post)
                             <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="{{asset('uploads/'.$post->owner->thumbnail)}}" width="50" height="50">
+                                {{-- <img class="mr-3 circle-rounded" src="{{asset('uploads/'.$post->owner->thumbnail)}}" width="50" height="50"> --}}
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">{{ $post->owner->ceo_name }} <small class="text-muted ml-3">post at {{$post->created_at->diffForHumans()}}</small></h5>
+                                        {{-- <h5 class="mb-sm-0">{{ $post->owner->ceo_name }}  --}}
+                                            <p class="text-muted text-">{{($post->created_at == $post->updated_at) ? $post->created_at->diffForHumans() : 'Disunting '.$post->updated_at->diffForHumans()}}</p>
                                         <div class="media-reply__link">
                                             <button data-toggle="modal" data-target="#{{$post->owner->slug.$post->id}}" class="btn btn-transparent p-2"><i class="fa fa-trash-o fa-lg"></i></button>
-                                            <button class="btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-pencil-square-o fa-lg"></i></button>
+                                            <button id="edit" onclick="edit({{$loop->iteration}})" class="edit btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-pencil-square-o fa-lg"></i></button>
+                                            <button onclick="cancel({{$loop->iteration}})" class="hidden cancel btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-window-close-o fa-lg"></i></button>
                                         </div>
                                     </div>
-                                    <p>{{ $post->post }}</p>
+                                    <div class="click2edit m-b-40">{!!$post->post!!}</div>
+                                    <button id="update" class="hidden update btn btn-sm btn-success mt-2" onclick="update({{$post->id.','.$loop->iteration}})" type="button">Save</button>
                                 </div>
+                                <script>
+                                    window.edit = function (i) { 
+                                        $('.click2edit').eq(i).summernote({
+                                            callbacks: {
+                                                onImageUpload: function(files) {
+                                                    imageSave(files[0],i)
+                                                }
+                                            }
+                                        })
+                                        $('.update').eq(i).show('slow');
+                                        $('.cancel').eq(i).show();
+                                        $('.edit').eq(i).hide();
+                                    },
+                                    window.cancel = function (i) {
+                                        $('.cancel').eq(i).hide()
+                                        $('.edit').eq(i).show();
+                                        $('.update').eq(i).hide('slow');
+                                        $('.click2edit').eq(i).summernote('reset')
+                                        $(".click2edit").eq(i).summernote("destroy")
+                                    },
+                                    window.update = function (identifier, i) {
+                                        let postBody = $('.click2edit').eq(i).summernote('code');
+                                        let url = (identifier === 0) ? '{{route("profile.posting")}}' : '{{route("post.update")}}'
+                                        $.ajax({
+                                            headers: {
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            type: 'post',
+                                            url: url,
+                                            dataType: 'json',
+                                            data: {
+                                                'id' : identifier,
+                                                postBody : postBody
+                                            },
+                                            success: function(res) {
+                                                console.log('sucess');
+                                            }
+                                        })
+                                        $(".click2edit").eq(i).summernote("destroy")
+                                        $('.update').eq(i).hide('slow')
+                                        $('.edit').eq(i).show()
+                                        $('.cancel').eq(i).hide()
+                                        if(identifier === 0){
+                                            location.reload();
+                                        }
+                                    }; 
+                                    function imageSave(files,i) {
+                                        let imgFile = new FormData()
+                                            imgFile.append('image', files)
+                                            $.ajax({
+                                            headers: {
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            type: 'post',
+                                            url: "{{ route('post.image') }}",
+                                            dataType: 'json',
+                                            data: imgFile,
+                                            processData : false,
+                                            contentType : false,
+                                            success: function(res) {
+                                                $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
+                                            }
+                                        })
+                                    }
+                                </script>
+
                             </div>
                             @section('type', 'company-post')
                             @include('layouts.modal')
                         @endforeach
                     </div>
                 </div>
-
-                {{-- <div class="card mt-5">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h4>Table Hover</h4>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Kolor Tea Shirt For Man</td>
-                                        <td><span class="badge badge-primary px-2">Sale</span>
-                                        </td>
-                                        <td>January 22</td>
-                                        <td class="color-primary">$21.56</td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>Kolor Tea Shirt For Women</td>
-                                        <td><span class="badge badge-danger px-2">Tax</span>
-                                        </td>
-                                        <td>January 30</td>
-                                        <td class="color-success">$55.32</td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>Blue Backpack For Baby</td>
-                                        <td><span class="badge badge-success px-2">Extended</span>
-                                        </td>
-                                        <td>January 25</td>
-                                        <td class="color-danger">$14.85</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> --}}
-
-
             </div>
         </div>
     </div>
@@ -156,5 +165,7 @@
 <!--**********************************
     Content body end
 ***********************************-->
+
+
 
 @endsection

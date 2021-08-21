@@ -12,8 +12,8 @@
     <link href="{{asset('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     {{-- steps form --}}
     <link href="{{asset('assets/plugins/jquery-steps/css/jquery.steps.css')}}" rel="stylesheet">
-    {{-- toastr --}}
-    <link href="{{asset('assets/plugins/toastr/css/toastr.min.css')}}" rel="stylesheet">
+    {{-- summernote --}}
+    <link href="{{asset('assets/plugins/summernote/dist/summernote.css')}}" rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/mystyle.css')}}" rel="stylesheet">
@@ -65,10 +65,9 @@
     <script src="{{asset('assets/plugins/tables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
-
-
-    {{-- toastr --}}
-    <script src="{{asset('assets/plugins/toastr/js/toastr.min.js')}}"></script>
+    
+    {{-- summernote --}}
+    <script src="{{asset('assets/plugins/summernote/dist/summernote.min.js')}}"></script>
 
     {{-- myscripts --}}
     <script src="{{asset('assets/js/script.js')}}"></script>
