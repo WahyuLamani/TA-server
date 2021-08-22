@@ -60,8 +60,8 @@
                 <div class="click2edit m-b-40"></div>
                 <button onclick="edit(0)" class="edit btn mb-1 btn-secondary">Buat Laporan <span class="btn-icon-right"><i class="fa fa-envelope"></i></span>
                 </button>
-                <button id="update" class="hidden update btn btn-sm btn-success mt-2" onclick="update(0,0)" type="button">Save</button>
-                <button onclick="cancel(0)" class="hidden cancel  btn btn-sm btn-danger mt-2">Cancel</button>
+                <button style="display: none" id="update" class="hidden update btn btn-sm btn-success mt-2" onclick="update(0,0)" type="button">Save</button>
+                <button style="display: none" onclick="cancel(0)" class="hidden cancel  btn btn-sm btn-danger mt-2">Cancel</button>
             </div>
         </div>
         <div class="row">
@@ -79,11 +79,11 @@
                                         <div class="media-reply__link">
                                             <button data-toggle="modal" data-target="#{{$post->owner->slug.$post->id}}" class="btn btn-transparent p-2"><i class="fa fa-trash-o fa-lg"></i></button>
                                             <button id="edit" onclick="edit({{$loop->iteration}})" class="edit btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-pencil-square-o fa-lg"></i></button>
-                                            <button onclick="cancel({{$loop->iteration}})" class="hidden cancel btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-window-close-o fa-lg"></i></button>
+                                            <button style="display: none" onclick="cancel({{$loop->iteration}})" class="hidden cancel btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-window-close-o fa-lg"></i></button>
                                         </div>
                                     </div>
                                     <div class="click2edit m-b-40">{!!$post->post!!}</div>
-                                    <button id="update" class="hidden update btn btn-sm btn-success mt-2" onclick="update({{$post->id.','.$loop->iteration}})" type="button">Save</button>
+                                    <button id="update" style="display: none" class="hidden update btn btn-sm btn-success mt-2" onclick="update({{$post->id.','.$loop->iteration}})" type="button">Save</button>
                                 </div>
                                 <script>
                                     window.edit = function (i) { 
