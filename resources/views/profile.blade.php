@@ -102,7 +102,12 @@
         $('.click2edit').eq(i).summernote({
             callbacks: {
                 onImageUpload: function(files) {
-                    imageSave(files[0],i)
+                    console.log(files[0]);
+                    if(files[0].size <= 5100000){
+                        imageSave(files[0],i)
+                    }else{
+                        alert(`Ukuran image terlalu besar`)
+                    }
                 },
                 onMediaDelete: function(files) {
                     imageDelete(files[0],i)
@@ -160,7 +165,11 @@
             processData : false,
             contentType : false,
             success: function(res) {
-                $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
+                if(res.error){
+                    alert(res.error)
+                }else{
+                    $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
+                }
             }
         })
     }

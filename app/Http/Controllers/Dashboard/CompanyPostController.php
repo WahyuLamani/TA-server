@@ -7,6 +7,7 @@ use App\Models\Client\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyPostController extends Controller
 {
@@ -38,6 +39,12 @@ class CompanyPostController extends Controller
 
     public function saveImages(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'image' => 'image|mimes:jpeg,png,jpg|max:5100'
+        ]);
+        if ($validator->fails()) {
+            return response(['error' => 'Ukuran image terlalu besar']);
+        }
         $imgUrl = $request->file('image')->store("images/posts", 'public2');
         return response(['imgUrl' => asset('uploads/' . $imgUrl)], 200);
     }
