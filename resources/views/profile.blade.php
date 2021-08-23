@@ -139,16 +139,16 @@
                 postBody : postBody
             },
             success: function(res) {
-                //
+                if(identifier === 0){
+                    location.reload();
+                }
             }
         })
         $(".click2edit").eq(i).summernote("destroy")
         $('.update').eq(i).hide('slow')
         $('.edit').eq(i).show()
         $('.cancel').eq(i).hide()
-        if(identifier === 0){
-            location.reload();
-        }
+        
     }; 
     function imageSave(files,i) {
         let imgFile = new FormData()
