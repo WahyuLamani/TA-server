@@ -15,15 +15,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Slides only</h4>
-                        <img src="{{asset('uploads/'.$post->owner->thumbnail)}}" class="img-fluid" alt="...">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
@@ -37,12 +29,11 @@
                         
                         <div class="row mb-5">
                             <div class="col-12 text-center">
-                                <button class="btn btn-danger px-5">Delete Post</button>
+                                <button class="btn btn-danger px-5">Hapus post ini</button>
                             </div>
                         </div>
-
                         <h4>Post</h4>
-                        <p class="text-muted">{{$post->post}}</p>
+                        <p class="text-dark">{!!$post->post!!}</p>
                         <ul class="card-profile__info">
                             <li class="mb-1"><strong class="text-dark mr-4">Published : </strong><span>{{ $post->created_at->diffForHumans() }}</span></li>
                         </ul>

@@ -82,75 +82,9 @@
                                             <button style="display: none" onclick="cancel({{$loop->iteration}})" class="hidden cancel btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-window-close-o fa-lg"></i></button>
                                         </div>
                                     </div>
-                                    <div class="click2edit m-b-40">{!!$post->post!!}</div>
+                                    <div class="click2edit m-b-40 text-dark">{!!$post->post!!}</div>
                                     <button id="update" style="display: none" class="hidden update btn btn-sm btn-success mt-2" onclick="update({{$post->id.','.$loop->iteration}})" type="button">Save</button>
                                 </div>
-                                <script>
-                                    window.edit = function (i) { 
-                                        $('.click2edit').eq(i).summernote({
-                                            callbacks: {
-                                                onImageUpload: function(files) {
-                                                    imageSave(files[0],i)
-                                                }
-                                            }
-                                        })
-                                        $('.update').eq(i).show('slow');
-                                        $('.cancel').eq(i).show();
-                                        $('.edit').eq(i).hide();
-                                    },
-                                    window.cancel = function (i) {
-                                        $('.cancel').eq(i).hide()
-                                        $('.edit').eq(i).show();
-                                        $('.update').eq(i).hide('slow');
-                                        $('.click2edit').eq(i).summernote('reset')
-                                        $(".click2edit").eq(i).summernote("destroy")
-                                    },
-                                    window.update = function (identifier, i) {
-                                        let postBody = $('.click2edit').eq(i).summernote('code');
-                                        let url = (identifier === 0) ? '{{route("profile.posting")}}' : '{{route("post.update")}}'
-                                        $.ajax({
-                                            headers: {
-                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                            },
-                                            type: 'post',
-                                            url: url,
-                                            dataType: 'json',
-                                            data: {
-                                                'id' : identifier,
-                                                postBody : postBody
-                                            },
-                                            success: function(res) {
-                                                console.log('sucess');
-                                            }
-                                        })
-                                        $(".click2edit").eq(i).summernote("destroy")
-                                        $('.update').eq(i).hide('slow')
-                                        $('.edit').eq(i).show()
-                                        $('.cancel').eq(i).hide()
-                                        if(identifier === 0){
-                                            location.reload();
-                                        }
-                                    }; 
-                                    function imageSave(files,i) {
-                                        let imgFile = new FormData()
-                                            imgFile.append('image', files)
-                                            $.ajax({
-                                            headers: {
-                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                            },
-                                            type: 'post',
-                                            url: "{{ route('post.image') }}",
-                                            dataType: 'json',
-                                            data: imgFile,
-                                            processData : false,
-                                            contentType : false,
-                                            success: function(res) {
-                                                $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
-                                            }
-                                        })
-                                    }
-                                </script>
-
                             </div>
                             @section('type', 'company-post')
                             @include('layouts.modal')
@@ -162,6 +96,91 @@
     </div>
     <!-- #/ container -->
 </div>
+
+<script>
+    window.edit = function (i) { 
+        $('.click2edit').eq(i).summernote({
+            callbacks: {
+                onImageUpload: function(files) {
+                    imageSave(files[0],i)
+                },
+                onMediaDelete: function(files) {
+                    imageDelete(files[0],i)
+                }
+            }
+        })
+        $('.update').eq(i).show('slow');
+        $('.cancel').eq(i).show();
+        $('.edit').eq(i).hide();
+    },
+    window.cancel = function (i) {
+        $('.cancel').eq(i).hide()
+        $('.edit').eq(i).show();
+        $('.update').eq(i).hide('slow');
+        $('.click2edit').eq(i).summernote('reset')
+        $(".click2edit").eq(i).summernote("destroy")
+    },
+    window.update = function (identifier, i) {
+        let postBody = $('.click2edit').eq(i).summernote('code');
+        let url = (identifier === 0) ? '{{route("profile.posting")}}' : '{{route("post.update")}}'
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            type: 'post',
+            url: url,
+            dataType: 'json',
+            data: {
+                'id' : identifier,
+                postBody : postBody
+            },
+            success: function(res) {
+                //
+            }
+        })
+        $(".click2edit").eq(i).summernote("destroy")
+        $('.update').eq(i).hide('slow')
+        $('.edit').eq(i).show()
+        $('.cancel').eq(i).hide()
+        if(identifier === 0){
+            location.reload();
+        }
+    }; 
+    function imageSave(files,i) {
+        let imgFile = new FormData()
+            imgFile.append('image', files)
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            type: 'post',
+            url: "{{ route('post.image') }}",
+            dataType: 'json',
+            data: imgFile,
+            processData : false,
+            contentType : false,
+            success: function(res) {
+                $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
+            }
+        })
+    }
+    function imageDelete(files,i) {
+        let imgUrt = files.getAttribute('src');
+        console.log(imgUrt);
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            type: 'delete',
+            url: "{{ route('delete.image') }}",
+            dataType: 'json',
+            data:{ 'data' : imgUrt},
+            success: function(res) {
+                // 
+            }
+        })
+    }
+</script>
 <!--**********************************
     Content body end
 ***********************************-->

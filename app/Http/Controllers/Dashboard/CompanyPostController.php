@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyPostController extends Controller
 {
@@ -30,15 +31,33 @@ class CompanyPostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->destroyImg($post->post);
         $post->delete();
-
-        session()->flash('success', ucwords('Post Deleted'));
-        return redirect()->back();
+        return redirect()->back()->with('success', ucwords('Post Deleted'));
     }
 
     public function saveImages(Request $request)
     {
         $imgUrl = $request->file('image')->store("images/posts", 'public2');
         return response(['imgUrl' => asset('uploads/' . $imgUrl)], 200);
+    }
+
+    public function deleteImages(Request $request)
+    {
+        $this->destroyImg($request->data);
+        return response(['message' => 'sucess']);
+    }
+
+
+    public function destroyImg($data)
+    {
+        $array = array();
+
+        // search string using regex
+        preg_match_all("/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/", $data, $array);
+
+        foreach ($array[0] as $filename) {
+            Storage::disk('public2')->delete('images/posts/' . $filename);
+        }
     }
 }
