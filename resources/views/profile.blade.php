@@ -102,7 +102,6 @@
         $('.click2edit').eq(i).summernote({
             callbacks: {
                 onImageUpload: function(files) {
-                    console.log(files[0]);
                     if(files[0].size <= 5100000){
                         imageSave(files[0],i)
                     }else{
