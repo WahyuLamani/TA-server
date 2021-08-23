@@ -167,7 +167,9 @@
                 if(res.error){
                     alert(res.error)
                 }else{
-                    $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
+                    let imgTag = `<img src=${res.imgUrl}  style="width: 561.047px; height: 315.582px;">`
+                    // $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
+                    $('.click2edit').eq(i).summernote('pasteHTML', imgTag);
                 }
             }
         })
