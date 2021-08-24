@@ -57,8 +57,14 @@
                 </div>  
             </div>
             <div class="col-lg-8 col-xl-8">
+                <div style="display: none" class="upload-status my-3">
+                    <h5 class="mt-3">Upload Images <span class="float-right">0%</span></h5>
+                    <div class="progress" style="height: 9px">
+                        <div class="progress-bar bg-danger wow  progress-" role="progressbar"></div>
+                    </div>
+                </div>
                 <div class="click2edit m-b-40"></div>
-                <button onclick="edit(0)" class="edit btn mb-1 btn-secondary">Buat Laporan <span class="btn-icon-right"><i class="fa fa-envelope"></i></span>
+                <button onclick="edit(0)" class="edit btn mb-1 btn-secondary mb-4">Buat Laporan <span class="btn-icon-right"><i class="fa fa-envelope"></i></span>
                 </button>
                 <button style="display: none" id="update" class="hidden update btn btn-sm btn-success mt-2" onclick="update(0,0)" type="button">Save</button>
                 <button style="display: none" onclick="cancel(0)" class="hidden cancel  btn btn-sm btn-danger mt-2">Cancel</button>
@@ -80,6 +86,12 @@
                                             <button data-toggle="modal" data-target="#{{$post->owner->slug.$post->id}}" class="btn btn-transparent p-2"><i class="fa fa-trash-o fa-lg"></i></button>
                                             <button id="edit" onclick="edit({{$loop->iteration}})" class="edit btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-pencil-square-o fa-lg"></i></button>
                                             <button style="display: none" onclick="cancel({{$loop->iteration}})" class="hidden cancel btn btn-transparent p-0 mt-1 ml-3"><i class="fa fa-window-close-o fa-lg"></i></button>
+                                        </div>
+                                    </div>
+                                    <div style="display: none" class="upload-status my-3">
+                                        <h5 class="mt-3">Upload Images <span class="float-right">0%</span></h5>
+                                        <div class="progress" style="height: 9px">
+                                            <div class="progress-bar bg-danger wow  progress-" role="progressbar"></div>
                                         </div>
                                     </div>
                                     <div class="click2edit m-b-40 text-dark">{!!$post->post!!}</div>
@@ -163,20 +175,38 @@
             data: imgFile,
             processData : false,
             contentType : false,
-            success: function(res) {
-                if(res.error){
-                    alert(res.error)
-                }else{
-                    let imgTag = `<img src=${res.imgUrl}  style="width: 561.047px; height: 315.582px;">`
-                    // $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
-                    $('.click2edit').eq(i).summernote('pasteHTML', imgTag);
+            xhr: function(){
+                //upload Progress
+                let xhr = $.ajaxSettings.xhr();
+                if (xhr.upload) {
+                    $('.upload-status').eq(i).show('slow')
+                    xhr.upload.addEventListener('progress', function(event) {
+                        let percent = 0;
+                        let position = event.loaded || event.position;
+                        let total = event.total;
+                        if (event.lengthComputable) {
+                            percent = Math.ceil(position / total * 100);
+                        }
+                        //update progressbar
+                        $(".progress-bar").eq(i).css("width", + percent +"%");
+                        $("span.float-right").eq(i).text(percent +"%");
+                    }, true);
                 }
+                return xhr;
+            },
+        }).done(function(res){ 
+            $('.upload-status').eq(i).hide('slow')
+            if(res.error){
+                alert(res.error)
+            }else{
+                let imgTag = `<img src=${res.imgUrl}  style="width: 561.047px; height: 315.582px;">`
+                // $('.click2edit').eq(i).summernote('insertImage',res.imgUrl)
+                $('.click2edit').eq(i).summernote('pasteHTML', imgTag);
             }
         })
     }
     function imageDelete(files,i) {
         let imgUrt = files.getAttribute('src');
-        console.log(imgUrt);
             $.ajax({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
