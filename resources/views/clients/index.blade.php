@@ -363,6 +363,7 @@
                                                 <th>Tanggal Order</th>
                                                 <th>Tanggal Terdistribusi</th>
                                                 <th>Agent</th>
+                                                <th>Company</th>
                                                 <th>info</th>
                                             </tr>
                                         </thead>
@@ -373,6 +374,7 @@
                                                 <td>{{$dist->order->created_at->format('d M, y')}}</td>
                                                 <td>{{$dist->created_at->format('d M, y')}}</td>
                                                 <td><img src="{{asset('uploads/'.$dist->order->agent->thumbnail)}}" width="30px" class="rounded-circle mr-3" alt="">{{$dist->order->agent->name}}</td>
+                                                <td>{{$dist->order->agent->company->company_name}}</td>
                                                 <td>{{$dist->info}}</td>
                                             </tr>
                                             @endforeach
@@ -383,6 +385,7 @@
                                                 <th>Tanggal Order</th>
                                                 <th>Tanggal Terdistribusi</th>
                                                 <th>Agent</th>
+                                                <th>Company</th>
                                                 <th>info</th>
                                             </tr>
                                         </tfoot>
