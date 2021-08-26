@@ -93,8 +93,8 @@ class WarehouseController extends Controller
         ]);
 
         Auth::user()->userable->product_type()->create([
-            'type' => $request->product_type,
-            'unit' => $request->product_unit
+            'type' => ucwords($request->product_type),
+            'unit' => ucwords($request->product_unit)
         ]);
 
         session()->flash('success', 'Product type successfully created!!');

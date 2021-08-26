@@ -37,7 +37,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <h4 class="card-title">Warehouse List</h4>
-                            <button data-toggle="modal" data-target="#createWarehouseData" class="btn btn-primary">New data</button>
+                            <button data-toggle="modal" data-target="#createWarehouseData" class="btn btn-primary btn-sm">Tambah produk</button>
                         </div>
 
                         {{-- modal add warehouse data --}}
@@ -81,7 +81,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-info">Save data</button>
+                                            <button type="submit" class="btn btn-info">Save produk</button>
                                         </form>
                                         
                                     </div>
@@ -158,7 +158,7 @@
                             </table>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button data-toggle="modal" data-target="#createProductType" class="btn btn-primary">New data</button>
+                            <button data-toggle="modal" data-target="#createProductType" class="btn btn-primary btn-sm">Tambah type produk</button>
                         </div>
                     </div>
                 </div>
@@ -179,8 +179,8 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Type Product</label>
-                                            <input name="product_type" value="{{old('product_type')}}" type="text" class="form-control @error('product_type') is-invalid @enderror" id="recipient-name">
+                                            <label for="type-produk" class="col-form-label">Type produk</label>
+                                            <input name="product_type" value="{{old('product_type')}}" type="text" class="form-control @error('product_type') is-invalid @enderror" id="type-produk" placeholder="ex : Aqua 600ML">
                                             @error('product_type')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -190,8 +190,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Unit</label>
-                                            <input name="product_unit" value="{{old('product_unit')}}" type="text" class="form-control @error('product_unit') is-invalid @enderror" id="recipient-name">
+                                            <label for="unit" class="col-form-label">Unit</label>
+                                            <input name="product_unit" value="{{old('product_unit')}}" type="text" class="form-control @error('product_unit') is-invalid @enderror" id="unit" placeholder="ex : Kardus">
                                             @error('product_unit')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -201,7 +201,7 @@
                                     </div>
                                     
                                 </div>
-                                <button type="submit" class="btn btn-info">Save data</button>
+                                <button type="submit" class="btn btn-info">Save produk</button>
                             </form>
                             
                         </div>
