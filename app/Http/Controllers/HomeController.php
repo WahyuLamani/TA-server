@@ -30,12 +30,12 @@ class HomeController extends Controller
             'agent' => Agent::where('company_id', Auth::user()->userable->id)->count(),
             'distributor' => Distributor::all()->count()
         ];
-        $agent = Post::byOwner(Agent::class)->byCompanyId(Auth::user()->userable->id)->get();
-        $distributors = Post::byOwner(Distributor::class)->get();
-        session()->put([
-            'agent' => $agent,
-            'distributors' => $distributors
-        ]);
+        // $agent = Post::byOwner(Agent::class)->byCompanyId(Auth::user()->userable->id)->get();
+        // $distributors = Post::byOwner(Distributor::class)->get();
+        // session()->put([
+        //     'agent' => $agent,
+        //     'distributors' => $distributors
+        // ]);
 
         // $fecthPost = [];
         // foreach ($posts as $i) {

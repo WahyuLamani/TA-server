@@ -28,7 +28,7 @@
         ***********************************-->
     @auth
     <div id="main-wrapper">
-    @include('layouts.navbar')
+    <x-navbar></x-navbar>
     @include('layouts.sidebar')
     @endauth
     {{--sectios--}}
