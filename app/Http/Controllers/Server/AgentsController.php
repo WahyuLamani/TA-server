@@ -32,6 +32,7 @@ class AgentsController extends Controller
             'slug' => Str::slug($request->name),
             'thumbnail' => 'images/avatar/default.png',
         ]);
+        $agent->track()->create();
         // $agent = new Agent();
         // $agent->name = ucwords($request->name);
         // $agent->save();

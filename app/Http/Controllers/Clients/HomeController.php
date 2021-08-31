@@ -53,4 +53,16 @@ class HomeController extends Controller
             ]));
         }
     }
+
+    public function saveKoordinats(Request $request)
+    {
+        $coordinats = Auth::user()->userable->track;
+        Auth::user()->userable->track()->update([
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'coordinats' => $coordinats->coordinats . ',' . $request->coordinats
+        ]);
+
+        // return response(['message' => 'success']);
+    }
 }

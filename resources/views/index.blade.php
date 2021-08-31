@@ -145,7 +145,10 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Distributions tracking</h4>
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="card-title">Distributions tracking</h4>
+                                    <a href="/tracking" class="btn btn-dark">View maps</a>
+                                </div>
                                     @forelse ($distributed as $item)
                                     <div class="media border-bottom-1 pt-3 pb-3">
                                         <img width="35" src="{{asset('uploads/'.$item->container->agent->thumbnail)}}" class="mr-3 rounded-circle">

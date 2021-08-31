@@ -8,6 +8,7 @@ use App\Http\Controllers\Clients\HomeController as ClientsHomeController;
 use App\Http\Controllers\Dashboard\{AgentPostController, CompanyPostController, DistributorPostController, ExportController, ProfileController, ShowOrderController};
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Server\{AgentsController, CompanyController, ContainerController, DistributorController, DistributionController, WarehouseController};
+use App\Http\Livewire\Tracking;
 use Illuminate\Support\Facades\{Auth, Route};
 
 
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'client', 'prefix' => 'clients'], function () {
         Route::get('/', [ClientsHomeController::class, 'index'])->name('clients');
+        Route::patch('/koordinats', [ClientsHomeController::class, 'saveKoordinats'])->name('save.koordinats');
         Route::post('/', [GetOrderController::class, 'order']);
         Route::patch('{order:id}', [GetOrderController::class, 'acceptOrder']);
         Route::post('{order:id}', [GetOrderController::class, 'distributed']);
@@ -50,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::middleware('server')->group(function () {
+        Route::get('/tracking', Tracking::class);
         Route::get('/agents', [AgentsController::class, 'index'])->name('agents');
         Route::post('/agent/store', [AgentsController::class, 'store'])->name('agent.store');
         Route::get('/agent/details/{agent:id}', [AgentsController::class, 'details']);

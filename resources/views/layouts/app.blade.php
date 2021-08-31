@@ -9,15 +9,16 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    {{-- mapbox --}}
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+    {{-- livewire --}}
+    @livewireStyles
 </head>
 <body>
     <div id="app">
@@ -76,7 +77,10 @@
 
         <main class="py-4">
             @yield('content')
+            <livewire:tracking /> 
         </main>
     </div>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'>@stack('scripts')</script>
+    @livewireScripts
 </body>
 </html>

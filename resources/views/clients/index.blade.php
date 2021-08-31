@@ -404,5 +404,41 @@
         <!--**********************************
             Content body end
         ***********************************-->
+
+<script>
+    let coordinats = []
+    navigator.geolocation.watchPosition(data => {
+            coordinats = [data.coords.latitude,data.coords.longitude];
+            // coordinats.push([data.coords.latitude,data.coords.longitude]);
+            const jsonCoordinats = {
+                latitude : data.coords.latitude,
+                longitude : data.coords.longitude,
+                coordinats : JSON.stringify(coordinats)
+            }
+            // window.localStorage.setItem('coordinats', JSON.stringify(coordinats));
+            saveKoordinats(jsonCoordinats)
+            
+        }, (error) => console.log(error), {
+            enableHighAccuracy : true
+        }
+    );
+    function saveKoordinats(json){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            type: 'patch',
+            url: "{{route('save.koordinats')}}",
+            dataType: 'json',
+            data: {
+                latitude : json.latitude,
+                longitude : json.longitude,
+                coordinats : json.coordinats
+            },
+        })
+    }
+
+
+</script>
 @endsection
         

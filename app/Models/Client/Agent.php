@@ -5,6 +5,7 @@ namespace App\Models\Client;
 use App\Models\Client\Transactions\Order;
 use App\Models\User;
 use App\Models\Server\Company;
+use App\Models\Tracking;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,6 +26,11 @@ class Agent extends Model
     public function user()
     {
         return $this->morphOne(User::class, 'userable');
+    }
+
+    public function track()
+    {
+        return $this->morphOne(Tracking::class, 'tracing');
     }
 
     public function company()

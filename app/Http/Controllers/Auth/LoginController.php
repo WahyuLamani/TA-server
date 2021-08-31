@@ -9,6 +9,8 @@ use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -49,5 +51,27 @@ class LoginController extends Controller
         // if ($user->userable_type === Agent::class) {
         //     dd('agent login');
         // }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::user()->userable->track()->update([
+            'latitude' => null,
+            'longitude' => null,
+            'coordinats' => null
+        ]);
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/');
     }
 }
