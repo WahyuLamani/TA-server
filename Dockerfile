@@ -45,6 +45,8 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
+# list folder
+RUN ls -la public
 # Expose port 9001 and start php-fpm server
 EXPOSE 9001
 CMD ["php-fpm"]
