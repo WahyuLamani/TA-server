@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => 'http://dtspolimdo.tech',
+    'asset_url' => 'https://dtspolimdo.tech',
 
     /*
     |--------------------------------------------------------------------------
