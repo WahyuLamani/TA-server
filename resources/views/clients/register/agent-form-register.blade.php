@@ -24,7 +24,7 @@
                             <div class="form-group row">
                                 <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">Repeat Password</label>
                                 <div class="col-md-6">
-                                    <input id="password_confirmation" type="text" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="password_confirmation" autofocus>
+                                    <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="password_confirmation" autofocus>
                                     @error('password_confirmation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
