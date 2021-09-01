@@ -32,7 +32,7 @@
 
             markElement.className = 'marker' + id;
             markElement.id = 'marker-' + id;
-            markElement.style.backgroundImage = 'url(https://https://dtspolimdo.tech/assets/images/truck2.png)';
+            markElement.style.backgroundImage = 'url(https://dtspolimdo.tech/assets/images/truck2.png)';
             markElement.style.backgroundSize = 'cover';
             markElement.style.width = '50px';
             markElement.style.height = '50px';
