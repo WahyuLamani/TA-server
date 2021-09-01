@@ -9,10 +9,10 @@
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        // center: [124.8891153, 1.4221726],
-        // zoom: 9.6
-        center: [106.827, -6.1747],
-        zoom: 8
+        center: [124.8891153, 1.4221726],
+        zoom: 9.6
+        // center: [106.827, -6.1747],
+        // zoom: 8
     });
 
     const updateMarker = (markers) => {
@@ -20,9 +20,6 @@
         markers.features.forEach((loc) => {
             const { geometry, properties } = loc;
             const { id, name, image } = properties;
-
-            // console.log(geometry.coordinates);
-
             // hapus dulu markernya
             try {
                 document.getElementById('marker-' + id).remove();
@@ -35,7 +32,7 @@
 
             markElement.className = 'marker' + id;
             markElement.id = 'marker-' + id;
-            markElement.style.backgroundImage = 'url(https://cdn.iconscout.com/icon/free/png-256/truck-shipping-logistic-delivery-transport-supply-vehicle-export-5-20575.png)';
+            markElement.style.backgroundImage = 'url(https://https://dtspolimdo.tech/assets/images/truck2.png)';
             markElement.style.backgroundSize = 'cover';
             markElement.style.width = '50px';
             markElement.style.height = '50px';
