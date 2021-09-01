@@ -38,6 +38,7 @@ class Tracking extends Component
             'type' => 'FeatureCollection',
             'features' => $convertLocations
         ];
+
         $geoJson = collect($geoLocation)->toJson();
 
         $this->geoJson = $geoJson;
@@ -47,5 +48,10 @@ class Tracking extends Component
     {
         $this->loadLocations();
         return view('livewire.tracking');
+    }
+
+    public function updateData()
+    {
+        $this->dispatchBrowserEvent('marker-updated', ['newLocation' => $this->geoJson]);
     }
 }
