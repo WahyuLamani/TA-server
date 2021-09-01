@@ -55,11 +55,13 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::user()->userable->track()->update([
-            'latitude' => null,
-            'longitude' => null,
-            'coordinats' => null
-        ]);
+        if (Auth::user()->userable === Agent::class) {
+            Auth::user()->userable->track()->update([
+                'latitude' => null,
+                'longitude' => null,
+                'coordinats' => null
+            ]);
+        }
         $this->guard()->logout();
 
         $request->session()->invalidate();
