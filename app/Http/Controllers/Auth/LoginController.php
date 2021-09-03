@@ -55,7 +55,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        if (Auth::user()->userable === Agent::class) {
+        if (Auth::user()->userable_type == Agent::class) {
             Auth::user()->userable->track()->update([
                 'latitude' => null,
                 'longitude' => null,
