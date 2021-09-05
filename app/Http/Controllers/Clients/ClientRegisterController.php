@@ -54,7 +54,7 @@ class ClientRegisterController extends Controller
             Auth::user()->last_login = Carbon::now()->toDateTimeString();
             Auth::user()->save();
         }
-        // return redirect()->route('clients');
+        return redirect()->route('clients');
     }
 
 
