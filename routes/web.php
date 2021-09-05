@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ClientsHomeController::class, 'index'])->name('clients');
         Route::patch('/koordinats', [ClientsHomeController::class, 'saveKoordinats'])->name('save.koordinats');
         Route::post('/', [GetOrderController::class, 'order']);
-        Route::patch('{order:id}', [GetOrderController::class, 'acceptOrder']);
+        // Route::patch('{order:id}', [GetOrderController::class, 'acceptOrder']);
         Route::post('{order:id}', [GetOrderController::class, 'distributed']);
         Route::patch('accept/{order:id}', [GetOrderController::class, 'completeOrder']);
         Route::delete('delete/{order:id}', [GetOrderController::class, 'delete']);
@@ -79,5 +79,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/warehouse/{warehouse:id}', [WarehouseController::class, 'detail']);
         Route::post('/warehouse', [WarehouseController::class, 'store']);
         Route::post('/warehouse/product-type', [WarehouseController::class, 'createProductType'])->name('product-type');
+
+        Route::patch('clients/{order:id}', [GetOrderController::class, 'acceptOrder']);
     });
 });

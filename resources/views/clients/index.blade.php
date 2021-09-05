@@ -95,36 +95,7 @@
                 @endif
                 <div class="row">
                     <div class="col-12">
-                        @if (Auth::user()->userable_type === "App\Models\Client\Agent")
-                        <h4 class="d-inline">Order lists</h4>
-                        <p class="text-muted">{{Auth::user()->userable->company->company_name}} Orders</p>
-                        <div class="row">
-                            @forelse ($orderLists as $row)
-                            <div class="col-md-6 col-lg-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h6 class="card-title">{{$row->req_amount.' '.$row->product_type->unit.' '.$row->product_type->type}}</h6>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{$row->distributor->name}}</h6>
-                                        <p class="card-text">{{$row->distributor->address}}</p>
-                                        <p class="card-text d-inline"><small class="text-muted">{{$row->created_at->format('d M, Y')}}</small>
-                                            <div class="d-inline">
-                                                <form action="/clients/{{$row->id}}" method="post">
-                                                    @csrf
-                                                    @method('patch')
-                                                    <p>
-                                                    <button type="submit" class="btn mb-1 btn-outline-info btn-xs card-link float-right">terima orderan</button>
-                                                    </p>
-                                                </form>
-                                            </div>
-                                        {{-- </p><a href="#" class="card-link float-right"><small>terima orderan</small></a> --}}
-                                    </div>
-                                </div>
-                            </div>
-                            @empty
-                            <p class="text-secondary">Tidak ada orderan</p>
-                            @endforelse
-                        </div>
-                        @else
+                        @if (Auth::user()->userable_type === "App\Models\Client\Distributor")
                         <h4 class="d-inline">Order Pending</h4>
                         <p class="text-muted">{{Auth::user()->userable->name}}</p>
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newOrder">Buat Order</button>
@@ -150,7 +121,7 @@
                                 </div>
                             </div>
                             @empty
-                            <p class="text-secondary">Tidak ada orderan</p>
+                            <p class="text-secondary ml-3">Tidak ada orderan</p>
                             @endforelse
                         </div>
                         {{-- modal new order --}}
@@ -212,7 +183,7 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between mb-3">
                                             <h6 class="card-title">{{$order->req_amount.' '.$order->product_type->type.' '.$order->product_type->unit}}</h6>
-                                            @if ($order->on_progress === 'Accepted' && $order->distribution === null)
+                                            {{-- @if ($order->on_progress === 'Accepted' && $order->distribution === null)
                                                 <form action="/clients/{{$order->id}}" method="post">
                                                     @csrf
                                                     @method('patch')
@@ -220,7 +191,7 @@
                                                     <button type="submit" class="btn mb-1 btn-outline-danger btn-xs card-link float-right">Batalkan Orderan</button>
                                                     </p>
                                                 </form>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <h6 class="card-subtitle mb-2 text-muted">{{$order->distributor->name}}</h6>
                                         <p class="card-text">{{$order->distributor->address}}</p>
@@ -253,7 +224,7 @@
                                 </div>
                             </div>
                             @empty
-                            <p class="text-secondary">Tidak ada orderan</p>
+                            <p class="text-secondary ml-3">Tidak ada orderan</p>
                             @endforelse
                         </div>
                         @else
@@ -268,13 +239,13 @@
                                         <h6 class="card-subtitle mb-2 text-muted">{{$row->company->company_name}}</h6>
                                         <p class="card-text">Di terima oleh Agent : {{$row->agent->name}}</p>
                                         <p class="card-text d-inline"><small class="text-muted">{{$row->updated_at->format('d M, Y')}}</small></p>
-                                        <button type="submit" class="btn mb-1 btn-outline-info btn-xs card-link float-right"  data-toggle="modal" data-target="#infoAgent">Info</button>
+                                        <button type="submit" class="btn mb-1 btn-outline-info btn-xs card-link float-right"  data-toggle="modal" data-target="#infoAgent{{$row->id}}">Info</button>
                                     </div>
                                 </div>
                             </div>
                             {{-- modal --}}
                             <div class="bootstrap-modal">
-                                <div class="modal fade" id="infoAgent">
+                                <div class="modal fade" id="infoAgent{{$row->id}}">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -284,7 +255,8 @@
                                             </div>
                                             <div class="modal-body">
                                                 <p>Alamat : <b>{{$row->agent->address}}</b></p>
-                                                <p class="text-primary">Nomor Telepon : <b> {{$row->agent->telp_num}}</b></p>
+                                                <p class="text-secondary">Nomor Telepon agent: <b> {{$row->agent->telp_num}}</b></p>
+                                                <p class="text-primary">Nomor Telepon Perusahaan : <b> {{$row->agent->company->company_telp_num}}</b></p>
                                                 <form action="/clients/accept/{{$row->id}}" method="post">
                                                     @method('patch')
                                                     @csrf

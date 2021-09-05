@@ -12,20 +12,26 @@ use Illuminate\Support\Facades\Auth;
 
 class GetOrderController extends Controller
 {
-    public function acceptOrder(Order $order)
+    public function acceptOrder(Order $order, Request $request)
     {
         if ($order->on_progress === 'Accepted') {
             $order->update([
                 'on_progress' => 1,
                 'agent_id' => null,
             ]);
-            return redirect()->route('clients')->with('success', 'Order Canceled');
+            // return redirect()->route('clients')->with('success', 'Order Canceled');
+            return redirect()->back()->with('success', 'Pembatalan Berhasil');
         }
+
+        $request->validate([
+            'agent' => 'required',
+        ]);
         $order->update([
             'on_progress' => 2,
-            'agent_id' => Auth::user()->userable->id,
+            'agent_id' => $request->agent,
         ]);
-        return redirect()->route('clients')->with('success', 'order diterima');
+        // return redirect()->route('clients')->with('success', 'order diterima');
+        return redirect()->back()->with('success', 'Berhasil di alokasikan');
     }
 
     public function delete(Order $order)
