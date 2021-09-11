@@ -77,7 +77,7 @@
 
         <main class="py-4">
             @yield('content')
-            <livewire:tracking /> 
+            {{ isset($slot) ? $slot : null}}
         </main>
     </div>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'>@stack('scripts')</script>
