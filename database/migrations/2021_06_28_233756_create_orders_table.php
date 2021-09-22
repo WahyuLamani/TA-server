@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('company_id')->nullable();
             $table->foreignId('product_type_id')->nullable();
             $table->integer('req_amount');
-            $table->enum('on_progress', ['Waiting', 'Accepted', 'Clear'])->default('Waiting');
+            $table->enum('on_progress', ['Waiting', 'Accepted', 'Rejected', 'Clear'])->default('Waiting');
             $table->foreignId('agent_id')->nullable();
             $table->timestamps();
         });

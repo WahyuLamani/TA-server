@@ -40,7 +40,12 @@
                                             <td><b>{{ $order->distributor->telp_num }}</b></td>
                                             <td class="text-primary"><strong>{{ $order->req_amount.' '.$order->product_type->type.' '.$order->product_type->unit}}</strong></td>
                                             <td>{{ $order->created_at->format('d, M Y') }}</td>
-                                            <td><button data-toggle="modal" data-target="#ModalAgent{{$order->id}}" class="btn btn-success btn-sm">Terima</button></td>
+                                            <td>@if ($order->on_progress === 'Rejected')
+                                                <span class="badge badge-danger">Ditolak</span>
+                                            @else
+                                                <span data-toggle="modal" data-target="#ModalAgent{{$order->id}}"><button class="tombol-keluar text-success" data-toggle="tooltip" data-placement="top" title="Terima Order"><i class="fa fa-check fa-lg color-danger"></i></button></span> <span data-toggle="modal" data-target="#Tolak{{$order->id}}"><button class="tombol-keluar text-danger" data-toggle="tooltip" data-placement="top" title="Tolak Order"><i class="fa fa-ban fa-lg color-danger"></i></button></span>
+                                            @endif
+                                            </td>
                                         </tr>
 
                                         {{-- modal --}}
@@ -48,7 +53,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Modal title</h5>
+                                                        <h5 class="modal-title">Terima Order?</h5>
                                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                         </button>
                                                     </div>
@@ -71,6 +76,24 @@
                                                                 @enderror
                                                             </div>
                                                             <button type="submit" class="btn btn-info">Selesai</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- modal tolak --}}
+                                        <div class="modal fade" id="Tolak{{$order->id}}">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <p>Ingin Menolak Order Atas nama <b>{{$order->distributor->name}}</b> dengan jumlah orderan <b>{{$order->req_amount.' '.$order->product_type->type.' '.$order->product_type->unit}}</b></p>
+                                                        <form action="/rejected/{{$order->id}}" method="POST">
+                                                            @method('patch')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger">Tolak</button>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
@@ -120,7 +143,15 @@
                                             <td><img style="width: 25px" src="{{asset('uploads/'.$row->agent->thumbnail)}}" class=" rounded-circle mr-3"><a href="/agent/details/{{ $row->agent->id }}">{{ $row->agent->name }}</a></td>
                                             <td>{{ $row->updated_at->format('d, M Y') }}</td>
                                             <td>
-                                                <form action="/clients/{{$row->id}}" method="post">@csrf @method('patch')<button type="submit" class="btn btn-warning btn-sm">cancel</button></form>
+                                                <span>
+                                                    <form class="d-inline" action="/clients/{{$row->id}}" method="post">@csrf @method('patch')<button type="submit" class="tombol-keluar text-danger" data-toggle="tooltip" data-placement="top" title="Batalkan"><i class="fa fa-times fa-lg color-danger"></i></button></form>
+                                                </span>  
+                                                <span>
+                                                    <form class="d-inline" action="{{route('container.store')}}" method="post">@csrf
+                                                    <input type="hidden" name="order_id" value="{{$row->id}}">
+                                                    <input type="hidden" name="agent_id" value="{{$row->agent->id}}">
+                                                    <button type="submit" class="tombol-keluar text-success" data-toggle="tooltip" data-placement="top" title="Produk akan di angkut"><i class="fa fa-truck"></i></button>
+                                                </span>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -20,7 +20,7 @@ class GetOrderController extends Controller
                 'agent_id' => null,
             ]);
             // return redirect()->route('clients')->with('success', 'Order Canceled');
-            return redirect()->back()->with('success', 'Pembatalan Berhasil');
+            return redirect()->back()->with('success', 'Canceled');
         }
 
         $request->validate([
@@ -32,6 +32,14 @@ class GetOrderController extends Controller
         ]);
         // return redirect()->route('clients')->with('success', 'order diterima');
         return redirect()->back()->with('success', 'Berhasil di alokasikan');
+    }
+
+    public function rejected(Order $order)
+    {
+        $order->update([
+            'on_progress' => 3
+        ]);
+        return redirect()->back()->with('success', 'Orderan Ditolak');
     }
 
     public function delete(Order $order)

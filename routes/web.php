@@ -81,5 +81,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/warehouse/product-type', [WarehouseController::class, 'createProductType'])->name('product-type');
 
         Route::patch('clients/{order:id}', [GetOrderController::class, 'acceptOrder']);
+        Route::patch('rejected/{order:id}', [GetOrderController::class, 'rejected']);
     });
 });
