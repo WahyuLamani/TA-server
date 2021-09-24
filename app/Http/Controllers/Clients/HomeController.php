@@ -7,6 +7,7 @@ use App\Models\Client\{Agent, Container, Distributor, Post};
 use App\Models\Client\Transactions\Distribution;
 use App\Models\Client\Transactions\Order;
 use App\Models\Server\{Company, ProductType};
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,9 @@ class HomeController extends Controller
     {
 
         if (Auth::user()->userable_type === Distributor::class) {
-
+            // if (Auth::user()->userable->location == null) {
+            //     return redirect()->route('distloct.view');
+            // }
             $orderWaiting = Order::where('agent_id', null)
                 ->where('distributor_id', Auth::user()->userable->id)->get();
             $orderAccepted = Order::where('on_progress', 2)
@@ -34,19 +37,23 @@ class HomeController extends Controller
             ]));
         }
         if (Auth::user()->userable_type === Agent::class) {
-            $orderLists  = Order::where('on_progress', 1)
-                ->where('company_id', Auth::user()->userable->company_id)
-                ->orWhere('company_id', null)->get();
-
             $receivedOrders = Order::where('agent_id', Auth::user()->userable->id)
-                ->where('on_progress', '!=', 1)->get();
-            $containers = Container::where('agent_id', Auth::user()->userable->id)
+                ->where('on_progress', 2)
+                ->orWhere('on_progress', 4)
+                ->latest()->get();
+
+            $ContainersModel = Container::where('agent_id', Auth::user()->userable->id)
                 ->where('count_down_amount', '>', '0')->get();
 
+            /* kelompokan data yang sama */
+            $containers = array();
+            foreach ($ContainersModel as $container) {
+                $containers[$container->warehouse->product_type->unit . ' ' . $container->warehouse->product_type->type][] = $container->amount;
+            }
             $distributions = Distribution::byAgent(Auth::user()->userable->id)->get();
 
+            /**selesai */
             return view('clients.index', compact([
-                'orderLists',
                 'receivedOrders',
                 'containers',
                 'distributions'

@@ -37,7 +37,10 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <h4 class="card-title">Warehouse List</h4>
-                            <button data-toggle="modal" data-target="#createWarehouseData" class="btn btn-primary btn-sm">Tambah produk</button>
+                            <div>
+                                <button data-toggle="modal" data-target="#recordWarehouseData" class="btn btn-dark btn-sm">History warehouse</button>
+                                <button data-toggle="modal" data-target="#createWarehouseData" class="btn btn-primary btn-sm">Tambah produk</button>
+                            </div>
                         </div>
 
                         {{-- modal add warehouse data --}}
@@ -93,6 +96,53 @@
                         </div>
                         {{-- end modal --}}
 
+                        {{-- modal record warehouse data --}}
+                        <div class="modal fade" id="recordWarehouseData">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered zero-configuration">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Jenis Produk</th>
+                                                        <th>Tanggal Didaftarkan</th>
+                                                        <th>jumlah</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($recordWarehouse as $item)
+                                                    <tr>
+                                                        <td>{{$loop->iteration}}</td>
+                                                        <td>{{ $item->product_type->type }}</td>
+                                                        <td>{{ $item->created_at->format("F d, Y, g:i:s a") }}</td>
+                                                        <td class="text-primary"><b>{{ $item->amount.' '.$item->product_type->unit }}</b></td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Jenis Produk</th>
+                                                        <th>Tanggal Didaftarkan</th>
+                                                        <th>jumlah</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- end modal --}}
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -100,7 +150,7 @@
                                         <th>#</th>
                                         <th>Jenis</th>
                                         <th>Total</th>
-                                        <th>Tanggal di buat</th>
+                                        {{-- <th>Tanggal di buat</th> --}}
                                         <th>Tanggal di perbarui</th>
                                         <th>Sisa</th>
                                     </tr>
@@ -112,7 +162,7 @@
                                         <th>{{ $loop->iteration }}</th>
                                         <td>{{ $row->product_type->type }}</td>
                                         <td>{{ $row->amount.' '.$row->product_type->unit }}</td>
-                                        <td>{{ $row->created_at->format("F d, Y, g:i:s a") }}</td>
+                                        {{-- <td>{{ $row->created_at->format("F d, Y, g:i:s a") }}</td> --}}
                                         <td>{{ $row->updated_at->format("F d, Y, g:i:s a") }}</td>
                                         <td class="text-primary"><b>{{ $row->count_down_amount.' '.$row->product_type->unit }}</b></td>
 

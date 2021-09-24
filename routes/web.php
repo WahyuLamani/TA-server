@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/agent-container', [ContainerController::class, 'index'])->name('container');
         Route::post('/agent-container', [ContainerController::class, 'store'])->name('container.store');
-        Route::post('/agent-container/handle/{container:id}', [ContainerController::class, 'handle'])->withoutMiddleware('server');
+        // Route::post('/agent-container/handle/{container:id}', [ContainerController::class, 'handle'])->withoutMiddleware('server');
         Route::delete('/container/delete/{container:id}', [ContainerController::class, 'destroy']);
 
         Route::get('/post/agent/{post:id}', [AgentPostController::class, 'detail']);

@@ -59,7 +59,7 @@
                                                             <th>Jumlah</th>
                                                             <th>Jenis</th>
                                                             <th>Sisa</th>
-                                                            <th>Edit status</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -77,16 +77,8 @@
                                                             <td>{{ $container->amount.' '.$container->warehouse->product_type->unit }}</td>
                                                             <td class="text-primary"><b>{{ $container->warehouse->product_type->type }}</b></td>
                                                             <td class="text-primary"><b>{{ $container->count_down_amount .' '.$container->warehouse->product_type->unit }}</b></td>
-                                                            <td style="width:100px">
+                                                            <td style="width:25px">
                                                                 <div class="d-flex justify-content-between">
-                                                                    <form action="/agent-container/handle/{{$container->id}}" method="post">
-                                                                        @csrf
-                                                                        @if ($container->on_truck === 0)
-                                                                        <button class="btn tombol-keluar" type="submit"><i class="fa fa-toggle-on fa-lg" aria-hidden="true"></i></button>
-                                                                        @else
-                                                                        <button class="tombol-keluar" type="submit"><i class="fa fa-toggle-off fa-lg" aria-hidden="true"></i></button>
-                                                                        @endif
-                                                                    </form>
                                                                     <span data-toggle="modal" data-target="#{{$container->agent->slug.$container->id}}"><button class="tombol-keluar" type="submit" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash fa-lg color-danger"></i></button></span>
                                                                     @section('type', 'container')
                                                                     @include('layouts.modal')
@@ -99,7 +91,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer mb-0">
+                                    {{-- <div class="card-footer mb-0">
                                         <form action="{{route('container.store')}}" method="POST" class="mt-3 ">
                                             @csrf
                                             <input type="hidden" name="agent_id" value="{{$row->id}}">
@@ -136,7 +128,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             @endforeach

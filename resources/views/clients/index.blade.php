@@ -14,79 +14,13 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Container</h4>
+                                <h4 class="card-title">Produk di Truck <i class="fa fa-truck"></i></h4>
                                 <div class="basic-list-group">
-                                    <div class="row">
-                                        <div style="z-index:0" class="col-xl-4 col-md-4 col-sm-3 mb-4 mb-sm-0">
-                                            <div class="list-group" id="list-tab" role="tablist">
-                                                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">On truck list</a> 
-                                                {{-- <a class="list-group-item list-group-item-action" id="list-profile-list"
-                                                data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Distribution</a>  --}}
-                                                {{-- <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab"
-                                                aria-controls="messages">Messages</a> 
-                                                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a> --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-8 col-md-8 col-sm-9">
-                                            <div class="tab-content" id="nav-tabContent">
-                                                <div class="tab-pane fade show active" id="list-home">
-                                                    <div class="table-responsive">
-                                                        <table class="table header-border table-hover verticle-middle">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">#</th>
-                                                                    <th scope="col">Product</th>
-                                                                    <th scope="col">Progress</th>
-                                                                    <th scope="col">Sisa</th>
-                                                                    <th scope="col">status</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @forelse ($containers as $container)
-                                                                    <tr>
-                                                                        <th>{{$loop->iteration}}</th>
-                                                                        <td>{{$container->warehouse->product_type->type.'/'.$container->warehouse->product_type->unit.' sebanyak '.$container->amount}}</td>
-                                                                        <td>
-                                                                            <div class="progress" style="height: 10px">
-                                                                                <div class="progress-bar gradient-1" style="width: {{$container->count_down_amount / $container->amount *100}}%;" role="progressbar">
-                                                                                </div>
-                                                                            </div> 
-                                                                        </td>
-                                                                        <td><b class="text-primary">{{$container->count_down_amount}}</b></td>
-                                                                        <td>
-                                                                            <form action="/agent-container/handle/{{$container->id}}" method="post">
-                                                                                @csrf
-                                                                                @if ($container->on_truck === 0)
-                                                                                <button class="tombol-keluar" type="submit"><i class="fa fa-toggle-off fa-lg" aria-hidden="true"></i></button>
-                                                                                @else
-                                                                                <button class="btn tombol-keluar" type="submit"><i class="fa fa-toggle-on fa-lg" aria-hidden="true"></i></button>
-                                                                                @endif
-                                                                            </form>
-                                                                        </td>
-                                                                    </tr>
-                                                                @empty
-                                                                    <p>Tidak ada Barang di container</p>
-                                                                @endforelse
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                {{-- <div class="tab-pane fade" id="list-profile" role="tabpanel">
-                                                    <p>
-                                                        test
-                                                    </p>
-                                                </div> --}}
-                                                {{-- <div class="tab-pane fade" id="list-messages">
-                                                    <p></p>
-                                                </div>
-                                                <div class="tab-pane fade" id="list-settings">
-                                                    <p>
-
-                                                    </p>
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <ul class="list-group">
+                                        @foreach ($containers as $product_type => $value)
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">{{$product_type}} <span class="badge badge-dark">{{array_sum($value)}}</span></li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -96,16 +30,16 @@
                 <div class="row">
                     <div class="col-12">
                         @if (Auth::user()->userable_type === "App\Models\Client\Distributor")
-                        <h4 class="d-inline">Order Pending</h4>
-                        <p class="text-muted">{{Auth::user()->userable->name}}</p>
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newOrder">Buat Order</button>
-                        <div class="row">
+                        <button type="button" class="btn btn-primary mb-3 d-block" data-toggle="modal" data-target="#newOrder">Buat Order</button>
+                        <h4 class="d-inline">Order Pending</h4><br>
+                        <div class="row mt-3">
                             @forelse ($orderWaiting as $row)
                             <div class="col-md-6 col-lg-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h6 class="card-title">{{$row->req_amount.' '.$row->product_type->unit.' '.$row->product_type->type}}</h6>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{$row->distributor->name}}</h6>
+                                        <h6 class="card-title">{{$row->req_amount.' '.$row->product_type->unit.' '.$row->product_type->type}}{!! $row->on_progress === "Rejected" ? '  <span class="badge badge-danger">Orderan ditolak</span>' : '' !!}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">di Perusahaan : <b>{{$row->company->company_name}}</b></h6>
+                                        <p>Kontak : <b>{{$row->company->company_telp_num}}</b></p>
                                         <p class="card-text d-inline"><small class="text-muted">{{$row->created_at->format('d M, Y')}}</small>
                                             <div class="d-inline">
                                                 <form action="/clients/delete/{{$row->id}}" method="post">
@@ -211,7 +145,9 @@
                                                         </button>
                                                     </div>
                                                     <form action="/clients/{{$order->id}}" method="POST"> @csrf
-                                                    <div class="modal-body"><input type="text" name="info" placeholder="info (optional)" class="form-control input-flat"></div>
+                                                    <div class="modal-body">
+                                                        <p>Orderan atas nama : <b>{{$order->distributor->name}}</b></p>
+                                                        <input type="text" name="info" placeholder="info (optional)" class="form-control input-flat"></div>
                                                     <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             <button type="submit" class="btn btn-success">Yes</button>
@@ -235,7 +171,7 @@
                             <div class="col-md-6 col-lg-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h6 class="card-title">{{$row->req_amount.' '.$row->product_type->type.' '.$row->product_type->unit}}</h6>
+                                        <h6 class="card-title">{{$row->req_amount.' '.$row->product_type->type.' '.$row->product_type->unit}}{!!$row->container->on_truck === 0 ? ' <span class="badge badge-warning">Butuh Persetujuan</span>' : ''!!}</h6>
                                         <h6 class="card-subtitle mb-2 text-muted">{{$row->company->company_name}}</h6>
                                         <p class="card-text">Di terima oleh Agent : {{$row->agent->name}}</p>
                                         <p class="card-text d-inline"><small class="text-muted">{{$row->updated_at->format('d M, Y')}}</small></p>

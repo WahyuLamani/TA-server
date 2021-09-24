@@ -52,7 +52,7 @@ class GetOrderController extends Controller
     {
         if ($order->distribution !== null) {
             $order->update([
-                'on_progress' => 3
+                'on_progress' => 4
             ]);
             return redirect()->route('clients')->with('success', 'Order telah diterima');
         }
@@ -80,6 +80,7 @@ class GetOrderController extends Controller
             return redirect()->route('clients')->with('error', 'Produk ditruk tidak cukup');
         }
         $container->count_down_amount = $container->count_down_amount - $order->req_amount;
+        $container->on_truck = 0;
         $container->save();
 
         $container->distribution()->create([

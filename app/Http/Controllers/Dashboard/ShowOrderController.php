@@ -14,10 +14,11 @@ class ShowOrderController extends Controller
     {
         $orderLists = Order::where('company_id', Auth::user()->userable->id)
             ->where('on_progress', 1)
-            ->paginate(4, ['*'], 'orderLists');
+            ->orWhere('on_progress', 3)
+            ->paginate(6, ['*'], 'orderLists');
         $orderAccepts = Order::where('company_id', Auth::user()->userable->id)
             ->where('on_progress', 2)
-            ->paginate(4, ['*'], 'orderAccepts');
+            ->paginate(6, ['*'], 'orderAccepts');
         $agents = Agent::where('company_id', Auth::user()->userable->id)->get();
 
         return view('order.order', compact([

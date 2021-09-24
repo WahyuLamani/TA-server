@@ -2,7 +2,7 @@
 
 namespace App\Models\Client;
 
-use App\Models\Client\Transactions\Distribution;
+use App\Models\Client\Transactions\{Distribution, order};
 use App\Models\Server\Warehouse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +16,8 @@ class Container extends Model
     protected $fillable = [
         'warehouse_id',
         'amount',
-        'count_down_amount'
+        'count_down_amount',
+        'order_id',
     ];
 
 
@@ -34,5 +35,10 @@ class Container extends Model
     public function agent()
     {
         return $this->belongsTo(Agent::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }

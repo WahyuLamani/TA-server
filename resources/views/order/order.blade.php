@@ -40,7 +40,7 @@
                                             <td><b>{{ $order->distributor->telp_num }}</b></td>
                                             <td class="text-primary"><strong>{{ $order->req_amount.' '.$order->product_type->type.' '.$order->product_type->unit}}</strong></td>
                                             <td>{{ $order->created_at->format('d, M Y') }}</td>
-                                            <td>@if ($order->on_progress === 'Rejected')
+                                            <td>@if($order->on_progress === 'Rejected')
                                                 <span class="badge badge-danger">Ditolak</span>
                                             @else
                                                 <span data-toggle="modal" data-target="#ModalAgent{{$order->id}}"><button class="tombol-keluar text-success" data-toggle="tooltip" data-placement="top" title="Terima Order"><i class="fa fa-check fa-lg color-danger"></i></button></span> <span data-toggle="modal" data-target="#Tolak{{$order->id}}"><button class="tombol-keluar text-danger" data-toggle="tooltip" data-placement="top" title="Tolak Order"><i class="fa fa-ban fa-lg color-danger"></i></button></span>
@@ -142,17 +142,22 @@
                                             <td class="text-primary"><strong>{{ $row->req_amount.' '.$row->product_type->type.' '.$row->product_type->unit}}</strong></td>
                                             <td><img style="width: 25px" src="{{asset('uploads/'.$row->agent->thumbnail)}}" class=" rounded-circle mr-3"><a href="/agent/details/{{ $row->agent->id }}">{{ $row->agent->name }}</a></td>
                                             <td>{{ $row->updated_at->format('d, M Y') }}</td>
+                                            @if(isset($row->container->id))
                                             <td>
-                                                <span>
-                                                    <form class="d-inline" action="/clients/{{$row->id}}" method="post">@csrf @method('patch')<button type="submit" class="tombol-keluar text-danger" data-toggle="tooltip" data-placement="top" title="Batalkan"><i class="fa fa-times fa-lg color-danger"></i></button></form>
-                                                </span>  
-                                                <span>
-                                                    <form class="d-inline" action="{{route('container.store')}}" method="post">@csrf
-                                                    <input type="hidden" name="order_id" value="{{$row->id}}">
-                                                    <input type="hidden" name="agent_id" value="{{$row->agent->id}}">
-                                                    <button type="submit" class="tombol-keluar text-success" data-toggle="tooltip" data-placement="top" title="Produk akan di angkut"><i class="fa fa-truck"></i></button>
-                                                </span>
+                                                <span class="badge badge-warning">On Progress</span>
                                             </td>
+                                            @else
+                                            <td>
+                                                <form class="d-inline" action="/clients/{{$row->id}}" method="post">@csrf 
+                                                    @method('patch')
+                                                    <button type="submit" class="tombol-keluar text-danger" data-toggle="tooltip" data-placement="top" title="Batalkan"><i class="fa fa-times fa-lg color-danger"></i></button>
+                                                </form>
+                                                <form class="d-inline" action="{{route('container.store')}}" method="post">@csrf
+                                                    <input type="hidden" name="order_id" value="{{$row->id}}">
+                                                    <button type="submit" class="tombol-keluar text-success" data-toggle="tooltip" data-placement="top" title="Produk akan di angkut"><i class="fa fa-truck"></i></button>
+                                                </form>
+                                            </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
