@@ -150,11 +150,11 @@
                                             <td>
                                                 <form class="d-inline" action="/clients/{{$row->id}}" method="post">@csrf 
                                                     @method('patch')
-                                                    <button type="submit" class="tombol-keluar text-danger" data-toggle="tooltip" data-placement="top" title="Batalkan"><i class="fa fa-times fa-lg color-danger"></i></button>
+                                                    <button type="submit" onclick="return confirm('Batalkan ?')" class="tombol-keluar text-danger" data-toggle="tooltip" data-placement="top" title="Batalkan"><i class="fa fa-times fa-lg color-danger"></i></button>
                                                 </form>
                                                 <form class="d-inline" action="{{route('container.store')}}" method="post">@csrf
                                                     <input type="hidden" name="order_id" value="{{$row->id}}">
-                                                    <button type="submit" class="tombol-keluar text-success" data-toggle="tooltip" data-placement="top" title="Produk akan di angkut"><i class="fa fa-truck"></i></button>
+                                                    <button type="submit" onclick="return confirm('Produk sudah di angkut ?')" class="tombol-keluar text-success" data-toggle="tooltip" data-placement="top" title="Produk akan di angkut"><i class="fa fa-truck"></i></button>
                                                 </form>
                                             </td>
                                             @endif
