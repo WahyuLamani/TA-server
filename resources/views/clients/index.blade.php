@@ -12,6 +12,10 @@
                 @if (Auth::user()->userable_type === "App\Models\Client\Agent")
                 <div class="row">
                     <div class="col-lg-12">
+                        <div class="alert alert-danger text-center" id="get-location" role="alert">AKTIFKAN LOKASI !!</div>
+                        <script>
+                            
+                        </script>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Produk di Truck <i class="fa fa-truck"></i></h4>
@@ -314,6 +318,38 @@
         ***********************************-->
 
 <script>
+    var x = document.getElementById("get-location");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(() => {
+                x.style.display = "none"
+            },(error) => {
+                switch(error.code) {
+                case error.PERMISSION_DENIED:
+                x.innerHTML = "Aktifkan Lokasi !!"
+                x.style.display = "block"
+                break;
+                case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Informasi lokasi tidak tersedia."
+                x.style.display = "block"
+                break;
+                case error.TIMEOUT:
+                x.innerHTML = "Permintaan untuk mendapatkan lokasi pengguna habis."
+                x.style.display = "block"
+                break;
+                case error.UNKNOWN_ERROR:
+                x.innerHTML = "Terjadi kesalahan yang tidak diketahui."
+                x.style.display = "block"
+                break;
+            }
+            });
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+        setInterval(() => {
+            getLocation()
+        }, 2000);
     let coordinats = []
     navigator.geolocation.watchPosition(data => {
             coordinats = [data.coords.latitude,data.coords.longitude];
@@ -330,6 +366,7 @@
             enableHighAccuracy : true
         }
     );
+
     function saveKoordinats(json){
         $.ajax({
             headers: {
