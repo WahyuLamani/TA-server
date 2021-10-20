@@ -32,7 +32,7 @@ class DistributorController extends Controller
     public function destroy(Distributor $distributor)
     {
         $distributor->user->delete();
-        $distributor->delete();
+        // $distributor->delete();
         // User::find($distributor->id, 'userable_id')->token()->revoke();
         session()->flash('success', ucwords('Distributor Has Ben Deleted'));
         return redirect()->to('distributors');
